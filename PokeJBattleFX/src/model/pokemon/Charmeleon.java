@@ -10,14 +10,7 @@ public class Charmeleon extends Pokemon{
 
 	public Charmeleon() {
 		super("Charmeleon", Tipo.FUOCO, null, new Mossa []{null, null, null, null},
-				new HashMap<Integer, Mossa>() {{put(17, Mossa.ROGODENTI); put(20, Mossa.LACERAZIONE); put(24, Mossa.LANCIAFIAMME); put(28, Mossa.VISOTRUCE); put(36, Mossa.MARCHIATURA);}}, 
-				5, 36, null, 58, 64, 58, 80, 65, 80);
+				new HashMap<Integer, Mossa>() {{put(1, Mossa.GRAFFIO); put(2, Mossa.RUGGITO); put(4, Mossa.BRACIERE); put(8, Mossa.MURODIFUMO); put(12, Mossa.DRAGOSPIRO); put(17, Mossa.ROGODENTI); put(20, Mossa.LACERAZIONE); put(24, Mossa.LANCIAFIAMME); put(28, Mossa.VISOTRUCE);}}, 
+				1, 36, new Charizard(), 58, 80, 64, 80, 58, 65);
 	}
-	
-	public Charmeleon(int lvl) {
-		super("Charmeleon", Tipo.FUOCO, null, new Mossa []{null, null, null, null},
-				new HashMap<Integer, Mossa>() {{put(17, Mossa.ROGODENTI); put(20, Mossa.LACERAZIONE); put(24, Mossa.LANCIAFIAMME); put(28, Mossa.VISOTRUCE); put(36, Mossa.MARCHIATURA);}}, 
-				lvl, 36, null, 58, 64, 58, 80, 65, 80);
-	}
-
 }

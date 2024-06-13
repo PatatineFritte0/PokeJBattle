@@ -9,6 +9,11 @@ public enum Mossa {
 	RIDUTTORE("Riduttore", 90, Tipo.NORMALE, Categoria.FISICO, 85, 20, /*Dati per mosse di stato ->*/null, 0, false),
 	VIGORCOLPO("Vigorcolpo", 120, Tipo.ERBA, Categoria.FISICO, 85, 10, /*Dati per mosse di stato ->*/null, 0, false),
 	FOGLIELAMA("Foglielama", 55, Tipo.ERBA, Categoria.FISICO, 95, 25, /*Dati per mosse di stato ->*/null, 0, false),
+	FOGLIAMAGICA("Fogliamagica", 60, Tipo.ERBA, Categoria.SPECIALE, 100, 20, /*Dati per mosse di stato ->*/null, 0, false),
+	LACCIOERBOSO("Laccioerboso", 70, Tipo.ERBA, Categoria.FISICO, 100, 20, /*Dati per mosse di stato ->*/null, 0, false),
+	SOLARAGGIO("Solarraggio", 120, Tipo.ERBA, Categoria.SPECIALE, 100, 8, /*Dati per mosse di stato ->*/null, 0, false),
+	VERDEBUFERA("Verdebufera", 130, Tipo.ERBA, Categoria.SPECIALE, 90, 5, /*Dati per mosse di stato ->*/null, 0, false),
+	FIORTEMPESTA("Fiortempesta", 90, Tipo.ERBA, Categoria.FISICO, 100, 15, /*Dati per mosse di stato ->*/null, 0, false),
 	
 	// Squirtle stuff
 	AZIONE("Azione", 40, Tipo.NORMALE, Categoria.FISICO, 100, 35, /*Dati per mosse di stato ->*/null, 0, false),
@@ -17,8 +22,12 @@ public enum Mossa {
 	RITIRATA("Ritirata", 0, Tipo.ACQUA, Categoria.STATO, 100, 40, /*Dati per mosse di stato ->*/Statistica.DIFESA, 1, true),
 	MORSO("Morso", 60, Tipo.BUIO, Categoria.FISICO, 100, 25, /*Dati per mosse di stato ->*/null, 0, false),
 	IDROPOMPA("Idropompa", 110, Tipo.ACQUA, Categoria.SPECIALE, 80, 5, /*Dati per mosse di stato ->*/null, 0, false),
-	IDROPURSAL("Idropulsar", 60, Tipo.ACQUA, Categoria.SPECIALE, 100, 20, /*Dati per mosse di stato ->*/null, 0, false),
+	IDROPULSAR("Idropulsar", 60, Tipo.ACQUA, Categoria.SPECIALE, 100, 20, /*Dati per mosse di stato ->*/null, 0, false),
 	FERROSCUDO("Ferroscudo", 0, Tipo.ACCIAIO, Categoria.STATO, 100, 15, /*Dati per mosse di stato ->*/Statistica.DIFESA, 2, true),
+	IDRONDATA("Idrondata", 90, Tipo.ACQUA, Categoria.SPECIALE, 90, 10, /*Dati per mosse di stato ->*/null, 0, false),
+	ONDASCHIANTO("Ondaschianto", 75, Tipo.ACQUA, Categoria.SPECIALE, 100, 10, /*Dati per mosse di stato ->*/null, 0, false),
+	SURF("Surf", 90, Tipo.ACQUA, Categoria.SPECIALE, 100, 15, /*Dati per mosse di stato ->*/null, 0, false),
+	IDROPOPMA("Idropompa", 110, Tipo.ACQUA, Categoria.SPECIALE, 80, 5, /*Dati per mosse di stato ->*/null, 0, false),
 	
 	// Charmander stuff
 	GRAFFIO("Graffio", 40, Tipo.NORMALE, Categoria.FISICO, 100, 35, /*Dati per mosse di stato ->*/null, 0, false),
@@ -29,7 +38,9 @@ public enum Mossa {
 	LANCIAFIAMME("Lanciafiamme", 90, Tipo.FUOCO, Categoria.SPECIALE, 100, 15, /*Dati per mosse di stato ->*/null, 0, false),
 	VISOTRUCE("Visotruce", 0, Tipo.NORMALE, Categoria.STATO, 100, 10, /*Dati per mosse di stato ->*/Statistica.VELOCITA, -2, false),
 	MARCHIATURA("Marchiatura", 100, Tipo.FUOCO, Categoria.SPECIALE, 50, 5, /*Dati per mosse di stato ->*/null, 0, false),
-	BRACIERE("Braciere", 40, Tipo.FUOCO, Categoria.SPECIALE, 100, 25, /*Dati per mosse di stato ->*/null, 0, false);
+	BRACIERE("Braciere", 40, Tipo.FUOCO, Categoria.SPECIALE, 100, 25, /*Dati per mosse di stato ->*/null, 0, false),
+	INFERNO("Inferno", 100, Tipo.FUOCO, Categoria.SPECIALE, 50, 5, /*Dati per mosse di stato ->*/null, 0, false),
+	RUOTAFUOCO("Ruotafuoco", 35, Tipo.FUOCO, Categoria.SPECIALE, 85, 15, /*Dati per mosse di stato ->*/null, 0, false);
 	
 	
 	private String nome;

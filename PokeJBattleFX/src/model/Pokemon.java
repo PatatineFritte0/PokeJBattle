@@ -241,28 +241,14 @@ public class Pokemon implements Crescita {
 	// ↓ lvl-up ↓ ---------------------------------------------------------------------------
 	@Override
 	public void levelUp() {
-		this.setLvl(this.getLvl() + 1);
+		if (this.lvl >= 100) {return;}
 		
-		if(this.getLvl() == this.getEvoLvl()) {
-			this.nome = evo.nome;
-			this.tipi = evo.tipi;
-			this.parcoMosse = evo.parcoMosse;
-			this.evoLvl = evo.evoLvl;
-			
-			this.battlePs = evo.battlePs;
-			this.maxPs = evo.maxPs;
-			
-			this.velocita = evo.velocita;
-			this.attacco = evo.attacco;
-			this.attaccoSP = evo.attaccoSP;
-			this.difesa = evo.difesa;
-			this.difesaSP = evo.difesaSP;
-		}
+		this.setLvl(this.getLvl() + 1);
 		
 		this.setNextLvlExp( (int) (4 * Math.pow(this.getLvl(), 3)/ 5));
 		
 		int oldMaxPs = this.getMaxPs();
-		this.setMaxPs(this.getMaxPs() + calcStat(this.getMaxPs()));
+		this.setMaxPs(this.getMaxPs() + calcStat(this.getMaxPs(), 110));
 		
 		int possibleNewHp = this.getBattlePs() + (this.getMaxPs()*5)/100;
 		
@@ -273,26 +259,25 @@ public class Pokemon implements Crescita {
 		}
 		
 		
-		this.attacco.setMainValue(this.attacco.getMainValue() + calcStat( this.attacco.getMainValue() ));
-		this.attacco.setBattleValue(this.attacco.getBattleValue() + calcStat( this.attacco.getBattleValue() ));	
+		this.attacco.setMainValue(this.attacco.getMainValue() + calcStat( this.attacco.getMainValue(), 110));
+		this.attacco.setBattleValue(this.attacco.getBattleValue() + calcStat( this.attacco.getBattleValue(), 110));	
 		
-		this.attaccoSP.setMainValue(this.attaccoSP.getMainValue() +calcStat( this.attaccoSP.getMainValue() ));
-		this.attaccoSP.setBattleValue(this.attaccoSP.getBattleValue() + calcStat( this.attaccoSP.getBattleValue() ));	
+		this.attaccoSP.setMainValue(this.attaccoSP.getMainValue() +calcStat( this.attaccoSP.getMainValue(), 110));
+		this.attaccoSP.setBattleValue(this.attaccoSP.getBattleValue() + calcStat( this.attaccoSP.getBattleValue(), 110));	
 		
-		this.difesa.setMainValue(this.difesa.getMainValue() +calcStat( this.difesa.getMainValue() ));
-		this.difesa.setBattleValue(this.difesa.getBattleValue() + calcStat( this.difesa.getBattleValue() ));	
+		this.difesa.setMainValue(this.difesa.getMainValue() + calcStat( this.difesa.getMainValue(), 110));
+		this.difesa.setBattleValue(this.difesa.getBattleValue() + calcStat( this.difesa.getBattleValue(), 110));	
 		
-		this.difesaSP.setMainValue(this.difesaSP.getMainValue() +calcStat( this.difesaSP.getMainValue() ));
-		this.difesaSP.setBattleValue(this.difesaSP.getBattleValue() + calcStat( this.difesaSP.getBattleValue() ));
+		this.difesaSP.setMainValue(this.difesaSP.getMainValue() +calcStat( this.difesaSP.getMainValue(), 110));
+		this.difesaSP.setBattleValue(this.difesaSP.getBattleValue() + calcStat( this.difesaSP.getBattleValue(), 110));
 		
-		this.velocita.setMainValue(this.velocita.getMainValue() +calcStat( this.velocita.getMainValue() ));
-		this.velocita.setBattleValue(this.velocita.getBattleValue() + calcStat( this.velocita.getBattleValue() ));
+		this.velocita.setMainValue(this.velocita.getMainValue() +calcStat( this.velocita.getMainValue(), 110));
+		this.velocita.setBattleValue(this.velocita.getBattleValue() + calcStat( this.velocita.getBattleValue(), 110));
 		
 		this.learnMove();
 	}
 	
-	// private int calcPS(int ps) { return ((ps * 2 + this.lvl)/100) + this.lvl + 10; } fotte i ps
-	private int calcStat(int stat) { return ((stat * 2 + this.lvl)/100) + 5; }
+	private int calcStat(int stat, int percentuale) { return ((stat + this.lvl)/percentuale) + 1; }
 	
 	public void goToLvl(int lvl) {
 		for(int i = 0; i<lvl; i++) {
@@ -337,14 +322,31 @@ public class Pokemon implements Crescita {
 	}
 	
 	@Override
-	public Pokemon evolve() {
-		if(this.evo != null) {
-			this.evo.setBattlePs(this.battlePs);
-			this.evo.goToLvl(getLvl());
+	public void evolve() {
+		if(!(this.getLvl() >= this.getEvoLvl() && this.evo != null)) { return; }
 		
-			return this.evo;
+		System.out.println(this.nome + " vorrebbe evolversi! Confermare l'evoluzione? s/n");
+		Scanner s = new Scanner(System.in);
+		String scelta = s.next();
+		if(!scelta.equals("s")) {
+			System.out.println("Evoluzione annullata");
+			return; 
 		}
-		return null;
+		
+		this.nome = evo.nome;
+		this.tipi = evo.tipi;
+		this.parcoMosse = evo.parcoMosse;
+		this.evoLvl = evo.evoLvl;
+		this.evo = evo.evo;
+		
+		this.setMaxPs(this.getMaxPs() + calcStat(this.getMaxPs(), 10));
+		this.attacco.setMainValue(this.attacco.getMainValue() + calcStat( this.attacco.getMainValue(), 10));
+		this.attaccoSP.setMainValue(this.attaccoSP.getMainValue() +calcStat( this.attaccoSP.getMainValue(), 10));	
+		this.difesa.setMainValue(this.difesa.getMainValue() + calcStat( this.difesa.getMainValue(), 10));
+		this.difesaSP.setMainValue(this.difesaSP.getMainValue() +calcStat( this.difesaSP.getMainValue(), 10));
+		this.velocita.setMainValue(this.velocita.getMainValue() +calcStat( this.velocita.getMainValue(), 10));
+		
+		this.resetStats();
 	}
 	
 	@Override
@@ -360,9 +362,12 @@ public class Pokemon implements Crescita {
 	
 	@Override
 	public String toString() {
+		
+		String eName = (this.evo == null)? null:evo.nome;
+		
 		return "Pokemon [nome=" + nome + ", tipi=" + Arrays.toString(tipi) + ", mosse=" + Arrays.toString(mosse) + ",\n" 
 				+ "parcoMosse(Mossa=Lvl):" + parcoMosse + ",\n" 
-				+ "lvl=" + lvl + ", currentExp=" + currentExp + ", nextLvlExp=" + nextLvlExp + ", evoLvl=" + evoLvl + ", evo=" + evo.nome + ",\n" 
+				+ "lvl=" + lvl + ", currentExp=" + currentExp + ", nextLvlExp=" + nextLvlExp + ", evoLvl=" + evoLvl + ", evo=" + eName + ",\n" 
 				+ "battlePs=" + battlePs + ", maxPs=" + maxPs + ",\n" + "velocita=" + velocita + ", attacco=" + attacco + ", attaccoSP=" + attaccoSP + ", difesa=" + difesa + ", difesaSP=" + difesaSP + "]" 
 				+  ",\n" + "precisione=" + precisione + ", elusione=" + elusione;
 	}
