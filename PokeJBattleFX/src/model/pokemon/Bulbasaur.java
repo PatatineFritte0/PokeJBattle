@@ -7,9 +7,8 @@ import model.costanti.*;
 
 public class Bulbasaur extends Pokemon {
 	
-	public Bulbasaur(String nome, Tipo t1, Tipo t2, Mossa[] mosse, HashMap<Integer, Mossa> parcoMosse, int lvl,
-			int evoLvl, Pokemon evo, int maxPs, int velocita, int attacco, int attaccoSP, int difesa, int difesaSP) {
-		super(nome, t1, t2, mosse, parcoMosse, lvl, evoLvl, evo, maxPs, velocita, attacco, attaccoSP, difesa, difesaSP);
-		// TODO Auto-generated constructor stub
+	public Bulbasaur() {
+		super("Bulbasaur", Tipo.ERBA, null, new Mossa []{Mossa.FRUSTATA, Mossa.RUGGITO, null, null},
+				null, 5, 16, null , 45, 45, 49, 65, 49, 65);	
 	}
 }

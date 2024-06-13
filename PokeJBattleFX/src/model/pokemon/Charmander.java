@@ -3,15 +3,16 @@ package model.pokemon;
 import java.util.HashMap;
 
 import model.Pokemon;
+import model.factoryPkmn;
 import model.costanti.Mossa;
 import model.costanti.Tipo;
 
 public class Charmander extends Pokemon {
-
-	public Charmander(String nome, Tipo t1, Tipo t2, Mossa[] mosse, HashMap<Integer, Mossa> hashMap, int lvl,
-			int evoLvl, Pokemon evo, int maxPs, int velocita, int attacco, int attaccoSP, int difesa, int difesaSP) {
-		super(nome, t1, t2, mosse, hashMap, lvl, evoLvl, evo, maxPs, velocita, attacco, attaccoSP, difesa, difesaSP);
-		// TODO Auto-generated constructor stub
+	
+	public Charmander() {	
+		super("Charmander", Tipo.FUOCO, null, new Mossa []{null, null, null, null},
+				new HashMap<Integer, Mossa>() {{put(1, Mossa.GRAFFIO); put(2, Mossa.RUGGITO); put(4, Mossa.BRACIERE); put(8, Mossa.MURODIFUMO); put(12, Mossa.DRAGOSPIRO);}}, 
+				5, 16, new Charmeleon(), 39, 65, 52, 60, 43, 50);
 	}
 
 }

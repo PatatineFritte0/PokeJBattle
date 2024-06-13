@@ -8,9 +8,8 @@ import model.costanti.Tipo;
 
 public class Squirtle extends Pokemon {
 	
-	public Squirtle(String nome, Tipo t1, Tipo t2, Mossa[] mosse, HashMap<Integer, Mossa> parcoMosse, int lvl,
-			int evoLvl, Pokemon evo, int maxPs, int velocita, int attacco, int attaccoSP, int difesa, int difesaSP) {
-		super(nome, t1, t2, mosse, parcoMosse, lvl, evoLvl, evo, maxPs, velocita, attacco, attaccoSP, difesa, difesaSP);
-		// TODO Auto-generated constructor stub
+	public Squirtle() {
+		super("Squirtle", Tipo.ACQUA, null, new Mossa []{Mossa.PISTOLACQUA, Mossa.RITIRATA, null, null},
+				null, 5, 16, null, 44, 43, 48, 50, 65, 64);
 	}
 }

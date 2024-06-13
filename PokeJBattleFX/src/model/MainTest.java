@@ -1,28 +1,27 @@
+// Token Desk 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
+
 package model;
 
 import java.util.HashMap;
+import model.costanti.*;
 
-import model.costanti.Mossa;
-import model.costanti.Tipo;
 import model.pokemon.*;
 
 public class MainTest {
 
 	public static void test(String[] args) {
+		
+		factoryPkmn factory = new factoryPkmn();
 
-		Charmander p1 = new Charmander("Charmander", Tipo.FUOCO, null, new Mossa []{null, null, null, null},
-										new HashMap<Integer, Mossa>() {{put(1, Mossa.GRAFFIO); put(2, Mossa.RUGGITO); put(4, Mossa.BRACIERE); put(8, Mossa.MURODIFUMO); put(12, Mossa.DRAGOSPIRO); put(17, Mossa.ROGODENTI); 
-																		put(20, Mossa.LACERAZIONE); put(24, Mossa.LANCIAFIAMME); put(28, Mossa.VISOTRUCE); put(36, Mossa.MARCHIATURA);}}, 
-										16, 16, null, 39, 65, 52, 60, 43, 50);
+		Pokemon p1 = factory.crea("charmander", 12);
 		
-		Bulbasaur p2 = new Bulbasaur("Bulbasaur", Tipo.ERBA, null, new Mossa []{Mossa.FRUSTATA, Mossa.RUGGITO, null, null},
-										null, 16, 16, p1 , 45, 45, 49, 65, 49, 65);
+		Pokemon p2 = factory.crea("squirtle");
 		
-		Squirtle p3 = new Squirtle("Squirtle", Tipo.ACQUA, null, new Mossa []{Mossa.PISTOLACQUA, Mossa.RITIRATA, null, null},
-				null, 5, 16, null, 44, 43, 48, 50, 65, 64);
+		Pokemon p3 = factory.crea("bulbasaur");
 		
+		System.out.println(p1 + "\n");
 		//non capisco la madonna che mi mette il livello 32 porcacccio chi so io
-		System.out.println(p2.evolve());
+		//System.out.println(p2.evolve());
 		//System.out.println("\n" + p1);
 		
 		/*Test botte, precisione ed elusione
@@ -68,6 +67,8 @@ public class MainTest {
 		p3.gainExp(p2);
 		System.out.println(p3);
 		*/
+		
+		return;
 	}
 
 }

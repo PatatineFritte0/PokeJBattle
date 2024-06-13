@@ -244,7 +244,19 @@ public class Pokemon implements Crescita {
 		this.setLvl(this.getLvl() + 1);
 		
 		if(this.getLvl() == this.getEvoLvl()) {
-			//evolvi
+			this.nome = evo.nome;
+			this.tipi = evo.tipi;
+			this.parcoMosse = evo.parcoMosse;
+			this.evoLvl = evo.evoLvl;
+			
+			this.battlePs = evo.battlePs;
+			this.maxPs = evo.maxPs;
+			
+			this.velocita = evo.velocita;
+			this.attacco = evo.attacco;
+			this.attaccoSP = evo.attaccoSP;
+			this.difesa = evo.difesa;
+			this.difesaSP = evo.difesaSP;
 		}
 		
 		this.setNextLvlExp( (int) (4 * Math.pow(this.getLvl(), 3)/ 5));
@@ -282,7 +294,7 @@ public class Pokemon implements Crescita {
 	// private int calcPS(int ps) { return ((ps * 2 + this.lvl)/100) + this.lvl + 10; } fotte i ps
 	private int calcStat(int stat) { return ((stat * 2 + this.lvl)/100) + 5; }
 	
-	private void goToLvl(int lvl) {
+	public void goToLvl(int lvl) {
 		for(int i = 0; i<lvl; i++) {
 			this.levelUp(); 
 		}
@@ -299,7 +311,7 @@ public class Pokemon implements Crescita {
 				if(Arrays.asList(this.getMoveSet()).contains(null) && !Arrays.asList(this.getMoveSet()).contains(m)) {
 					mosse[Arrays.asList(this.getMoveSet()).indexOf(null)] = new UsableMove(m);
 				} else {
-					System.out.println("Vorrebbe imparare " + m.getNome() + ". Inserire il numero della mossa da sostituire...");
+					System.out.println(this.nome + " vorrebbe imparare " + m.getNome() + ". Inserire il numero della mossa da sostituire...");
 					Scanner s = new Scanner(System.in);
 					String scelta = s.nextLine();
 					switch(scelta) {
@@ -349,8 +361,8 @@ public class Pokemon implements Crescita {
 	@Override
 	public String toString() {
 		return "Pokemon [nome=" + nome + ", tipi=" + Arrays.toString(tipi) + ", mosse=" + Arrays.toString(mosse) + ",\n" 
-				+ "parcoMosse(Mossa=Lvl)=" + parcoMosse + ",\n" 
-				+ "lvl=" + lvl + ", currentExp=" + currentExp + ", nextLvlExp=" + nextLvlExp + ", evoLvl=" + evoLvl + ", evo=" + evo + ",\n" 
+				+ "parcoMosse(Mossa=Lvl):" + parcoMosse + ",\n" 
+				+ "lvl=" + lvl + ", currentExp=" + currentExp + ", nextLvlExp=" + nextLvlExp + ", evoLvl=" + evoLvl + ", evo=" + evo.nome + ",\n" 
 				+ "battlePs=" + battlePs + ", maxPs=" + maxPs + ",\n" + "velocita=" + velocita + ", attacco=" + attacco + ", attaccoSP=" + attaccoSP + ", difesa=" + difesa + ", difesaSP=" + difesaSP + "]" 
 				+  ",\n" + "precisione=" + precisione + ", elusione=" + elusione;
 	}
