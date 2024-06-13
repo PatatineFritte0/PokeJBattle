@@ -1,10 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="345.0" prefWidth="482.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controller.ControllerBattleJPoke">
+<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerBattleJPoke">
    <children>
-      <AnchorPane layoutY="1.0" prefHeight="344.0" prefWidth="487.0" />
+      <ImageView fitHeight="800.0" fitWidth="1000.0">
+         <image>
+            <Image url="@../img/sfondo.jpg" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <effect>
+            <Lighting bumpInput="$null">
+               <light>
+                  <Light.Distant color="#feffb5" />
+               </light>
+            </Lighting>
+         </effect>
+      </ImageView>
+      <Button fx:id="newProfileButton" layoutX="593.0" layoutY="461.0" mnemonicParsing="false" onAction="#sceneNewProfile" prefHeight="100.0" prefWidth="300.0" text="New Profile" />
+      <ImageView fitHeight="303.0" fitWidth="803.0" layoutX="90.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/pokemonLogo.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="startButton" layoutX="90.0" layoutY="461.0" mnemonicParsing="false" onAction="#sceneChoose" prefHeight="100.0" prefWidth="300.0" text="Start" />
    </children>
 </AnchorPane>
