@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="chooseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" styleClass="custom-anchor" stylesheets="@../css/choosePlayers.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerChoosePlayer">
    <children>
-      <ComboBox fx:id="chooseP1" layoutX="186.0" layoutY="182.0" prefHeight="59.0" prefWidth="156.0" promptText="Choose P1" />
-      <ComboBox fx:id="chooseP2" layoutX="604.0" layoutY="187.0" prefHeight="59.0" prefWidth="181.0" promptText="Choose P2" />
-      <ImageView fitHeight="59.0" fitWidth="59.0" layoutX="796.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
+      <ComboBox fx:id="chooseP1" layoutX="186.0" layoutY="177.0" prefHeight="70.0" prefWidth="150.0" promptText="Choose P1" styleClass="custom-combobox" />
+      <ComboBox fx:id="chooseP2" layoutX="655.0" layoutY="177.0" prefHeight="70.0" prefWidth="150.0" promptText="Choose P2" styleClass="custom-combobox" />
+      <ImageView fitHeight="59.0" fitWidth="59.0" layoutX="814.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/setting.png" />
          </image>
@@ -20,5 +20,28 @@
             <Image url="@../img/setting.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="400.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/versus.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="15.0" layoutX="321.0" layoutY="203.0">
+         <image>
+            <Image url="@../img/downArrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="15.0" layoutX="790.0" layoutY="203.0">
+         <image>
+            <Image url="@../img/downArrow.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="176.0" layoutY="297.0" prefHeight="25.0" prefWidth="120.0" text="Vittorie:" />
+      <Label fx:id="VP1" layoutX="283.0" layoutY="301.0" prefHeight="17.0" prefWidth="59.0" text="None" />
+      <Label layoutX="647.0" layoutY="297.0" prefHeight="25.0" prefWidth="120.0" text="Vittorie:" />
+      <Label fx:id="VP2" layoutX="754.0" layoutY="301.0" prefHeight="17.0" prefWidth="59.0" text="None" />
+      <Label layoutX="170.0" layoutY="318.0" prefHeight="25.0" prefWidth="120.0" text="Sconfitte:" />
+      <Label fx:id="SP1" layoutX="292.0" layoutY="322.0" prefHeight="17.0" prefWidth="59.0" text="None" />
+      <Label layoutX="647.0" layoutY="318.0" prefHeight="25.0" prefWidth="120.0" text="Sconfitte:" />
+      <Label fx:id="SP2" layoutX="769.0" layoutY="322.0" prefHeight="17.0" prefWidth="59.0" text="None" />
    </children>
 </AnchorPane>

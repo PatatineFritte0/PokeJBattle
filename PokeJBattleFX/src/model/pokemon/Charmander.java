@@ -3,7 +3,7 @@ package model.pokemon;
 import java.util.HashMap;
 
 import model.Pokemon;
-import model.factoryPkmn;
+import model.FactoryPkmn;
 import model.costanti.Mossa;
 import model.costanti.Tipo;
 

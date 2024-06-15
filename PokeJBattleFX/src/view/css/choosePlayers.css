@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+
+.custom-combobox .arrow-button {
+    -fx-background-color: transparent;
+    -fx-background-size: contain; /* Adatta l'immagine alle dimensioni del pulsante */
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url('../img/downArrow.png');
+    -fx-padding: 7px;
+}
+
+.custom-combobox .list-cell {
+    -fx-pref-height: 70px;
+    -fx-background-image: url('../img/selezione.jpeg');
+    -fx-background-size: 100% 100%; /* Adatta l'immagine di sfondo alle dimensioni della cella */
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-alignment: center;
+}
+
+.custom-combobox{
+	-fx-font-size: 10px;
+	-fx-background-image: url('../img/selezione.jpeg');
+    -fx-background-size: 100% 100%; /* Adatta l'immagine di sfondo alle dimensioni del ComboBox */
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    
+}
+
+.custom-combobox .arrow {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-background-image: url('../img/downArrow.png');
+    -fx-background-size: contain; /* Adatta l'immagine alle dimensioni del pulsante */
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-shape: null; /* Rimuovi la forma della freccia originale */
+}
+
+.custom-anchor{
+	-fx-font-family: "Press Start 2P";
+	-fx-background-image: url('../img/sfondoChoose.jpg');
+	-fx-background-size: contain;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 100% 100%;
+}

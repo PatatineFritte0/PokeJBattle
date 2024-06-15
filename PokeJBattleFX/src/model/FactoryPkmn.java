@@ -1,7 +1,7 @@
 package model;
 import model.pokemon.*;
 
-public class factoryPkmn {
+public class FactoryPkmn {
 
 	private Pokemon pkmn; 
 	

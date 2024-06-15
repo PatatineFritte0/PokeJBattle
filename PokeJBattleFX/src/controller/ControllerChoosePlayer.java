@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,63 +11,71 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
+import model.FactoryPkmn;
 import model.Pokemon;
 
 public class ControllerChoosePlayer {
 	@FXML
-	private AnchorPane ChooseAnchor;
+	private AnchorPane chooseAnchor;
 	
 	@FXML
 	public void initialize(){
-		Scene scena = ChooseAnchor.getScene();
-		
-		ComboBox<Pokemon> comboBox1 = (ComboBox<Pokemon>) scena.lookup("#chooseP1");
-		
-		ObservableList<Pokemon> pokemon = FXCollections.observableArrayList();
-		comboBox1.setItems(pokemon);
-		
-		
-		comboBox1.setItems(pokemon);
-		
-		comboBox1.setCellFactory(new Callback<ListView<Pokemon>, ListCell<Pokemon>>(){
+		chooseAnchor.sceneProperty().addListener(new ChangeListener<Scene>() {
 
 			@Override
-			public ListCell<Pokemon> call(ListView<Pokemon> param) {
-				return new ListCell<Pokemon>() {
-				
-					protected void updateItem(Pokemon pokemon, boolean empty) {
-	                    super.updateItem(pokemon, empty);
-	                    if (empty || pokemon == null) {
-	                        setText(null);
-	                        setGraphic(null);
-	                        setStyle("");
-	                    } else {
-	                        setText(pokemon.getNome());
-	                        setStyle("-fx-background-image: url(' ../view/img/pokemonLogo '); " +
-	                                 "-fx-background-size: cover; " +
-	                                 "-fx-background-position: center center;");
-	                    }
-					}
-				};
+			public void changed(ObservableValue<? extends Scene> observable, Scene oldScene, Scene newScene) {
+				if(newScene != null) {
+					
+					ComboBox<Pokemon> comboBox1 = (ComboBox<Pokemon>) newScene.lookup("#chooseP1");
+					
+					
+					FactoryPkmn factory = new FactoryPkmn();
+					
+					ObservableList<Pokemon> pokemon = FXCollections.observableArrayList(
+							factory.crea("bulbasaur", 5),
+							factory.crea("bulbasaur", 5),
+							factory.crea("bulbasaur", 5));
+					comboBox1.setItems(pokemon);
+					
+					
+					comboBox1.setItems(pokemon);
+					
+					comboBox1.setCellFactory(new Callback<ListView<Pokemon>, ListCell<Pokemon>>(){
+	
+						@Override
+						public ListCell<Pokemon> call(ListView<Pokemon> param) {
+							return new ListCell<Pokemon>() {
+							
+								protected void updateItem(Pokemon pokemon, boolean empty) {
+				                    super.updateItem(pokemon, empty);
+				                    if (empty || pokemon == null) {
+				                        setText(null);
+				                        setGraphic(null);
+				                        setStyle("");
+				                    } else {
+				                        setText(pokemon.getNome());   
+				                    }
+								}
+							};
+						}
+					});
+					
+					comboBox1.setButtonCell(new ListCell<Pokemon>() {
+			            @Override
+			            protected void updateItem(Pokemon pokemon, boolean empty) {
+			                super.updateItem(pokemon, empty);
+			                if (empty || pokemon == null) {
+			                    setText(null);
+			                    setGraphic(null);
+			                    setStyle("");
+			                } else {
+			                    setText(pokemon.getNome());
+			                }
+			            }
+			        });
+				}
 			}
 		});
-		
-		comboBox1.setButtonCell(new ListCell<Pokemon>() {
-            @Override
-            protected void updateItem(Pokemon pokemon, boolean empty) {
-                super.updateItem(pokemon, empty);
-                if (empty || pokemon == null) {
-                    setText(null);
-                    setGraphic(null);
-                    setStyle("");
-                } else {
-                    setText(pokemon.getNome());
-                    setStyle("-fx-background-image: url(' ../view/img/pokemonLogo '); " +
-                             "-fx-background-size: cover; " +
-                             "-fx-background-position: center center;");
-                }
-            }
-        });
 	}
 }
 		

@@ -11,7 +11,7 @@ public class MainTest {
 
 	public static void test(String[] args) {
 		
-		factoryPkmn factory = new factoryPkmn();
+		FactoryPkmn factory = new FactoryPkmn();
 
 		Pokemon p1 = factory.crea("charmander", 12);
 		
