@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="newSaveAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" stylesheets="@../css/newSave.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerNewSave">
+   <children>
+      <Accordion layoutX="612.0" layoutY="91.0" />
+      <Pane fx:id="paneSquadra" layoutX="689.0" layoutY="36.0" prefHeight="651.0" prefWidth="220.0">
+         <children>
+            <Pane fx:id="panePKN1" layoutY="51.0" prefHeight="100.0" prefWidth="220.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="220.0" text="+" />
+               </children>
+            </Pane>
+            <Pane fx:id="panePKN2" layoutY="151.0" prefHeight="100.0" prefWidth="220.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="220.0" text="+" />
+               </children>
+            </Pane>
+            <Pane fx:id="panePKN3" layoutY="251.0" prefHeight="100.0" prefWidth="220.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="220.0" text="+" />
+               </children>
+            </Pane>
+            <Pane fx:id="panePKN4" layoutY="351.0" prefHeight="100.0" prefWidth="220.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="220.0" text="+" />
+               </children>
+            </Pane>
+            <Pane fx:id="panePKN5" layoutY="451.0" prefHeight="100.0" prefWidth="220.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="220.0" text="+" />
+               </children>
+            </Pane>
+            <Pane fx:id="panePKN6" layoutY="551.0" prefHeight="100.0" prefWidth="220.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="220.0" text="+" />
+               </children>
+            </Pane>
+            <Label prefHeight="53.0" prefWidth="220.0" text="Squadra" textAlignment="CENTER" />
+         </children>
+      </Pane>
+      <Button layoutX="109.0" layoutY="561.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="294.0" text="Crea" />
+      <Pane layoutX="35.0" layoutY="31.0" prefHeight="120.0" prefWidth="257.0">
+         <children>
+            <TextField layoutX="87.0" layoutY="14.0" />
+            <Label layoutX="21.0" layoutY="18.0" text="Nickname: " />
+            <Label fx:id="errNickname" layoutX="5.0" layoutY="60.0" prefHeight="25.0" prefWidth="245.0" text="errore" textFill="RED" />
+         </children>
+      </Pane>
+      <Label fx:id="errCrea" layoutX="106.0" layoutY="530.0" prefHeight="17.0" prefWidth="294.0" text="Errore" textFill="RED" />
+   </children>
+</AnchorPane>

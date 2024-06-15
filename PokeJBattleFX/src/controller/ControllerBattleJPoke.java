@@ -11,8 +11,14 @@ import javafx.stage.Stage;
 
 public class ControllerBattleJPoke {
 	
-	public void sceneNewProfile() {
+	public void sceneNewProfile(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("../view/fxml/newSave.fxml"));
 		
+		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		
+		Scene scene = new Scene(root,1000,800);
+		stage.setScene(scene);
+		stage.show();
 	}
 	
 	public void sceneChoose(ActionEvent event) throws IOException {
