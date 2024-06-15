@@ -11,8 +11,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
-import model.FactoryPkmn;
 import model.Pokemon;
+import model.FactoryPkmn;
 
 public class ControllerChoosePlayer {
 	@FXML

@@ -13,12 +13,15 @@ public class MainTest {
 		
 		FactoryPkmn factory = new FactoryPkmn();
 
-		Pokemon p1 = factory.crea("charmander", 12);
+		Pokemon p1 = factory.crea("charmander", 100);
 		
 		Pokemon p2 = factory.crea("squirtle");
 		
 		Pokemon p3 = factory.crea("bulbasaur");
 		
+		System.out.println(p1 + "\n");
+		p1.evolve();
+		p1.evolve();
 		System.out.println(p1 + "\n");
 		//non capisco la madonna che mi mette il livello 32 porcacccio chi so io
 		//System.out.println(p2.evolve());
