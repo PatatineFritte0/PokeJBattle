@@ -12,6 +12,21 @@ public class MainTest {
 	public static void test(String[] args) {
 		
 		FactoryPkmn factory = new FactoryPkmn();
+		
+		Allenatore a1 = new Allenatore("Alessia", new Pokemon[] {factory.crea("squirtle", 10), factory.crea("charmander", 5), null, null, null, null}, 0, 0);
+		Allenatore a2 = new Allenatore("SimoCom", new Pokemon[] {factory.crea("bulbasaur", 15), factory.crea("charmeleon", 20), null, null, null, null}, 0, 0);
+		
+		a2.getPokemonById(0).setCurrentExp(2650);
+		
+		BestOfThree game = new BestOfThree(a1,a2);
+		
+		game.run();
+		
+		System.out.println("\nVITTORIE-SCONFITTE -> " + a1.getNickname() + ":" + a1.getVittorie() + " - " + a1.getSconfitte() + "; " + a2.getNickname() + ":" + a2.getVittorie() + " - " + a2.getSconfitte() + "\n");
+		
+		
+		/*
+		FactoryPkmn factory = new FactoryPkmn();
 
 		Pokemon p1 = factory.crea("charmander", 100);
 		
@@ -23,6 +38,7 @@ public class MainTest {
 		p1.evolve();
 		p1.evolve();
 		System.out.println(p1 + "\n");
+		*/
 		//non capisco la madonna che mi mette il livello 32 porcacccio chi so io
 		//System.out.println(p2.evolve());
 		//System.out.println("\n" + p1);

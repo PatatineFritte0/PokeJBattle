@@ -54,6 +54,15 @@ public class Allenatore {
 		this.mainPokemon = this.squadra[0];
 	}
 	
+	public String squadraToString() {
+		String ms = "[";
+		for(int i = 0; i < this.squadra.length; i++) {
+			ms += (this.squadra[i] == null) ? "" : this.squadra[i].getNome() + "[" + (i) +"], ";
+		}
+		ms += "]";
+		return ms;
+	}
+	
 	public Pokemon getPokemonById(int index) { return squadra[index];}
 	
 	public Pokemon getMainPokemon() { return mainPokemon; }
@@ -62,4 +71,12 @@ public class Allenatore {
 			this.mainPokemon = this.squadra[index];
 		}
 	}
+
+	public int getVittorie() { return vittorie; }
+	public void setVittorie(int vittorie) { this.vittorie = vittorie; }
+
+	public int getSconfitte() { return sconfitte; }
+	public void setSconfitte(int sconfitte) { this.sconfitte = sconfitte; }
+	
+	
 }

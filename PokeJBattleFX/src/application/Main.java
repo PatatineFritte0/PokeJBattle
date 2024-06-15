@@ -34,8 +34,8 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		launch(args);
-		//MainTest.test(args);
+		//launch(args);
+		MainTest.test(args);
 		System.exit(0);
 
 	}

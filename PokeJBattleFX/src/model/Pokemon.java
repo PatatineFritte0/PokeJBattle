@@ -372,6 +372,14 @@ public class Pokemon implements Crescita {
 				+  ",\n" + "precisione=" + precisione + ", elusione=" + elusione;
 	}
 	
+public String battleData() {
+		
+		return "Pokemon [nome=" + nome + ", tipi=" + Arrays.toString(tipi) + ", mosse=" + Arrays.toString(mosse) + ",\n" 
+				+ "lvl=" + lvl + ", currentExp=" + currentExp + ", nextLvlExp=" + nextLvlExp
+				+ "\nbattlePs=" + battlePs + ", maxPs=" + maxPs + ",\n" + "velocita=" + velocita + ", attacco=" + attacco + ", attaccoSP=" + attaccoSP + ", difesa=" + difesa + ", difesaSP=" + difesaSP + "]" 
+				+  ",\n" + "precisione=" + precisione + ", elusione=" + elusione;
+	}
+	
 	
 	// ↓ Setters and Getters ↓ ------------------------------------------------------------------------------
 	public Tipo[] getTipi() { return tipi; }
@@ -398,6 +406,15 @@ public class Pokemon implements Crescita {
 		for(int i = 0; i < this.mosse.length; i++) {
 			ms[i] = (mosse[i] == null) ? null : mosse[i].getMossa();
 		}
+		return ms;
+	}
+	
+	public String moveSetToString() {
+		String ms = "[";
+		for(int i = 0; i < this.mosse.length; i++) {
+			ms += (mosse[i] == null) ? "" : mosse[i].getMossa().getNome() + "[" + (i+1) +"], ";
+		}
+		ms += "]";
 		return ms;
 	}
 	

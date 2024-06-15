@@ -1,41 +1,49 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class Partita {
+import model.costanti.*;
+
+public class Partita implements Runnable {
 	private Allenatore allenatore;
+	private AtomicInteger nPkmnAllenatore = new AtomicInteger();
 	private Allenatore sfidante;
+	private AtomicInteger nPkmnSfidante = new AtomicInteger();;
 	
-	public Partita(Allenatore allenatore, Allenatore sfidante){
+	private ArrayList<String> log = new ArrayList<>();
+	
+	public Partita(Allenatore allenatore, Allenatore sfidante) {
 		this.allenatore = allenatore;
+		this.nPkmnAllenatore.set(contaPkmn(allenatore));
 		this.sfidante = sfidante;
+		this.nPkmnSfidante.set(contaPkmn(sfidante));
 	}
 	
-	public void doTurno(Turno allenatore, Turno sfidante){
-			
+	@Override
+	public void run() {
+			Turno t = new Turno(allenatore, sfidante, nPkmnAllenatore, nPkmnSfidante);
+			t.run();
+			log.add(t.getLog());
+	}
+	
+	public ArrayList<String> getLog() { return log; }
+
+	private int contaPkmn(Allenatore t) {
+		int pkmn = 0;
+		
+		Pokemon[] squadraAll = t.getSquadra();
+		for(Pokemon poke: squadraAll) {
+			pkmn += (poke != null) ? 1 : 0;
+		}
+		return pkmn;
 	}
 	
 	public Allenatore checkVincitore() {
-		int nPokeVivi = 0;
-		
-		Pokemon[] squadraAll = this.allenatore.getSquadra();
-		for(Pokemon poke: squadraAll) {
-			if(poke != null) {
-				nPokeVivi += (poke.getBattlePs() <= 0 ) ? 1 : 0;
-			}
-		}
-		
-		if(nPokeVivi == 0) return this.sfidante;
-		else nPokeVivi = 0;
-		
-		Pokemon[] squadraSfid = this.sfidante.getSquadra();
-		for(Pokemon poke: squadraSfid) {
-			if(poke != null) {
-				nPokeVivi += (poke.getBattlePs() <= 0 ) ? 1 : 0;
-			}
-		}
-		
-		if(nPokeVivi == 0) return this.allenatore;
+		if(this.nPkmnAllenatore.get() <= 0) {return this.sfidante;}
+		if(this.nPkmnSfidante.get()  <= 0) {return this.allenatore;}
 		return null;
 	}
 	

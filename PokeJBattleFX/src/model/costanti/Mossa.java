@@ -1,6 +1,10 @@
 package model.costanti;
 
 public enum Mossa {
+	
+	RESA("RESA", 0, Tipo.NORMALE, Categoria.FISICO, 0, 0, /*Dati per mosse di stato ->*/null, 0, false),
+	CAMBIA("CAMBIA", 0, Tipo.NORMALE, Categoria.FISICO, 0, 0, /*Dati per mosse di stato ->*/null, 0, false),
+	
 	// Bulbasaur stuff
 	FRUSTATA("Frustata", 45, Tipo.ERBA, Categoria.FISICO, 100, 25, /*Dati per mosse di stato ->*/null, 0, false),
 	RUGGITO("Ruggito", 0, Tipo.NORMALE, Categoria.STATO, 100, 40, /*Dati per mosse di stato ->*/Statistica.ATTACCO, -1, false),
