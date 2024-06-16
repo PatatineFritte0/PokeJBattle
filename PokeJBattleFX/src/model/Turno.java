@@ -70,6 +70,11 @@ public class Turno implements Runnable {
 				
 				if(this.sfidante.getMainPokemon().getBattlePs() > 0) {
 					scontro(this.sfidante, this.allenatore, this.m2);
+					
+					if(this.allenatore.getMainPokemon().getBattlePs() <= 0) {
+						this.sfidante.getMainPokemon().gainExp(this.allenatore.getMainPokemon());
+						esausto(this.allenatore, this.countAllenatore);
+					}
 				} else {
 					this.allenatore.getMainPokemon().gainExp(this.sfidante.getMainPokemon());
 					esausto(this.sfidante, this.countSfidante);
@@ -80,6 +85,11 @@ public class Turno implements Runnable {
 				
 				if(this.allenatore.getMainPokemon().getBattlePs() > 0) {
 					scontro(this.allenatore, this.sfidante, this.m1);
+					
+					if(this.sfidante.getMainPokemon().getBattlePs() <= 0) {
+						this.allenatore.getMainPokemon().gainExp(this.sfidante.getMainPokemon());
+						esausto(this.sfidante, this.countSfidante);
+					}
 				} else {
 					this.sfidante.getMainPokemon().gainExp(this.allenatore.getMainPokemon());
 					esausto(this.allenatore, this.countAllenatore);

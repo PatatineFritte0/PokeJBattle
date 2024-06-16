@@ -199,6 +199,12 @@ public class Pokemon implements Crescita {
 				case Statistica.VELOCITA:
 					baseOnAction = (mossa.getOnSelf()) ? this.getVelocita() : enemy.getVelocita();
 					break;
+				case Statistica.PRECISIONE:
+					baseOnAction = (mossa.getOnSelf()) ? this.getPrecisione() : enemy.getPrecisione();
+					break;
+				case Statistica.ELUSIONE:
+					baseOnAction = (mossa.getOnSelf()) ? this.getElusione() : enemy.getElusione();
+					break;
 				default:
 					return -1;
 			}		
@@ -226,6 +232,7 @@ public class Pokemon implements Crescita {
 		
 		int crit = r.nextInt(1, 100);
 		crit = (crit<=8) ? 2 : 1;
+		if(crit == 2) {System.out.println("\nColpo critico!\n");}
 																														
 		double random = r.nextDouble(217, 255) / 255;
 		double stab = (mossa.getTipo() == this.tipi[0] || mossa.getTipo() == this.tipi[1]) ? 1.5 : 1;
@@ -233,7 +240,16 @@ public class Pokemon implements Crescita {
 		Tipo tipo1 = enemy.getTipi()[0];
 		Tipo tipo2 = enemy.getTipi()[1];
 		
-		return (int) (((((((2 * this.lvl * crit )/ 5) + 2) * mossa.getBasePower() * myAtk.getBattleValue()/hisDef.getBattleValue()))/30 + 2) * stab * random * mossa.getTipo().calcolaRelazioneTipi(tipo1) * mossa.getTipo().calcolaRelazioneTipi(tipo2));
+		double s1 = mossa.getTipo().calcolaRelazioneTipi(tipo1);
+		double s2 = mossa.getTipo().calcolaRelazioneTipi(tipo2);
+		double superefficacia = s1 * s2;
+		if(superefficacia == 0.0) {System.out.println(" Il nemico e' immune! ");}
+		if(superefficacia == 0.25) {System.out.println(" Non e' per niente efficace! ");}
+		if(superefficacia == 0.5) {System.out.println(" E' poco efficace! ");}
+		if(superefficacia == 2) {System.out.println(" E' superefficace! ");}		
+		
+		
+		return (int) (((((((2 * this.lvl * crit )/ 5) + 2) * mossa.getBasePower() * myAtk.getBattleValue()/hisDef.getBattleValue()))/30 + 2) * stab * random * superefficacia);
 	}
 	// ↑ Danni ↑ ------------------------------------------------------------------------------------
 	
@@ -372,7 +388,7 @@ public class Pokemon implements Crescita {
 				+  ",\n" + "precisione=" + precisione + ", elusione=" + elusione;
 	}
 	
-public String battleData() {
+	public String battleData() {
 		
 		return "Pokemon [nome=" + nome + ", tipi=" + Arrays.toString(tipi) + ", mosse=" + Arrays.toString(mosse) + ",\n" 
 				+ "lvl=" + lvl + ", currentExp=" + currentExp + ", nextLvlExp=" + nextLvlExp

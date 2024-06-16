@@ -17,11 +17,13 @@ public class BestOfThree implements Runnable {
 	{
 		Allenatore winner;
 		
+		bo3:
 		for(int i = 0; i < 3; i++) {
 			winner = match(this.allenatore, this.sfidante);
 			assegnaPunti(winner);
 			
 			System.out.println("\nPUNTEGGI -> " + this.allenatore.getNickname() + ":" + this.winAllenatore + "; " + this.sfidante.getNickname() + ":" + this.winSfidante + "\n");
+			if(winAllenatore > 1 || winSfidante > 1) {break bo3;}
 		}
 			
 		if(winAllenatore > winSfidante) {
