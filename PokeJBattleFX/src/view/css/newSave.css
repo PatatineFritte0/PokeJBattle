@@ -1,0 +1,35 @@
+@font-face{
+	-fx-font-family: "Press Start 2P";
+	src: url("../fonts/PressStart2P.ttf");
+}
+
+.custom-anchor{
+	-fx-font-family: "Press Start 2P";
+}
+
+.paneSquadra .label{
+	-fx-alignment: center;
+	-fx-font-size: 20px;
+}
+
+.paneSquadra .pokeContainers .label{
+	-fx-alignment: center;
+	-fx-font-size: 10px;
+}
+
+.paneSquadra .pokeContainers{
+	-fx-background-color: red;
+	-fx-border-color: black;
+	-fx-border-width: 10px ;
+}
+
+
+
+.paneNickname .label{
+	-fx-font-size: 9px
+}
+
+.Err{
+	-fx-alignment: center;
+	-fx-font-size: 7px
+}

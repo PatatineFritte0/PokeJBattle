@@ -1,3 +1,4 @@
+/*
 package model;
 import com.google.gson.*;
 import java.io.File;
@@ -34,7 +35,7 @@ public class SaveManager {
 		} catch (IOException e) {
 			System.out.println("Errore nella creazione");
 		}
-		*/		
+				
 		return a;
 	}
-}
+}*/

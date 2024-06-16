@@ -13,9 +13,9 @@ public class MainTest {
 		
 		FactoryPkmn factory = new FactoryPkmn();
 		
-		SaveManager m = new SaveManager();
+		//SaveManager m = new SaveManager();
 		
-		Allenatore a = m.newSave("Carlo", new Pokemon[] {factory.crea("charmander", 5), null, null, null, null, null});
+		//Allenatore a = m.newSave("Carlo", new Pokemon[] {factory.crea("charmander", 5), null, null, null, null, null});
 		
 		/*
 				
