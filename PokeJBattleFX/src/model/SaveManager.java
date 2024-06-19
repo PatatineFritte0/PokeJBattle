@@ -1,41 +1,46 @@
-/*
 package model;
-import com.google.gson.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
-
+import com.google.gson.*;
 
 
 public class SaveManager {
 	
-	private String genericPath;
+	private String savePath;
+	private Gson salvatore;
 	
 	SaveManager() {
-		this.genericPath = "src/saves/";
+		this.savePath = "src/saves.json";
+		this.salvatore = new Gson();
 	}
 	
 	public Allenatore newSave(String nickname, Pokemon[] pokemon) {
 		
-		Gson c = new Gson();
+		Allenatore trainer = new Allenatore(nickname, pokemon, 0, 0);
 		
-		Allenatore a = new Allenatore(nickname, pokemon, 0, 0);
-		
-		String json = c.toJson(a);
-		System.out.println(a);
-		/*
-		String path = this.genericPath + nickname + ".json";
-		File f = new File(path);
+		String trainerJson = salvatore.toJson(trainer);
+
 		try {
-			if(f.createNewFile()) {
-				System.out.println("File creato");
-			} else {
-				System.out.println("File già esistente");
-			}
-		} catch (IOException e) {
-			System.out.println("Errore nella creazione");
+			
+			FileReader saveFileToRead = new FileReader(this.savePath);
+			BufferedReader reader = new BufferedReader(saveFileToRead);
+
+			String data = "";
+            while(reader.readLine() != null) {
+            	data += reader.readLine() + "\n";
+            }
+            data += trainerJson;
+            System.out.println(data);
+			
+            FileOutputStream saveFileToWrite = new FileOutputStream(this.savePath);
+            BufferedOutputStream writer = new BufferedOutputStream(saveFileToWrite);
+            
+            writer.write(data.getBytes());
+            writer.close();
+		} catch (Exception e) {
+			
 		}
-				
-		return a;
+		
+		return trainer;
 	}
-}*/
+}

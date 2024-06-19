@@ -13,14 +13,10 @@ public class MainTest {
 		
 		FactoryPkmn factory = new FactoryPkmn();
 		
-		//SaveManager m = new SaveManager();
+		SaveManager m = new SaveManager();
 		
-		//Allenatore a = m.newSave("Carlo", new Pokemon[] {factory.crea("charmander", 5), null, null, null, null, null});
-		
-		/*
-				
-		Allenatore a1 = new Allenatore("Desk", new Pokemon[] {factory.crea("charmander", 5), null, null, null, null, null}, 0, 0);
-		Allenatore a2 = new Allenatore("Comi", new Pokemon[] {factory.crea("bulbasaur", 5), null, null, null, null, null}, 0, 0);
+		Allenatore a1 = m.newSave("Desk", new Pokemon[] {factory.crea("charmander", 5), null, null, null, null, null});
+		Allenatore a2 = m.newSave("Comi", new Pokemon[] {factory.crea("bulbasaur", 5), null, null, null, null, null});
 		
 		a2.getPokemonById(0).setCurrentExp(2650);
 		
