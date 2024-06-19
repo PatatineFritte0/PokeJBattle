@@ -1,0 +1,14 @@
+@font-face{
+	-fx-font-family: "Press Start 2P";
+	src: url("../fonts/PressStart2P.ttf");
+}
+
+.custom-anchor{
+	-fx-font-family: "Press Start 2P";
+}
+
+.pane{
+	-fx-background-image: url("../img/pokemonLogo.png");
+	-fx-background-size: contain;
+	-fx-background-repeat: no-repeat;
+}

@@ -36,8 +36,17 @@ public class ControllerListPkmn {
 		FactoryPkmn factory = new FactoryPkmn();
 		Pokemon pokemon = factory.crea(nomePokemon.toLowerCase(), 5);
 		
-		Pane privPane = (Pane) priviusEvent.getTarget();
+		Pane privPane = null;
+		String oggetto = (String)priviusEvent.getTarget().getClass().getSimpleName();
 		
+		if(priviusEvent.getTarget() instanceof Pane) {
+			privPane = (Pane) priviusEvent.getTarget();
+		}else if(priviusEvent.getTarget() instanceof ImageView) {
+			privPane = (Pane)((ImageView)priviusEvent.getTarget()).getParent();
+		}else{
+			privPane = (Pane)((Text)priviusEvent.getTarget()).getParent().getParent();
+		}
+
 		String idPane = privPane.getId();
 		
 		controllerOwner.squadra[Integer.valueOf(idPane.substring(idPane.length()- 1)) - 1] = pokemon;

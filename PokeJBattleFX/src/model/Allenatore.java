@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class Allenatore {
@@ -11,16 +12,18 @@ public class Allenatore {
 	private int vittorie;
 	private int sconfitte;
 	private double winRadio;
-	private LocalDate ultimoAccesso;
+	private String ultimoAccesso;
 	
 	public Allenatore(String nickname, Pokemon[] pokemon, int vittorie, int sconfitte) {
 		this.nickname = nickname;
 		
-		// nel caso [x,x,null,null,x] otterremmo [x,x,x,null,null,null]
+		// nel caso [x,x,null,null,x,null] otterremmo [x,x,x,null,null,null]
 		int countNull = 0;
 		for(int i = 0; i < pokemon.length; i++) {
 			if(pokemon[i] != null) {
 				this.squadra[i-countNull] = pokemon[i];
+			}else {
+				countNull++;
 			}
 		}
 			
@@ -33,7 +36,32 @@ public class Allenatore {
 		this.vittorie = vittorie;
 		this.sconfitte = sconfitte;
 		this.winRadio = (sconfitte != 0) ? this.vittorie/this.sconfitte : this.vittorie;
-		this.ultimoAccesso = LocalDate.now();
+		 this.ultimoAccesso = LocalDateTime.now().toString().replace("T", "/").substring(0, 21);
+	}
+	
+	public Allenatore(String nickname, Pokemon[] pokemon) {
+		this.nickname = nickname;
+		
+		// nel caso [x,x,null,null,x,null] otterremmo [x,x,x,null,null,null]
+		int countNull = 0;
+		for(int i = 0; i < pokemon.length; i++) {
+			if(pokemon[i] != null) {
+				this.squadra[i-countNull] = pokemon[i];
+			}else {
+				countNull++;
+			}
+		}
+			
+		this.mainPokemon = this.squadra[0];
+		this.nPokemon = 0;
+		for(Pokemon poke: squadra) {
+			if(poke != null) this.nPokemon += 1;
+		}
+		
+		this.vittorie = 0;
+		this.sconfitte = 0;
+		this.winRadio = (sconfitte != 0) ? this.vittorie/this.sconfitte : this.vittorie;
+		 this.ultimoAccesso = LocalDateTime.now().toString().replace("T", "/").substring(0, 21);
 	}
 	
 	public int getGiocate() { return this.vittorie + this.sconfitte; }
