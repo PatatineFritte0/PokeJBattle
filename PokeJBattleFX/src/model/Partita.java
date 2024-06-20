@@ -17,15 +17,17 @@ public class Partita implements Runnable {
 	
 	public Partita(Allenatore allenatore, Allenatore sfidante) {
 		this.allenatore = allenatore;
+		this.allenatore.setMainPokemon(0);
 		this.nPkmnAllenatore.set(contaPkmn(allenatore));
 		this.sfidante = sfidante;
+		this.sfidante.setMainPokemon(0);
 		this.nPkmnSfidante.set(contaPkmn(sfidante));
 	}
 	
 	@Override
 	public void run() {
 			Turno t = new Turno(allenatore, sfidante, nPkmnAllenatore, nPkmnSfidante);
-			t.run();
+			t.run();			
 			log.add(t.getLog());
 	}
 	

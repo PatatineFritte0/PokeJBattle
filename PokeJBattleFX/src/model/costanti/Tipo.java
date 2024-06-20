@@ -111,15 +111,15 @@ public enum Tipo {
     public List<Tipo> getResistenti(){return this.resistitoDa;}
     public List<Tipo> getImmuni() { return this.immuneDa; }
 	
-	private boolean checkSuperefficacia(Tipo tipo) {
+    public boolean checkSuperefficacia(Tipo tipo) {
 		return getForze().contains(tipo);
 	}
 	
-	private boolean checkResistenza(Tipo tipo) {
+    public boolean checkResistenza(Tipo tipo) {
 		return getResistenti().contains(tipo);
 	}
 	
-	private boolean checkImmunita(Tipo tipo) {
+    public boolean checkImmunita(Tipo tipo) {
 		return getImmuni().contains(tipo);
 	}
 	

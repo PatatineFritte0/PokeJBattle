@@ -18,8 +18,20 @@ public class Turno implements Runnable {
 	public Turno(Allenatore allenatore, Allenatore sfidante, AtomicInteger countAllenatore, AtomicInteger countSfidante) {		
 		this.allenatore = allenatore;
 		this.sfidante = sfidante;
-		this.m1 = this.scelta(allenatore);
-		this.m2 = this.scelta(sfidante);
+		do {
+			this.m1 = this.scelta(allenatore);
+		} while(countAllenatore.get() <= 1 && m1 == Mossa.CAMBIA);
+		
+		do {
+			if(sfidante.getClass() == Franco.class) {
+				Franco npc = (Franco) sfidante;
+				this.m2 = npc.agisci();
+			} else {
+				this.m2 = this.scelta(sfidante);
+			}
+		} while(countSfidante.get() <= 1 && m2 == Mossa.CAMBIA);
+		
+		
 		this.countAllenatore = countAllenatore;
 		this.countSfidante = countSfidante;
 		this.log = "";
@@ -148,16 +160,25 @@ public class Turno implements Runnable {
 		String scelta = "";
 		
 		do{
-		System.out.println("Scegliere il pokemon con il quale si desidera sostituire " + trainer.getMainPokemon().getNome() + ". " + trainer.squadraToString());
-		Scanner s = new Scanner(System.in);
-		scelta = s.nextLine();
 		
+			if(trainer.getClass() == Franco.class) {
+				Franco npc = (Franco) trainer;
+				scelta = npc.cambia();
+			} else {
+				System.out.println("Scegliere il pokemon con il quale si desidera sostituire " + trainer.getMainPokemon().getNome() + ". " + trainer.squadraToString());
+				Scanner s = new Scanner(System.in);
+				scelta = s.nextLine();
+			}
+			
 			if(Integer.parseInt(scelta) >= 0 && Integer.parseInt(scelta) <= 5) {
 				if(trainer.getPokemonById(Integer.parseInt(scelta)) == null) {
 					System.out.println("lo slot selezionato e' vuoto");
 					esatuso = true;
 				} else if(trainer.getPokemonById(Integer.parseInt(scelta)).getBattlePs() <= 0) {
 					System.out.println("il pkmn selezionato e' esausto");
+					esatuso = true;
+				} else if(trainer.getPokemonId(trainer.getPokemonById(Integer.parseInt(scelta))) == trainer.getPokemonId(trainer.getMainPokemon())) {
+					System.out.println("il pkmn e' gia' in campo");
 					esatuso = true;
 				} else {
 					esatuso = false;

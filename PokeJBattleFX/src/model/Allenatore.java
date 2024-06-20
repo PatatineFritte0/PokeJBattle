@@ -31,12 +31,13 @@ public class Allenatore {
 				countNull++;
 			}
 		}
-			
-		this.mainPokemon = this.squadra[0];
+
 		this.nPokemon = 0;
 		for(Pokemon poke: squadra) {
 			if(poke != null) this.nPokemon += 1;
 		}
+		
+		this.setMainPokemon(0);
 		
 		this.vittorie = vittorie;
 		this.sconfitte = sconfitte;
@@ -57,11 +58,12 @@ public class Allenatore {
 			}
 		}
 			
-		this.mainPokemon = this.squadra[0];
 		this.nPokemon = 0;
 		for(Pokemon poke: squadra) {
 			if(poke != null) this.nPokemon += 1;
 		}
+		
+		this.setMainPokemon(0);
 		
 		this.vittorie = 0;
 		this.sconfitte = 0;
@@ -98,6 +100,17 @@ public class Allenatore {
 	
 	public Pokemon getPokemonById(int index) { return squadra[index];}
 	
+	public int getPokemonId(Pokemon pkmn) {
+		
+		int id = -1;
+		
+		for(int i = 0; i < this.squadra.length; i++) {
+			if(this.squadra[i]==pkmn) id = i;
+		}
+		
+		return id;
+	}
+	
 	public Pokemon getMainPokemon() { return mainPokemon; }
 	public void setMainPokemon(int index) {
 		if (index >= 0 && index <= 5 ) {
@@ -110,6 +123,4 @@ public class Allenatore {
 
 	public int getSconfitte() { return sconfitte; }
 	public void setSconfitte(int sconfitte) { this.sconfitte = sconfitte; }
-	
-	
 }

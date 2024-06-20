@@ -1,10 +1,10 @@
 package model;
 
 public class BestOfThree implements Runnable {
-	private Allenatore allenatore;
-	private Allenatore sfidante;
-	private int winAllenatore;
-	private int winSfidante;
+	protected Allenatore allenatore;
+	protected Allenatore sfidante;
+	protected int winAllenatore;
+	protected int winSfidante;
 	
 	BestOfThree(Allenatore allenatore, Allenatore sfidante) {
 		this.allenatore = allenatore;
@@ -39,7 +39,7 @@ public class BestOfThree implements Runnable {
 		
 	}
 	
-	private Allenatore match(Allenatore a1, Allenatore a2) {
+	protected Allenatore match(Allenatore a1, Allenatore a2) {
 		Partita p = new Partita(a1,a2);
 		
 		boolean fin = true;
@@ -49,7 +49,7 @@ public class BestOfThree implements Runnable {
 			p.run();
 			winner = p.checkVincitore();
 			fin = (winner != null)? false : true;
-			System.out.println(p.getLog());
+			//System.out.println(p.getLog());
 		} while (fin);
 		
 		System.out.println("\nIl vincitore è " + winner.getNickname() + "\n");
@@ -70,7 +70,7 @@ public class BestOfThree implements Runnable {
 		return winner;
 	}
 	
-	private void assegnaPunti(Allenatore w) {
+	protected void assegnaPunti(Allenatore w) {
 		if(w.getNickname() == this.allenatore.getNickname()) {
 			this.winAllenatore += 1;
 		}

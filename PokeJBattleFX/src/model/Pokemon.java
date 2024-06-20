@@ -434,6 +434,10 @@ public class Pokemon implements Crescita {
 		return ms;
 	}
 	
+	public void setMoveSet(Mossa[] mosse) {
+		this.setMosse(new UsableMove[] {new UsableMove(mosse[0]), new UsableMove(mosse[1]), new UsableMove(mosse[2]), new UsableMove(mosse[3])});
+	}
+	
 	public void setTipi(Tipo[] tipi) { this.tipi = tipi; }
 	public void setNome(String nome) { this.nome = nome; }
 	public void setMosse(UsableMove[] mosse) { this.mosse = mosse; }
@@ -462,6 +466,10 @@ public class Pokemon implements Crescita {
 		this.velocita.resetStat();
 		this.precisione.resetStat();
 		this.elusione.resetStat();
+		
+		for(UsableMove m:this.getMosse()) {
+			if(m != null) m.setPp(m.getPpMax());
+		}
 	}
 	
 	// Setter e Getter utili per debug
