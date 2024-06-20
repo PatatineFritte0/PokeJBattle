@@ -78,8 +78,6 @@ public class SaveManager {
 		String savePath = "src/saves.json";
 		Gson salvatore = new Gson();
 		
-		ArrayList<String> dati = new ArrayList<>();
-		
 		try {
 			FileReader saveFileToRead = new FileReader(savePath);
 			BufferedReader reader = new BufferedReader(saveFileToRead);
@@ -103,13 +101,27 @@ public class SaveManager {
 	        
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-		for (String current:dati) {
-			System.out.println(current);
-		}
-		
+		}	
 	}
+	
+	public static List getSaves() {
 		
+		String savePath = "src/saves.json";
+		Gson salvatore = new Gson();
+		
+		Type listType = new TypeToken<List<model.Allenatore>>() {}.getType();
+		 List<model.Allenatore> dati = null;
+		
+		try {
+			FileReader saveFileToRead = new FileReader(savePath);
+			BufferedReader reader = new BufferedReader(saveFileToRead);
+			
+	        dati = salvatore.fromJson(reader.readLine(), listType);
+
+		} catch (Exception e) {
+			
+		}	
+		return dati;
+	}	
 	
 }
