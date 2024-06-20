@@ -17,9 +17,9 @@ import model.FactoryPkmn;
 import model.Pokemon;
 
 public class ControllerReorganizePkmn {
-	private MouseEvent priviusEvent;
+	private String idChoose;
 	
-	private ControllerNewSave controllerOwner;
+	private ControllerChoosePlayer controllerOwner;
 	
 	@FXML
 	private Pane riorganizedPane;
@@ -31,6 +31,11 @@ public class ControllerReorganizePkmn {
 	
 	@FXML
 	public void initialize(){
+		//inserisci il nickname nel label nickname
+		
+			
+		
+		//
 		//carica squadra allenatore
 		FactoryPkmn f = new FactoryPkmn();
 		squadra[0] = f.crea("bulbasaur", 5);
@@ -158,11 +163,11 @@ public class ControllerReorganizePkmn {
 	}
 	
 	
-	public void setPriviusEvent(MouseEvent event) {
-		this.priviusEvent = event;
+	public void setIdChoose(String id) {
+		this.idChoose = id;
 	}
 	
-	public void setControllerOwner(ControllerNewSave controller) {
+	public void setControllerOwner(ControllerChoosePlayer controller) {
 		this.controllerOwner = controller;
 	}
 	

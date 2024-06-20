@@ -8,14 +8,14 @@
 
 <AnchorPane fx:id="chooseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" styleClass="custom-anchor" stylesheets="@../css/choosePlayers.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerChoosePlayer">
    <children>
-      <ComboBox fx:id="chooseP1" layoutX="186.0" layoutY="177.0" prefHeight="70.0" prefWidth="150.0" promptText="Choose P1" styleClass="custom-combobox" />
+      <ComboBox fx:id="chooseP1" layoutX="192.0" layoutY="168.0" prefHeight="70.0" prefWidth="150.0" promptText="Choose P1" styleClass="custom-combobox" />
       <ComboBox fx:id="chooseP2" layoutX="655.0" layoutY="177.0" prefHeight="70.0" prefWidth="150.0" promptText="Choose P2" styleClass="custom-combobox" />
-      <ImageView fx:id="imp2" fitHeight="59.0" fitWidth="59.0" layoutX="814.0" layoutY="182.0" onMouseClicked="#openReorganize" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imp2" fitHeight="59.0" fitWidth="59.0" layoutX="819.0" layoutY="182.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/setting.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imp1" fitHeight="59.0" fitWidth="59.0" layoutX="117.0" layoutY="182.0" onMouseClicked="#openReorganize" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imp1" fitHeight="59.0" fitWidth="59.0" layoutX="117.0" layoutY="174.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/setting.png" />
          </image>
@@ -23,11 +23,6 @@
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="400.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/versus.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="17.0" fitWidth="15.0" layoutX="321.0" layoutY="203.0">
-         <image>
-            <Image url="@../img/downArrow.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="17.0" fitWidth="15.0" layoutX="790.0" layoutY="203.0">
