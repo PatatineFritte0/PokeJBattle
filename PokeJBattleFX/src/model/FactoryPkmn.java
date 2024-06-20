@@ -1,5 +1,8 @@
 package model;
 import model.pokemon.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class FactoryPkmn {
@@ -65,8 +68,17 @@ public class FactoryPkmn {
 		Random r = new Random();
 		Integer n = r.nextInt(0, 9);
 		
-		return crea(n.toString());
+		return crea(n.toString());	
+	}
+	
+	public static List<Pokemon> allPokemon() {
+		int max = 8;
 		
+		List<Pokemon> all = new ArrayList<>();
+		for(Integer i = 0; i <= max; i++) {
+			all.add(crea(i.toString()));
+		}
 		
+		return all;
 	}
 }
