@@ -5,6 +5,11 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class Allenatore {
+	@Override
+	public String toString() {
+		return "Allenatore [nickname=" + nickname + ", nPokemon=" + nPokemon + ", vittorie=" + vittorie + ", sconfitte="
+				+ sconfitte + ", winRadio=" + winRadio + ", ultimoAccesso=" + ultimoAccesso + "]";
+	}
 	private String nickname;
 	private Pokemon[] squadra = new Pokemon[6];
 	private Pokemon mainPokemon;
@@ -61,7 +66,7 @@ public class Allenatore {
 		this.vittorie = 0;
 		this.sconfitte = 0;
 		this.winRadio = (sconfitte != 0) ? this.vittorie/this.sconfitte : this.vittorie;
-		 this.ultimoAccesso = LocalDateTime.now().toString().replace("T", "/").substring(0, 21);
+		 this.ultimoAccesso = LocalDateTime.now().toString().replace("T", "/").substring(0, 19);
 	}
 	
 	public int getGiocate() { return this.vittorie + this.sconfitte; }

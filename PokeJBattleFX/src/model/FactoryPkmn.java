@@ -3,50 +3,51 @@ import model.pokemon.*;
 
 public class FactoryPkmn {
 
-	private Pokemon pkmn; 
-	
-	public Pokemon crea(String scelta, int... lvl) {
+	public static Pokemon crea(String scelta, int... lvl) {
+		
+		Pokemon pkmn; 
+		
 		switch(scelta) {
 			case "bulbasaur":
-				this.pkmn = new Bulbasaur();
+				pkmn = new Bulbasaur();
 				break;
 			case "ivysaur":
-				this.pkmn = new Ivysaur();
+				pkmn = new Ivysaur();
 				break;
 			case "venosaur":
-				this.pkmn = new Venosaur();
+				pkmn = new Venosaur();
 				break;
 			case "squirtle":
-				this.pkmn = new Squirtle();
+				pkmn = new Squirtle();
 				break;
 			case "wortortle":
-				this.pkmn = new Wortortle();
+				pkmn = new Wortortle();
 				break;
 			case "blastoise":
-				this.pkmn = new Blastoise();
+				pkmn = new Blastoise();
 				break;
 			case "charmander":
-				this.pkmn = new Charmander();
+				pkmn = new Charmander();
 				break;
 			case "charmeleon":
-				this.pkmn = new Charmeleon();
+				pkmn = new Charmeleon();
 				break;
 			case "charizard":
-				this.pkmn = new Charizard();
+				pkmn = new Charizard();
 				break;
 			case "missingNo":
-				this.pkmn = new MissingNo();
+				pkmn = new MissingNo();
 				break;
 			default:
-				this.pkmn = null;
+				pkmn = null;
 		}
 		
 		int l = 0;
         for (int i : lvl) { l += i; }
         l = (l>1)? l-1 : 0;
         
-        if(l != 0) {this.pkmn.goToLvl(l);}
+        if(l != 0) {pkmn.goToLvl(l);}
 		
-		return this.pkmn;
+		return pkmn;
 	}
 }

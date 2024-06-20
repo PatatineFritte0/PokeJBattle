@@ -34,6 +34,9 @@ public class BestOfThree implements Runnable {
 			this.allenatore.setSconfitte(this.allenatore.getSconfitte() + 1);
 		}
 		
+		SaveManager.save(allenatore);
+		SaveManager.save(sfidante);
+		
 	}
 	
 	private Allenatore match(Allenatore a1, Allenatore a2) {

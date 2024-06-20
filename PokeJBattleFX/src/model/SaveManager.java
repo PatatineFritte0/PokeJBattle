@@ -1,46 +1,115 @@
 package model;
+
+import java.util.*;
 import java.io.*;
-import java.time.LocalDate;
+import java.lang.reflect.Type;
 import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 
 
 public class SaveManager {
 	
-	private String savePath;
-	private Gson salvatore;
-	
-	SaveManager() {
-		this.savePath = "src/saves.json";
-		this.salvatore = new Gson();
-	}
-	
-	public Allenatore newSave(String nickname, Pokemon[] pokemon) {
+	public static boolean newSave(Allenatore trainer) {
 		
-		Allenatore trainer = new Allenatore(nickname, pokemon, 0, 0);
+		String savePath = "src/saves.json";
+		Gson salvatore = new Gson();
 		
-		String trainerJson = salvatore.toJson(trainer);
-
+		boolean result = true;
+		
 		try {
+			if(SaveManager.loadSave(trainer.getNickname())!= null && loadSave(trainer.getNickname()).getNickname().equals(trainer.getNickname())) {
+				System.out.println(trainer.getNickname() + " gia' esistente");
+				return false;
+			}
 			
-			FileReader saveFileToRead = new FileReader(this.savePath);
+			FileReader saveFileToRead = new FileReader(savePath);
 			BufferedReader reader = new BufferedReader(saveFileToRead);
-
-			String data = "";
-            while(reader.readLine() != null) {
-            	data += reader.readLine() + "\n";
-            }
-            data += trainerJson;
-            System.out.println(data);
 			
-            FileOutputStream saveFileToWrite = new FileOutputStream(this.savePath);
+			ArrayList<Allenatore> lista = salvatore.fromJson(reader.readLine(), ArrayList.class);
+			reader.close();
+			lista.add(trainer);		
+			
+			
+			FileOutputStream saveFileToWrite = new FileOutputStream(savePath);
             BufferedOutputStream writer = new BufferedOutputStream(saveFileToWrite);
             
-            writer.write(data.getBytes());
+            writer.write(salvatore.toJson(lista).getBytes());
+            writer.flush();
             writer.close();
-		} catch (Exception e) {
 			
+		} catch (Exception e) {
+			System.out.println("shit");
+			 result = false;
 		}
 		
-		return trainer;
+		return result;
 	}
+	
+	public static Allenatore loadSave(String nickname) {
+		
+		String savePath = "src/saves.json";
+		Gson salvatore = new Gson();
+		
+		Allenatore save = null;
+		
+		try {
+			FileReader saveFileToRead = new FileReader(savePath);
+			BufferedReader reader = new BufferedReader(saveFileToRead);
+			
+			Type listType = new TypeToken<ArrayList<model.Allenatore>>() {}.getType();
+	        List<model.Allenatore> lista = salvatore.fromJson(reader.readLine(), listType);
+			
+			for(int i = 0; i < lista.size(); i++) {
+				if(lista.get(i).getNickname().equals(nickname)) {
+					save = lista.get(i);
+				}
+			}
+			
+			reader.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return save;
+	}
+	
+	public static void save(Allenatore trainer) {
+		
+		String savePath = "src/saves.json";
+		Gson salvatore = new Gson();
+		
+		ArrayList<String> dati = new ArrayList<>();
+		
+		try {
+			FileReader saveFileToRead = new FileReader(savePath);
+			BufferedReader reader = new BufferedReader(saveFileToRead);
+			
+			Type listType = new TypeToken<ArrayList<model.Allenatore>>() {}.getType();
+	        List<model.Allenatore> lista = salvatore.fromJson(reader.readLine(), listType);
+	        
+	        for(int i = 0; i < lista.size(); i++) {
+				if(lista.get(i).getNickname().equals(trainer.getNickname())) {
+					lista.set(i, trainer);
+				}
+			}
+	        reader.close();
+	        
+	        FileOutputStream saveFileToWrite = new FileOutputStream(savePath);
+            BufferedOutputStream writer = new BufferedOutputStream(saveFileToWrite);
+            
+            writer.write(salvatore.toJson(lista).getBytes());
+            writer.flush();
+            writer.close();
+	        
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		for (String current:dati) {
+			System.out.println(current);
+		}
+		
+	}
+		
+	
 }

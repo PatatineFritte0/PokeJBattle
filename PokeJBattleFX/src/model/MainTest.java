@@ -11,21 +11,29 @@ public class MainTest {
 
 	public static void test(String[] args) {
 		
-		FactoryPkmn factory = new FactoryPkmn();
+		boolean r = SaveManager.newSave(new Allenatore("Desk", new Pokemon[] {null, null, null, null, null, null}));
+		boolean r2 = SaveManager.newSave(new Allenatore("Comi", new Pokemon[] {FactoryPkmn.crea("bulbasaur", 5), FactoryPkmn.crea("squirtle", 5), null, null, null, null}));
+
+		Allenatore a = SaveManager.loadSave("Desk");
+		a.setSquadra(new Pokemon[] {FactoryPkmn.crea("charmander", 5), FactoryPkmn.crea("squirtle", 5), null, null, null, null});
+		System.out.println(a.getMainPokemon());
 		
-		SaveManager m = new SaveManager();
+		SaveManager.save(a);
 		
-		Allenatore a1 = m.newSave("Desk", new Pokemon[] {factory.crea("charmander", 5), null, null, null, null, null});
-		Allenatore a2 = m.newSave("Comi", new Pokemon[] {factory.crea("bulbasaur", 5), null, null, null, null, null});
+		
+		Allenatore a1 = SaveManager.loadSave("Desk");
+		Allenatore a2 = SaveManager.loadSave("Comi");
 		
 		a2.getPokemonById(0).setCurrentExp(2650);
 		
+		SaveManager.save(a2);
+		
 		BestOfThree game = new BestOfThree(a1,a2);
-		
+			
 		game.run();
-		
+			
 		System.out.println("\nVITTORIE-SCONFITTE -> " + a1.getNickname() + ":" + a1.getVittorie() + " - " + a1.getSconfitte() + "; " + a2.getNickname() + ":" + a2.getVittorie() + " - " + a2.getSconfitte() + "\n");
-		
+
 		
 		/*
 		FactoryPkmn factory = new FactoryPkmn();
