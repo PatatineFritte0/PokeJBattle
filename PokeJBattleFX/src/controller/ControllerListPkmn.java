@@ -1,12 +1,17 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventTarget;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -18,6 +23,61 @@ public class ControllerListPkmn {
 	private MouseEvent priviusEvent;
 	
 	private ControllerNewSave controllerOwner;
+	
+	@FXML
+	private AnchorPane pokeContainer;
+	
+	
+	@FXML
+	public void initialize() {
+		List<Pokemon> poke = new ArrayList<>();
+		poke.add(FactoryPkmn.crea("bulbasaur"));
+		poke.add(FactoryPkmn.crea("squirtle"));
+		poke.add(FactoryPkmn.crea("charmander"));
+		poke.add(FactoryPkmn.crea("bulbasaur"));
+		poke.add(FactoryPkmn.crea("squirtle"));
+		poke.add(FactoryPkmn.crea("charmander"));
+		poke.add(FactoryPkmn.crea("bulbasaur"));
+		poke.add(FactoryPkmn.crea("squirtle"));
+		poke.add(FactoryPkmn.crea("charmander"));
+		poke.add(FactoryPkmn.crea("bulbasaur"));
+		poke.add(FactoryPkmn.crea("squirtle"));
+		poke.add(FactoryPkmn.crea("charmander"));
+		poke.add(FactoryPkmn.crea("bulbasaur"));
+		poke.add(FactoryPkmn.crea("squirtle"));
+		poke.add(FactoryPkmn.crea("charmander"));
+		poke.add(FactoryPkmn.crea("bulbasaur"));
+		poke.add(FactoryPkmn.crea("squirtle"));
+		poke.add(FactoryPkmn.crea("charmander"));
+		
+		int lenAnchor = poke.size() * 100;
+		pokeContainer.setPrefHeight(lenAnchor);
+		
+		int counter = 0;
+		for (Pokemon pokemon: poke) {
+			Pane pane = new Pane();
+			pane.setLayoutY(counter * 100);
+			pane.setPrefHeight(100);
+			pane.setPrefWidth(235);
+			pane.getStyleClass().add("pane");
+			pane.setOnMouseClicked(this::sceltaPokemon);
+			
+			ImageView imagePokemon = new ImageView("./view/img/"+pokemon.getNome().toLowerCase() + "Front.png");
+			imagePokemon.setFitHeight(100);
+			imagePokemon.setFitWidth(100);
+			
+			Label namePokemon = new Label(pokemon.getNome());
+			namePokemon.setLayoutX(100);
+			namePokemon.setLayoutY(50);
+			
+			pane.getChildren().addAll(imagePokemon,namePokemon);
+			
+			pokeContainer.getChildren().add(pane);
+			
+			counter++;
+		}
+	}
+	
 	
 	public void sceltaPokemon(MouseEvent event) {
 		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();

@@ -27,7 +27,7 @@
             <Pane layoutY="500.0" prefHeight="100.0" prefWidth="250.0" styleClass="paneCell" />
          </children>
       </Pane>
-      <Label fx:id="nicknameLabel" alignment="CENTER" layoutX="260.0" layoutY="14.0" prefHeight="50.0" prefWidth="266.0" text="Nickname" />
+      <Label fx:id="nicknameLabel" alignment="CENTER" layoutX="260.0" layoutY="14.0" prefHeight="50.0" prefWidth="266.0" />
       <Label alignment="CENTER" layoutX="11.0" layoutY="14.0" prefHeight="50.0" prefWidth="266.0" text="Squadra" />
       <Label alignment="CENTER" layoutX="513.0" layoutY="14.0" prefHeight="50.0" prefWidth="276.0" text="Squadra riorganizzata" />
       <Button layoutX="340.0" layoutY="577.0" mnemonicParsing="false" onAction="#reorganizeSquad" prefHeight="43.0" prefWidth="86.0" text="Fatto" />

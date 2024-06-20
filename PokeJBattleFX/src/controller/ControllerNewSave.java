@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventDispatcher;
@@ -19,6 +20,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Allenatore;
 import model.Pokemon;
+import model.SaveManager;
 
 public class ControllerNewSave {
 	@FXML
@@ -64,11 +66,22 @@ public class ControllerNewSave {
 		if(text.equals("")) {
 			errLabel.setText("Il nickname non puo'\nessere vuoto, avrai\npur un nome te no?");
 			return;
+		}else if(controlEqualNickname(text)){
+			errLabel.setText("Nickname gia esistente");
 		}else {
 			errLabel.setText("");
 		}
 		
 		this.nicknameRight = true;
+	}
+	
+	public boolean controlEqualNickname(String nickname){
+		List<Allenatore> allenatori = SaveManager.getSaves();
+		for(Allenatore al: allenatori) {
+			if(nickname.toLowerCase().equals(al.getNickname().toLowerCase())) return true;
+		}
+		
+		return false;
 	}
 	
 	public void controlDone(ActionEvent event) throws IOException{
@@ -97,17 +110,14 @@ public class ControllerNewSave {
 		
 		Allenatore nuovoAllenatore = new Allenatore(nickname, this.squadra);
 		
-		// logica di save
-		
-		//
-		/*
+
+		SaveManager.newSave(nuovoAllenatore);
+
 		Stage stage = (Stage) myScene.getWindow();
 		
 		FXMLLoader choose = new FXMLLoader(getClass().getResource("../view/fxml/ChoosePlayers.fxml"));
-		
-		
 		stage.setScene(new Scene(choose.load()));
-		*/
+
 		
 	}
 	
@@ -118,5 +128,15 @@ public class ControllerNewSave {
             }
         }
         return true;
+	}
+	
+	public void back(MouseEvent event) throws IOException {
+		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/BattleJPoke.fxml"));
+		Scene scene = new Scene(root.load());
+		
+		Stage owner = (Stage)((Node)event.getSource()).getScene().getWindow();
+		
+		owner.setScene(scene);
+		owner.show();
 	}
 }

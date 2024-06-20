@@ -1,10 +1,12 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -13,71 +15,71 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Allenatore;
 import model.FactoryPkmn;
 import model.Pokemon;
+import model.SaveManager;
 
 public class ControllerReorganizePkmn {
 	private String idChoose;
 	
-	private ControllerChoosePlayer controllerOwner;
+	public ControllerChoosePlayer controllerOwner;
+	
+	@FXML
+	private Label nicknameLabel;
 	
 	@FXML
 	private Pane riorganizedPane;
 	
 	@FXML
 	private Pane squadPane;
-
-	public Pokemon[] squadra = new Pokemon[6];
+	
+	public Allenatore allenatore;
 	
 	@FXML
 	public void initialize(){
 		//inserisci il nickname nel label nickname
-		
+		Platform.runLater(()->{
+			Stage stage = (Stage)squadPane.getScene().getWindow();
+			ComboBox<Allenatore> comboBox = (ComboBox<Allenatore>)controllerOwner.getAnchor().getScene().lookup("#"+idChoose);
+			this.allenatore = comboBox.getSelectionModel().getSelectedItem();
 			
-		
-		//
-		//carica squadra allenatore
-		FactoryPkmn f = new FactoryPkmn();
-		squadra[0] = f.crea("bulbasaur", 5);
-		squadra[1] = f.crea("charmander", 5);
-		squadra[2] = f.crea("squirtle", 5);
-		squadra[3] = f.crea("charizard", 5);
-		squadra[4] = f.crea("wortortle", 5);
-		squadra[5] = f.crea("bulbasaur", 5);
-		//
-		
-		for(int i=0; i<6; i++) {
-			Pokemon poke;
-			if((poke = squadra[i]) == null) continue;
+			nicknameLabel.setText(allenatore.getNickname());
 			
-			Pane pane = getFreePane(squadPane);
-			pane.setOnMouseClicked(this::toRiorganize);
+			for(int i=0; i<6; i++) {
+				Pokemon poke;
+				if((poke = allenatore.getPokemonById(i)) == null) continue;
+				
+				Pane pane = getFreePane(squadPane);
+				pane.setOnMouseClicked(this::toRiorganize);
+				
+				ImageView image = new ImageView("./view/img/"+poke.getNome().toLowerCase()+"Front.png");
+				image.setFitHeight(100);
+				image.setFitWidth(100);
+				
+				Label namePokemon = new Label(poke.getNome());
+				namePokemon.setLayoutX(100);
+				namePokemon.setLayoutY(29);
+				namePokemon.setPrefHeight(13);
+				namePokemon.setPrefWidth(114);
+				
+				Label lvl = new Label("LVL:");
+				lvl.setLayoutX(140);
+				lvl.setLayoutY(60);
+				
+				Label valueLvl = new Label(String.valueOf((poke.getLvl())));
+				valueLvl.setLayoutX(190);
+				valueLvl.setLayoutY(60);
+				
+				Label indexPoke = new Label(String.valueOf(i + 1));
+				indexPoke.setLayoutX(8);
+				indexPoke.setLayoutY(8);
+				indexPoke.setId("index");
+				
+				pane.getChildren().addAll(image, namePokemon, lvl, valueLvl, indexPoke);
+			}
 			
-			ImageView image = new ImageView("./view/img/"+poke.getNome().toLowerCase()+"Front.png");
-			image.setFitHeight(100);
-			image.setFitWidth(100);
-			
-			Label namePokemon = new Label(poke.getNome());
-			namePokemon.setLayoutX(100);
-			namePokemon.setLayoutY(29);
-			namePokemon.setPrefHeight(13);
-			namePokemon.setPrefWidth(114);
-			
-			Label lvl = new Label("LVL:");
-			lvl.setLayoutX(140);
-			lvl.setLayoutY(60);
-			
-			Label valueLvl = new Label(String.valueOf((poke.getLvl())));
-			valueLvl.setLayoutX(190);
-			valueLvl.setLayoutY(60);
-			
-			Label indexPoke = new Label(String.valueOf(i + 1));
-			indexPoke.setLayoutX(8);
-			indexPoke.setLayoutY(8);
-			indexPoke.setId("index");
-			
-			pane.getChildren().addAll(image, namePokemon, lvl, valueLvl, indexPoke);
-		}
+		});
 	}
 	
 	public void reorganizeSquad(ActionEvent event) {
@@ -89,14 +91,12 @@ public class ControllerReorganizePkmn {
 				if((pane = getFullPane(riorganizedPane)) == null) break;
 				int index = Integer.valueOf(((Label) pane.lookup("#index")).getText()) - 1;
 				pane.getChildren().clear();
-				nuovaSquadra[i] = squadra[index];
+				nuovaSquadra[i] = allenatore.getPokemonById(index);
 			}
 			
-			this.squadra = nuovaSquadra;
+			this.allenatore.setSquadra(nuovaSquadra);
 			
-			for(int i = 0; i<6; i++) {
-				System.out.println(squadra[i].getNome());
-			}
+			SaveManager.save(this.allenatore);
 			
 			((Stage)((Node)event.getTarget()).getScene().getWindow()).close();
 		}else {
@@ -117,15 +117,17 @@ public class ControllerReorganizePkmn {
 				pane = (Pane) ((ImageView)source).getParent();
 	        } else if (source instanceof Pane) {
 	            pane = (Pane) source; 
-	        }else {
+	        }else if ( source instanceof Text){
 	        	pane = (Pane) ((Text) source).getParent().getParent();
+	        }else {
+	        	pane = (Pane) ((Label) source).getParent();
 	        }
 			
 			free.getChildren().addAll(pane.getChildren());
 			free.setOnMouseClicked(this::toSquad);
 			
 			pane.getChildren().clear();
-			pane.setOnMouseClicked(null);
+			pane.setOnMouseClicked((useless)->{});
 		}else {
 			Alert alert = new Alert(AlertType.ERROR);
 			((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("./view/img/pokeIcon2.PNG"));
@@ -144,15 +146,17 @@ public class ControllerReorganizePkmn {
 				pane = (Pane) ((ImageView)source).getParent();
 	        } else if (source instanceof Pane) {
 	            pane = (Pane) source; 
-	        }else {
+	        }else if ( source instanceof Text){
 	        	pane = (Pane) ((Text) source).getParent().getParent();
+	        }else {
+	        	pane = (Pane) ((Label) source).getParent();
 	        }
 			
 			free.getChildren().addAll(pane.getChildren());
 			free.setOnMouseClicked(this::toRiorganize);
 			
 			pane.getChildren().clear();
-			pane.setOnMouseClicked(null);
+			pane.setOnMouseClicked((useless)->{});
 		}else {
 			Alert alert = new Alert(AlertType.ERROR);
 			((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("./view/img/pokeIcon2.PNG"));
