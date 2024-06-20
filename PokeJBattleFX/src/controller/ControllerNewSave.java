@@ -28,11 +28,6 @@ public class ControllerNewSave {
 	
 	private boolean nicknameRight = false;
 	
-	@FXML
-	public void initialize() {
-		
-	}
-	
 	public void openListPkmn(MouseEvent event) throws IOException {
 		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/listPkmn.fxml"));
 		
@@ -69,12 +64,14 @@ public class ControllerNewSave {
 		if(text.equals("")) {
 			errLabel.setText("Il nickname non puo'\nessere vuoto, avrai\npur un nome te no?");
 			return;
+		}else {
+			errLabel.setText("");
 		}
 		
 		this.nicknameRight = true;
 	}
 	
-	public void controlDone(ActionEvent event){
+	public void controlDone(ActionEvent event) throws IOException{
 		Scene myScene = ((Node)event.getSource()).getScene();
 		
 		Label errLabel = (Label) myScene.lookup("#errCrea");
@@ -100,8 +97,17 @@ public class ControllerNewSave {
 		
 		Allenatore nuovoAllenatore = new Allenatore(nickname, this.squadra);
 		
-		
 		// logica di save
+		
+		//
+		/*
+		Stage stage = (Stage) myScene.getWindow();
+		
+		FXMLLoader choose = new FXMLLoader(getClass().getResource("../view/fxml/ChoosePlayers.fxml"));
+		
+		
+		stage.setScene(new Scene(choose.load()));
+		*/
 		
 	}
 	

@@ -1,0 +1,24 @@
+@font-face{
+	-fx-font-family: "Press Start 2P";
+	src: url("../fonts/PressStart2P.ttf");
+}
+
+.root{
+	-fx-font-family: "Press Start 2P";
+}
+
+.root .label{
+	-fx-font-size: 13px;
+	-fx-alignment: center;
+}
+
+.container .label{
+	-fx-font-size: 10px;
+	-fx-alignment: center;
+}
+
+.button{
+	-fx-background-image: url("../img/button.png");
+	-fx-background-size: contain;
+	-fx-background-repeat: no-repeat;
+}

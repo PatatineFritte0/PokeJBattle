@@ -10,12 +10,12 @@
    <children>
       <ComboBox fx:id="chooseP1" layoutX="186.0" layoutY="177.0" prefHeight="70.0" prefWidth="150.0" promptText="Choose P1" styleClass="custom-combobox" />
       <ComboBox fx:id="chooseP2" layoutX="655.0" layoutY="177.0" prefHeight="70.0" prefWidth="150.0" promptText="Choose P2" styleClass="custom-combobox" />
-      <ImageView fitHeight="59.0" fitWidth="59.0" layoutX="814.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imp2" fitHeight="59.0" fitWidth="59.0" layoutX="814.0" layoutY="182.0" onMouseClicked="#openReorganize" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/setting.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="59.0" fitWidth="59.0" layoutX="117.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imp1" fitHeight="59.0" fitWidth="59.0" layoutX="117.0" layoutY="182.0" onMouseClicked="#openReorganize" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/setting.png" />
          </image>
