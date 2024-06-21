@@ -6,7 +6,7 @@ public class BestOfThree implements Runnable {
 	protected int winAllenatore;
 	protected int winSfidante;
 	
-	BestOfThree(Allenatore allenatore, Allenatore sfidante) {
+	public BestOfThree(Allenatore allenatore, Allenatore sfidante) {
 		this.allenatore = allenatore;
 		this.sfidante = sfidante;
 		this.winAllenatore = 0;

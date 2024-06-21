@@ -39,7 +39,7 @@
       <Label fx:id="SP1" layoutX="292.0" layoutY="322.0" prefHeight="17.0" prefWidth="59.0" text="None" />
       <Label layoutX="647.0" layoutY="318.0" prefHeight="25.0" prefWidth="120.0" text="Sconfitte:" />
       <Label fx:id="SP2" layoutX="769.0" layoutY="322.0" prefHeight="17.0" prefWidth="59.0" text="None" />
-      <Button layoutX="374.0" layoutY="624.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="228.0" text="Fight" />
+      <Button layoutX="374.0" layoutY="624.0" mnemonicParsing="false" onAction="#fight" prefHeight="96.0" prefWidth="228.0" text="Fight" />
       <ImageView fitHeight="70.0" fitWidth="100.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#back">
          <image>
             <Image url="@../img/backarrow.png" />

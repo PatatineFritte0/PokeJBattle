@@ -31,24 +31,7 @@ public class ControllerListPkmn {
 	@FXML
 	public void initialize() {
 		List<Pokemon> poke = new ArrayList<>();
-		poke.add(FactoryPkmn.crea("bulbasaur"));
-		poke.add(FactoryPkmn.crea("squirtle"));
-		poke.add(FactoryPkmn.crea("charmander"));
-		poke.add(FactoryPkmn.crea("bulbasaur"));
-		poke.add(FactoryPkmn.crea("squirtle"));
-		poke.add(FactoryPkmn.crea("charmander"));
-		poke.add(FactoryPkmn.crea("bulbasaur"));
-		poke.add(FactoryPkmn.crea("squirtle"));
-		poke.add(FactoryPkmn.crea("charmander"));
-		poke.add(FactoryPkmn.crea("bulbasaur"));
-		poke.add(FactoryPkmn.crea("squirtle"));
-		poke.add(FactoryPkmn.crea("charmander"));
-		poke.add(FactoryPkmn.crea("bulbasaur"));
-		poke.add(FactoryPkmn.crea("squirtle"));
-		poke.add(FactoryPkmn.crea("charmander"));
-		poke.add(FactoryPkmn.crea("bulbasaur"));
-		poke.add(FactoryPkmn.crea("squirtle"));
-		poke.add(FactoryPkmn.crea("charmander"));
+		poke.addAll(FactoryPkmn.allPokemon());
 		
 		int lenAnchor = poke.size() * 100;
 		pokeContainer.setPrefHeight(lenAnchor);
@@ -62,15 +45,27 @@ public class ControllerListPkmn {
 			pane.getStyleClass().add("pane");
 			pane.setOnMouseClicked(this::sceltaPokemon);
 			
+			System.out.println(pokemon.getNome());
 			ImageView imagePokemon = new ImageView("./view/img/"+pokemon.getNome().toLowerCase() + "Front.png");
-			imagePokemon.setFitHeight(100);
-			imagePokemon.setFitWidth(100);
+			imagePokemon.setFitHeight(90);
+			imagePokemon.setFitWidth(90);
+			imagePokemon.setLayoutY(10);
 			
 			Label namePokemon = new Label(pokemon.getNome());
-			namePokemon.setLayoutX(100);
-			namePokemon.setLayoutY(50);
+			namePokemon.setLayoutX(110);
+			namePokemon.setLayoutY(20);
+			namePokemon.setId("name");
 			
-			pane.getChildren().addAll(imagePokemon,namePokemon);
+			Label lvl = new Label("LVL:");
+			lvl.setLayoutX(110);
+			lvl.setLayoutY(50);
+			
+			Label pokeLvl = new Label(String.valueOf(pokemon.getLvl()));
+			pokeLvl.setLayoutX(160);
+			pokeLvl.setLayoutY(50);
+			pokeLvl.setId("lvl");
+			
+			pane.getChildren().addAll(imagePokemon,namePokemon, lvl, pokeLvl);
 			
 			pokeContainer.getChildren().add(pane);
 			
@@ -91,14 +86,12 @@ public class ControllerListPkmn {
         	pane = (Pane) ((Text) source).getParent().getParent();
         }
 		
-		String nomePokemon = findLabelInPane(pane).getText();
+		String nomePokemon = findLabelInPaneWithId(pane, "name").getText();
+		int lvlPoke = Integer.valueOf(findLabelInPaneWithId(pane, "lvl").getText());
 		
-		FactoryPkmn factory = new FactoryPkmn();
-		Pokemon pokemon = factory.crea(nomePokemon.toLowerCase(), 5);
+		Pokemon pokemon = FactoryPkmn.crea(nomePokemon.toLowerCase(), lvlPoke);
 		
 		Pane privPane = null;
-		String oggetto = (String)priviusEvent.getTarget().getClass().getSimpleName();
-		
 		if(priviusEvent.getTarget() instanceof Pane) {
 			privPane = (Pane) priviusEvent.getTarget();
 		}else if(priviusEvent.getTarget() instanceof ImageView) {
@@ -113,7 +106,7 @@ public class ControllerListPkmn {
 		
 		Label namePokemonLabel = new Label(pokemon.getNome());
 		namePokemonLabel.setLayoutX(100.0);
-		namePokemonLabel.setLayoutY(14.0);
+		namePokemonLabel.setLayoutY(20.0);
 		
 		Label lvlPokemonLabel = new Label("LVL: "+String.valueOf(pokemon.getLvl()));
 		lvlPokemonLabel.setLayoutX(118.0);
@@ -130,13 +123,8 @@ public class ControllerListPkmn {
 		stage.close();
 	}
 	
-	private Label findLabelInPane(Pane pane) {
-        for (Node node : pane.getChildren()) {
-            if (node instanceof Label) {
-                return (Label) node;
-            }
-        }
-        return null;
+	private Label findLabelInPaneWithId(Pane pane, String id) {
+        return (Label)pane.lookup("#"+id);
     }
 	
 	public void setPriviusEvent(MouseEvent event) {

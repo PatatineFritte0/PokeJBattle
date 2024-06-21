@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="battleAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1300.0" styleClass="custom-anchor" stylesheets="@../css/battleInterface.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerBattleInterface">
+   <children>
+      <Pane fx:id="P2" layoutX="61.0" layoutY="81.0" prefHeight="320.0" prefWidth="1130.0">
+         <children>
+            <Pane layoutX="38.0" layoutY="41.0" prefHeight="212.0" prefWidth="517.0" styleClass="active">
+               <children>
+                  <Pane layoutX="5.0" layoutY="4.0" prefHeight="135.0" prefWidth="507.0" styleClass="statPartita">
+                     <children>
+                        <Label fx:id="nicknamePlayer" layoutX="47.0" layoutY="9.0" prefHeight="17.0" prefWidth="289.0" text="Nickname" />
+                        <Label fx:id="nVittorie" layoutX="371.0" layoutY="9.0" text="N" />
+                        <Label layoutX="14.0" layoutY="9.0" text="P2" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="5.0" layoutY="39.0" prefHeight="168.0" prefWidth="507.0" style="-fx-background-color: white;" styleClass="data">
+                     <children>
+                        <Label fx:id="nomePokemon" layoutX="24.0" layoutY="22.0" prefHeight="55.0" prefWidth="289.0" text="Charizard" />
+                        <ProgressBar fx:id="progresHPPokemon" layoutX="24.0" layoutY="100.0" prefHeight="30.0" prefWidth="289.0" progress="0.0" />
+                        <Label fx:id="currentHP" layoutX="320.0" layoutY="104.0" text="100" />
+                        <Label layoutX="387.0" layoutY="104.0" text="/" />
+                        <Label fx:id="maxHP" layoutX="417.0" layoutY="104.0" text="120" />
+                        <Label layoutX="348.0" layoutY="39.0" text="LVL:" />
+                        <Label fx:id="lvlPokemon" layoutX="435.0" layoutY="39.0" text="5" />
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+            <Pane fx:id="imgPokemon" layoutX="686.0" layoutY="95.0" prefHeight="191.0" prefWidth="213.0" styleClass="imgPoke" />
+         </children>
+      </Pane>
+      <Pane fx:id="P1" layoutX="143.0" layoutY="351.0" prefHeight="344.0" prefWidth="1130.0">
+         <children>
+            <Pane layoutX="525.0" layoutY="61.0" prefHeight="212.0" prefWidth="517.0" styleClass="active">
+               <children>
+                  <Pane layoutX="5.0" layoutY="4.0" prefHeight="135.0" prefWidth="507.0" styleClass="statPartita">
+                     <children>
+                        <Label fx:id="nicknamePlayer" layoutX="47.0" layoutY="9.0" prefHeight="17.0" prefWidth="289.0" text="Nickname" />
+                        <Label fx:id="nVittorie" layoutX="371.0" layoutY="9.0" text="N" />
+                        <Label layoutX="14.0" layoutY="9.0" text="P1" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="5.0" layoutY="39.0" prefHeight="168.0" prefWidth="507.0" style="-fx-background-color: white;" styleClass="data">
+                     <children>
+                        <Label fx:id="nomePokemon" layoutX="24.0" layoutY="22.0" prefHeight="55.0" prefWidth="289.0" text="Charizard" />
+                        <ProgressBar fx:id="progresHPPokemon" layoutX="24.0" layoutY="100.0" prefHeight="30.0" prefWidth="289.0" progress="0.0" />
+                        <Label fx:id="currentHP" layoutX="320.0" layoutY="104.0" text="100" />
+                        <Label layoutX="387.0" layoutY="104.0" text="/" />
+                        <Label fx:id="maxHP" layoutX="417.0" layoutY="104.0" text="120" />
+                        <Label layoutX="348.0" layoutY="39.0" text="LVL:" />
+                        <Label fx:id="lvlPokemon" layoutX="434.0" layoutY="39.0" text="5" />
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+            <Pane fx:id="imgPokemon" layoutX="66.0" layoutY="74.0" prefHeight="270.0" prefWidth="322.0" styleClass="imgPoke" />
+         </children>
+      </Pane>
+      <Pane fx:id="inf" layoutY="695.0" prefHeight="306.0" prefWidth="1300.0" style="-fx-background-color: red;">
+         <children>
+            <Pane fx:id="mossa1" layoutX="341.0" layoutY="42.0" prefHeight="115.0" prefWidth="300.0" styleClass="mossa">
+               <children>
+                  <Label fx:id="nameMossa" layoutX="31.0" layoutY="16.0" prefHeight="43.0" prefWidth="239.0" styleClass="nameMossa" text="Mossa1" />
+                  <Label fx:id="mosseDisponibili" layoutX="174.0" layoutY="69.0" text="35" />
+                  <Label fx:id="mosseMax" layoutX="231.0" layoutY="69.0" text="35" />
+               </children></Pane>
+            <Pane layoutX="666.0" layoutY="42.0" prefHeight="245.0" prefWidth="159.0" style="-fx-background-color: green;" styleClass="cambia">
+               <children>
+                  <ImageView fitHeight="115.0" fitWidth="122.0" layoutX="19.0" layoutY="42.0">
+                     <image>
+                        <Image url="@../img/pokeballSquadra.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="14.0" layoutY="151.0" prefHeight="55.0" prefWidth="134.0" text="Squadra" />
+               </children></Pane>
+            <Pane layoutX="845.0" layoutY="232.0" prefHeight="55.0" prefWidth="60.0" style="-fx-background-color: white;" styleClass="resa">
+               <children>
+                  <ImageView fitHeight="43.0" fitWidth="47.0" layoutX="7.0" layoutY="6.0">
+                     <image>
+                        <Image url="@../img/whiteFlag.png" />
+                     </image>
+                  </ImageView>
+               </children></Pane>
+            <TextArea editable="false" layoutX="934.0" layoutY="18.0" prefHeight="270.0" prefWidth="352.0" />
+            <Pane fx:id="mossa0" layoutX="25.0" layoutY="42.0" prefHeight="115.0" prefWidth="300.0" styleClass="mossa">
+               <children>
+                  <Label fx:id="nameMossa" layoutX="31.0" layoutY="16.0" prefHeight="43.0" prefWidth="239.0" styleClass="nameMossa" text="Mossa1" />
+                  <Label fx:id="mosseDisponibili" layoutX="174.0" layoutY="69.0" text="35" />
+                  <Label fx:id="mosseMax" layoutX="231.0" layoutY="69.0" text="35" />
+               </children>
+            </Pane>
+            <Pane fx:id="mossa2" layoutX="25.0" layoutY="175.0" prefHeight="115.0" prefWidth="300.0" styleClass="mossa">
+               <children>
+                  <Label fx:id="nameMossa" layoutX="31.0" layoutY="16.0" prefHeight="43.0" prefWidth="239.0" styleClass="nameMossa" text="Mossa1" />
+                  <Label fx:id="mosseDisponibili" layoutX="174.0" layoutY="69.0" text="35" />
+                  <Label fx:id="mosseMax" layoutX="231.0" layoutY="69.0" text="35" />
+               </children>
+            </Pane>
+            <Pane fx:id="mossa3" layoutX="341.0" layoutY="175.0" prefHeight="115.0" prefWidth="300.0" styleClass="mossa">
+               <children>
+                  <Label fx:id="nameMossa" layoutX="31.0" layoutY="16.0" prefHeight="43.0" prefWidth="239.0" styleClass="nameMossa" text="Mossa1" />
+                  <Label fx:id="mosseDisponibili" layoutX="174.0" layoutY="69.0" text="35" />
+                  <Label fx:id="mosseMax" layoutX="231.0" layoutY="69.0" text="35" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

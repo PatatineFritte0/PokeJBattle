@@ -12,9 +12,9 @@ import model.costanti.Tipo;
 public class Pokemon implements Crescita {
 	
 	// ↓ Mossa utilizzabile ↓ ------------------------------------------------------------
-	private class UsableMove {
+	public class UsableMove {
 		private Mossa mossa;
-		private static int ppMax;
+		private int ppMax;
 		private int pp;
 		
 		public UsableMove(Mossa m) {
@@ -30,8 +30,8 @@ public class Pokemon implements Crescita {
 
 		public Mossa getMossa() { return mossa; }
 		public void setMossa(Mossa mossa) { this.mossa = mossa; }
-		public static int getPpMax() { return ppMax; }
-		public static void setPpMax(int ppMax) { UsableMove.ppMax = ppMax; }
+		public int getPpMax() { return this.ppMax; }
+		public void setPpMax(int ppMax) { this.ppMax = ppMax; }
 		public int getPp() { return pp; }
 		public void setPp(int pp) { this.pp = pp; }
 		

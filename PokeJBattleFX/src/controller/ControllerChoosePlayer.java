@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -174,6 +175,16 @@ public class ControllerChoosePlayer {
 	
 	public void back(MouseEvent event) throws IOException {
 		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/BattleJPoke.fxml"));
+		Scene scene = new Scene(root.load());
+		
+		Stage owner = (Stage)((Node)event.getSource()).getScene().getWindow();
+		
+		owner.setScene(scene);
+		owner.show();
+	}
+	
+	public void fight(ActionEvent event) throws IOException{
+		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/battleInterface.fxml"));
 		Scene scene = new Scene(root.load());
 		
 		Stage owner = (Stage)((Node)event.getSource()).getScene().getWindow();

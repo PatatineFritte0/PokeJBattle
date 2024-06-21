@@ -18,7 +18,7 @@
 }
 
 .paneSquadra .pokeContainers .pane{
-	-fx-background-image: url("../img/pokemonLogo.png");
+	-fx-background-image: url("../img/partyMember.png");
 	-fx-background-size: contain;
 	-fx-background-repeat: no-repeat;
 }

@@ -76,7 +76,7 @@ public class FactoryPkmn {
 		
 		List<Pokemon> all = new ArrayList<>();
 		for(Integer i = 0; i <= max; i++) {
-			all.add(crea(i.toString()));
+			all.add(crea(i.toString(), 5));
 		}
 		
 		return all;

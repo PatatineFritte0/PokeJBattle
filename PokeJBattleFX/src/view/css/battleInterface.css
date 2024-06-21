@@ -1,0 +1,91 @@
+@font-face{
+	-fx-font-family: "Press Start 2P";
+	src: url("../fonts/PressStart2P.ttf");
+}
+
+.custom-anchor{
+	-fx-font-family: "Press Start 2P";
+	
+	-fx-background-image: url("../img/backgroundBattle.png");
+	-fx-background-size: 100% 70%;
+	-fx-background-repeat: no-repeat;
+}
+
+
+
+
+.data{
+	-fx-font-size: 20px;
+	-fx-alignment: center;
+	-fx-background-radius: 20px;
+	-fx-background-image: url("../img/dataPkmn.png");
+	-fx-background-size: 100% 100%;
+	-fx-background-repeat: no-repeat;
+}
+
+.data .label{
+	-fx-alignment: center;
+}
+
+.active{
+	-fx-border-radius: 24px;
+	-fx-border-width: 5px;
+	-fx-border-color: green;
+}
+
+.imgPoke{
+	-fx-background-image: url("../img/charizardFront.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 100% 100%;
+}
+
+
+
+
+.mossa{
+	-fx-background-image: url("../img/normale.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 100% 100%;
+	-fx-font-size: 15px;
+}
+
+.mossa .nameMossa{
+	-fx-font-size: 17px;
+}
+
+.mossa .label{
+	-fx-alignment: center;
+}
+
+
+
+
+
+.cambia{
+	-fx-background-radius: 10px;
+}
+
+.cambia .label{
+	-fx-font-size: 18px;
+	-fx-alignment: center;
+}
+
+
+
+
+.resa{
+	-fx-background-radius: 10px;
+}
+
+
+
+
+.statPartita{
+	-fx-background-color: green;
+	-fx-background-radius: 20px 20px 0px 0px;
+}
+
+.statPartita .label{
+	-fx-font-size: 15px;
+	-fx-alignment: center;
+}
