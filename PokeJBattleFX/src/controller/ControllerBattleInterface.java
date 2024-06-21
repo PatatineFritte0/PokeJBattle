@@ -16,7 +16,7 @@ import model.Allenatore;
 import model.BestOfThree;
 import model.FactoryPkmn;
 import model.Pokemon;
-import model.Pokemon.UsableMove;
+import model.UsableMove;
 import model.SaveManager;
 import model.costanti.Mossa;
 
