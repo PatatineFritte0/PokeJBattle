@@ -23,6 +23,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -65,7 +66,7 @@ public class ControllerBattleInterface {
 	int indexCambioSfidante;
 	AtomicInteger countSfidante;
 	
-	String log;
+	String log = "";
 	
 	@FXML
 	public void initialize() {
@@ -109,33 +110,30 @@ public class ControllerBattleInterface {
 		((Label)p.lookup("#currentHP")).setText(String.valueOf(main.getBattlePs()));
 		((Label)p.lookup("#maxHP")).setText(String.valueOf(main.getMaxPs()));
 		
-		ProgressBar bar = ((ProgressBar)p.lookup("#progresHPPokemon"));
-		double progress = Double.valueOf(main.getBattlePs())/Double.valueOf(main.getMaxPs());
-		double current = bar.getProgress();
+		ProgressBar barHp = ((ProgressBar)p.lookup("#progresHPPokemon"));
+		double progressHp = Double.valueOf(main.getBattlePs())/Double.valueOf(main.getMaxPs());
+		double currentHp = barHp.getProgress();
 		
-		animateProgressBar(bar, current, progress, 1);
+		animateProgressBar(barHp, currentHp, progressHp, 1);
 		
 		String color = "green";
-		if(progress > 0.5) color = "green";
-		if(progress <= 0.5 && progress >= 0.2 ) color = "orange";
-		if(progress < 0.2) color = "red";
-		bar.setStyle("-fx-accent: "+color);
+		if(progressHp > 0.5) color = "green";
+		if(progressHp <= 0.5 && progressHp >= 0.2 ) color = "orange";
+		if(progressHp < 0.2) color = "red";
+		barHp.setStyle("-fx-accent: "+color);
+		
+		ProgressBar barExp = ((ProgressBar)p.lookup("#progresExpPokemon"));
+		double progressExp = Double.valueOf(main.getCurrentExp())/Double.valueOf(main.getNextLvlExp());
+		double currentExp = barExp.getProgress();
+		
+		animateProgressBar(barExp, currentExp, progressExp, 0.5);
 	}
 	
 	private void animateProgressBar(ProgressBar progressBar, double fromValue, double toValue, double durationInSeconds) {
-        // Imposta il valore iniziale della ProgressBar
         progressBar.setProgress(fromValue);
-        
-        // Crea un KeyValue con la proprietà progress della ProgressBar
         KeyValue keyValue = new KeyValue(progressBar.progressProperty(), toValue);
-        
-        // Crea un KeyFrame con la durata e il KeyValue
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(durationInSeconds), keyValue);
-        
-        // Crea un Timeline con il KeyFrame
         Timeline timeline = new Timeline(keyFrame);
-        
-        // Avvia l'animazione
         timeline.play();
     }
 	
@@ -222,7 +220,6 @@ public class ControllerBattleInterface {
 		try {
 			turno();
 		} catch (InterruptedException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -236,11 +233,11 @@ public class ControllerBattleInterface {
 		
 		if(player.equals("P1")) {
 			m1 = Mossa.CAMBIA;
-			sostituisciPkmn(allenatore);
+			sostituisciPkmn(allenatore, false);
 			aggiornaTurno(sfidante.getMainPokemon(), "P2");
 		}else if(player.equals("P2")) {
 			m2 = Mossa.CAMBIA;
-			sostituisciPkmn(sfidante);
+			sostituisciPkmn(sfidante, false);
 			try {
 				turno();
 			} catch (InterruptedException | IOException e) {
@@ -310,13 +307,15 @@ public class ControllerBattleInterface {
 			
 		}else {
 			if(allenatore.getMainPokemon().getBattlePs() == 0) {
-				sostituisciPkmn(allenatore);
+				sostituisciPkmn(allenatore, true);
 			}
-			
 			if(sfidante.getMainPokemon().getBattlePs() == 0) {
-				sostituisciPkmn(sfidante);
+				sostituisciPkmn(sfidante, true);
 			}
 		}
+		
+		((TextArea)battleAnchor.lookup("#log")).setText(this.log);
+		this.log = "";
 		
 		aggiornaStatPokemon(allenatore.getMainPokemon(), "P1");
 		aggiornaStatPokemon(sfidante.getMainPokemon(), "P2");
@@ -335,7 +334,7 @@ public class ControllerBattleInterface {
 		return null;
 	}
 	
-	public void sostituisciPkmn(Allenatore trainer) throws IOException{
+	public void sostituisciPkmn(Allenatore trainer, boolean disableClose) throws IOException{
 		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/squadra.fxml"));
 		
 		Stage owner = (Stage)(battleAnchor.getScene().getWindow());
@@ -358,19 +357,20 @@ public class ControllerBattleInterface {
 		
 		pkmn.setResizable(false);
 		pkmn.initModality(Modality.APPLICATION_MODAL);
-		
-		pkmn.setOnCloseRequest(event ->{
-			 // Intercetta l'evento di chiusura
-            event.consume();
-
-            // Mostra un messaggio all'utente
-            Alert alert = new Alert(AlertType.INFORMATION);
-            ((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("./view/img/pokeIcon2.PNG"));
-            alert.setTitle("Attenzione");
-            alert.setHeaderText("Chiusura disabilitata");
-            alert.setContentText("La chiusura della finestra è disabilitata. Scegli prima un pokemon");
-            alert.showAndWait();
-		});
+		if (disableClose) {
+			pkmn.setOnCloseRequest(event ->{
+				 // Intercetta l'evento di chiusura
+	            event.consume();
+	
+	            // Mostra un messaggio all'utente
+	            Alert alert = new Alert(AlertType.INFORMATION);
+	            ((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("./view/img/pokeIcon2.PNG"));
+	            alert.setTitle("Attenzione");
+	            alert.setHeaderText("Chiusura disabilitata");
+	            alert.setContentText("La chiusura della finestra è disabilitata. Scegli prima un pokemon");
+	            alert.showAndWait();
+			});
+		}
 		
 		pkmn.initOwner(owner);
 		
@@ -379,7 +379,7 @@ public class ControllerBattleInterface {
 	
 	// turno -----------------------------------------------------------------------------	
 	public void iniziaTurno() {
-		this.log += "\n-----\nInizio turno: [" + this.allenatore.getNickname() + ":" + this.countAllenatore + ", " + this.sfidante.getNickname() + ":" + this.countSfidante + "]";
+		this.log += "\n-----\nInizio turno: [" + this.allenatore.getNickname() + ":" + this.countAllenatore + ", " + this.sfidante.getNickname() + ":" + this.countSfidante + "]\n";
 
 		int danno = 0;
 		
@@ -395,6 +395,10 @@ public class ControllerBattleInterface {
 		}
 		
 		if(this.m1 == Mossa.CAMBIA && this.m2 != Mossa.CAMBIA) {
+			Pokemon p = this.allenatore.getMainPokemon();
+			this.allenatore.setMainPokemon(indexCambioAllenatore);
+			this.log += "\n"+ allenatore.getNickname() + " sostituisce " + p.getNome() + " con " + allenatore.getMainPokemon().getNome()+"\n";
+			
 			scontro(this.sfidante, this.allenatore, m2);
 			
 			if(this.allenatore.getMainPokemon().getBattlePs() < 0) {
@@ -405,6 +409,10 @@ public class ControllerBattleInterface {
 			}
 			
 		} else if(this.m1 != Mossa.CAMBIA && this.m2 == Mossa.CAMBIA) {
+			Pokemon p = this.sfidante.getMainPokemon();
+			this.sfidante.setMainPokemon(indexCambioSfidante);
+			this.log += "\n"+ sfidante.getNickname() + " sostituisce " + p.getNome() + " con " + sfidante.getMainPokemon().getNome()+"\n";
+			
 			scontro(this.allenatore, this.sfidante, this.m1);
 			
 			if(this.sfidante.getMainPokemon().getBattlePs() < 0) {
@@ -413,7 +421,16 @@ public class ControllerBattleInterface {
 				this.allenatore.getMainPokemon().gainExp(this.sfidante.getMainPokemon());
 				esausto(this.sfidante, this.countSfidante);
 			}
-		} else {
+		}else if(this.m1 == Mossa.CAMBIA && this.m2 == Mossa.CAMBIA) {
+			Pokemon p = this.allenatore.getMainPokemon();
+			this.allenatore.setMainPokemon(indexCambioAllenatore);
+			this.log += "\n"+ allenatore.getNickname() + " sostituisce " + p.getNome() + " con " + allenatore.getMainPokemon().getNome()+"\n";
+			
+			p = this.sfidante.getMainPokemon();
+			this.sfidante.setMainPokemon(indexCambioSfidante);
+			this.log += "\n"+ sfidante.getNickname() + " sostituisce " + p.getNome() + " con " + sfidante.getMainPokemon().getNome()+"\n";
+			
+		}else {
 			if(this.allenatore.getMainPokemon().getVelocitaBattaglia() >= this.sfidante.getMainPokemon().getVelocitaBattaglia()) {
 				scontro(this.allenatore, this.sfidante, this.m1);
 				
@@ -453,9 +470,9 @@ public class ControllerBattleInterface {
 				}
 			}
 		}
-		System.out.println(this.allenatore.getMainPokemon().battleData() + "\n\n" + this.sfidante.getMainPokemon().battleData());
+		//System.out.println(this.allenatore.getMainPokemon().battleData() + "\n\n" + this.sfidante.getMainPokemon().battleData());
 		
-		this.log += "\nFine turno: [" + this.allenatore.getNickname() + ":" + this.countAllenatore + ", " + this.sfidante.getNickname() + ":" + this.countSfidante + "]\n-----\n";
+		this.log += "\nFine turno: [" + this.allenatore.getNickname() + ":" + this.countAllenatore + ", " + this.sfidante.getNickname() + ":" + this.countSfidante + "]\n-----\n\n";
 		return;
 	}
 	
@@ -468,8 +485,8 @@ public class ControllerBattleInterface {
 		
 		int danno = attaccante.getMainPokemon().attacca(ricevente.getMainPokemon(), attacco, isCrit, isMiss);
 		if(isMiss.get()) {
-			System.out.println("/n L'attacco non e' andato a segno!");
-			this.log += "/n L'attacco non e' andato a segno! ";
+			//System.out.println("/n L'attacco non e' andato a segno!");
+			this.log += "/n L'attacco di "+ attaccante.getMainPokemon() +" non e' andato a segno! \n";
 			return;
 		}
 		
@@ -478,24 +495,24 @@ public class ControllerBattleInterface {
 		if(attacco.getCategoria() == Categoria.STATO) {
 			if(attacco.getOnSelf()) {
 				if(attacco.getLvlBoostNerf() > 0) {
-					System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " aumenta!");
-					this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " aumenta!";
+					//System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " aumenta!\n");
+					this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " aumenta!\n";
 				} else {
-					System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " diminuisce!");
-					this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " diminuisce!";
+					//System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " diminuisce!\n");
+					this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " diminuisce!\n";
 				}
 			} else {
 				if(attacco.getLvlBoostNerf() > 0) {
-					System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " aumenta!");
-					this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " aumenta!";
+					//System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " aumenta!\n");
+					this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " aumenta!\n";
 				} else {
-					System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " diminuisce!");
-					this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " diminuisce!";
+					//System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " diminuisce!\n");
+					this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " diminuisce!\n";
 				}
 			}
 		} else {			
-			System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + ricevente.getMainPokemon().getNome() + " subisce " + danno + " danni!\n");
-			this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + ricevente.getMainPokemon().getNome() + " subisce " + danno + " danni!";
+			//System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + ricevente.getMainPokemon().getNome() + " subisce " + danno + " danni!\n");
+			this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + ricevente.getMainPokemon().getNome() + " subisce " + danno + " danni!\n";
 			
 			Tipo tipo1 = ricevente.getMainPokemon().getTipi()[0];
 			Tipo tipo2 = ricevente.getMainPokemon().getTipi()[1];
@@ -505,25 +522,25 @@ public class ControllerBattleInterface {
 			double superefficacia = s1 * s2;
 			
 			if(superefficacia == 0.0) {
-				System.out.println("\n" + ricevente.getMainPokemon().getNome() + " e' immune! ");
-				this.log += "\n" + ricevente.getMainPokemon().getNome() + " e' immune! ";
+				//System.out.println("\n" + ricevente.getMainPokemon().getNome() + " e' immune! \n");
+				this.log += "\n" + ricevente.getMainPokemon().getNome() + " e' immune! \n";
 			}
 			else if(superefficacia == 0.25) {
-				System.out.println("\n Non e' per niente efficace! ");
-				this.log += "\n Non e' per niente efficace! ";
+				//System.out.println("\n Non e' per niente efficace! \n");
+				this.log += "\n Non e' per niente efficace! \n";
 			}
 			else if(superefficacia == 0.5) {
-				System.out.println("\n E' poco efficace! ");
-				this.log += "\n E' poco efficace! ";
+				System.out.println("\n E' poco efficace! \n");
+				this.log += "\n E' poco efficace! \n";
 			}
 			else if(superefficacia == 2) {
-				System.out.println("\n E' superefficace! ");
-				this.log += "\n E' superefficace! ";
+				//System.out.println("\n E' superefficace! \n");
+				this.log += "\n E' superefficace! \n";
 			}	
 			
 			if(isCrit.get()) {
-				System.out.println("\n E' un colpo critico! ");
-				this.log += "\n E' un colpo critico! ";
+				//System.out.println("\n E' un colpo critico! ");
+				this.log += "\n E' un colpo critico! \n";
 			}
 		}
 	}
@@ -533,7 +550,27 @@ public class ControllerBattleInterface {
 		System.out.println("\n" + trainer.getMainPokemon().getNome() + " e' esausto");
 		count.set(count.get()-1);
 		if(count.get() <= 0) {return;}
-		this.log += "\n" + trainer.getMainPokemon().getNome() + " di " + trainer.getNickname() + " e' esausto!";
+		this.log += "\n" + trainer.getMainPokemon().getNome() + " di " + trainer.getNickname() + " e' esausto!\n";
+		String player = null;
+		if(trainer == allenatore) { player = "P1"; }
+		else if(trainer == sfidante){ player = "P2"; }
+		
+		aggiornaStatPokemon(trainer.getMainPokemon(), player);
+		
+		try {
+			sostituisciPkmn(trainer, true);
+		} catch (IOException e) {e.printStackTrace();}
+		
+		Pokemon p = trainer.getMainPokemon();
+		
+		int index = 6;
+		if(trainer == allenatore) { index = indexCambioSfidante; }
+		else if(trainer == sfidante){ index = indexCambioSfidante; }
+		
+		trainer.setMainPokemon(index);
+		this.log += "\n"+ trainer.getNickname() + " sostituisce " + p.getNome() + " con " + trainer.getMainPokemon().getNome()+"\n";
+		
+		
 	}
 	// turno-------------------------------------------------------
 	

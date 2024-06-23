@@ -101,3 +101,17 @@
 	-fx-border-width: 5px;
 	-fx-border-color: green;
 }
+
+
+.expBar{
+	-fx-accent: blue;	
+}
+
+.text-area{
+	-fx-wrap-text: true;
+	-fx-font-size: 14px
+}
+
+.text-flow {
+    -fx-line-spacing: 100px;
+}

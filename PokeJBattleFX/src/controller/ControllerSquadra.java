@@ -114,17 +114,22 @@ public class ControllerSquadra {
 			Alert alert = new Alert(AlertType.ERROR);
 			((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("./view/img/pokeIcon2.PNG"));
 			alert.setTitle("Errore");
-			alert.setContentText("Questo pokemon e' gia in campo, coglione, testa di cazzo, demente");
+			alert.setContentText("Questo pokemon e' gia in campo");
 			alert.showAndWait();
 			return;
 		}
 		
-		Pokemon p = trainer.getMainPokemon();
-		trainer.setMainPokemon(index);
+		//Pokemon p = trainer.getMainPokemon();
+		//trainer.setMainPokemon(index);
 		
-		System.out.println("\nRientra " + p.getNome() + ", vai " + trainer.getMainPokemon().getNome() +"!\n");
+		//System.out.println("\nRientra " + p.getNome() + ", vai " + trainer.getMainPokemon().getNome() +"!\n");
 		
-		owner.log += "\n" + trainer.getNickname() + " sostituisce " + p.getNome() + " con " + trainer.getMainPokemon().getNome();
+		//owner.log += "\n" + trainer.getNickname() + " sostituisce " + p.getNome() + " con " + trainer.getMainPokemon().getNome();
+		if(trainer == owner.allenatore) {
+			owner.indexCambioAllenatore = index;
+		}else if (trainer == owner.sfidante) {
+			owner.indexCambioSfidante = index;
+		}
 		((Stage)pane.getScene().getWindow()).close();
 	}
 	
