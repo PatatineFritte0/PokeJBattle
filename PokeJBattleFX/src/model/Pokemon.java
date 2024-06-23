@@ -3,6 +3,7 @@ package model;
 import java.util.*;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import model.costanti.Categoria;
 import model.costanti.Mossa;
@@ -133,7 +134,7 @@ public class Pokemon implements Crescita {
 	}
 	
 	
-	public int attacca(Pokemon enemy, Mossa mossa) {
+	public int attacca(Pokemon enemy, Mossa mossa, AtomicBoolean isCrit, AtomicBoolean isMiss) {
 		ricerca:
 		for(int i = 0; i<this.mosse.length; i++) {
 			if(mosse[i] != null && mosse[i].getMossa() == mossa) {
@@ -178,29 +179,29 @@ public class Pokemon implements Crescita {
 		}
 		
 		if(mossa.getCategoria() == Categoria.SPECIALE){
-			return hit(mossa, enemy, this.getAttaccoSP(), enemy.getDifesaSP());
+			return hit(mossa, enemy, this.getAttaccoSP(), enemy.getDifesaSP(), isCrit, isMiss);
 		}else if(mossa.getCategoria() == Categoria.FISICO) {
-			return hit(mossa, enemy, this.getAttacco(), enemy.getDifesa());
+			return hit(mossa, enemy, this.getAttacco(), enemy.getDifesa(), isCrit, isMiss);
 		}
 		return 0;
 	}
 	
-	private int hit(Mossa mossa, Pokemon enemy, BaseStat myAtk, BaseStat hisDef) {		
+	private int hit(Mossa mossa, Pokemon enemy, BaseStat myAtk, BaseStat hisDef, AtomicBoolean isCrit, AtomicBoolean isMiss) {		
 		Random r = new Random();
 		
 		int accuracy = mossa.getPrecisione() * this.precisione.getBattleValue()/100;
 
 		if (r.nextInt(1, 100) > accuracy) { 
-			System.out.println("MISS");
+			isMiss.set(true);
 			return 0 ;
 		}
 		
 		int crit = r.nextInt(1, 100);
 		crit = (crit<=8) ? 2 : 1;
-		if(crit == 2) {System.out.println("\nColpo critico!\n");}
+		if(crit == 2) {isCrit.set(true);}
 																														
 		double random = r.nextDouble(217, 255) / 255;
-		double stab = (mossa.getTipo() == this.tipi[0] || mossa.getTipo() == this.tipi[1]) ? 1.5 : 1;
+		double stab = (mossa.getTipo() == this.tipi[0] || mossa.getTipo() == this.tipi[1]) ? 1.5 : 1;	
 		
 		Tipo tipo1 = enemy.getTipi()[0];
 		Tipo tipo2 = enemy.getTipi()[1];
@@ -208,11 +209,6 @@ public class Pokemon implements Crescita {
 		double s1 = mossa.getTipo().calcolaRelazioneTipi(tipo1);
 		double s2 = mossa.getTipo().calcolaRelazioneTipi(tipo2);
 		double superefficacia = s1 * s2;
-		if(superefficacia == 0.0) {System.out.println(" Il nemico e' immune! ");}
-		if(superefficacia == 0.25) {System.out.println(" Non e' per niente efficace! ");}
-		if(superefficacia == 0.5) {System.out.println(" E' poco efficace! ");}
-		if(superefficacia == 2) {System.out.println(" E' superefficace! ");}		
-		
 		
 		return (int) (((((((2 * this.lvl * crit )/ 5) + 2) * mossa.getBasePower() * myAtk.getBattleValue()/hisDef.getBattleValue()))/30 + 2) * stab * random * superefficacia);
 	}
@@ -255,7 +251,7 @@ public class Pokemon implements Crescita {
 		this.velocita.setMainValue(this.velocita.getMainValue() +calcStat( this.velocita.getMainValue(), 110));
 		this.velocita.setBattleValue(this.velocita.getBattleValue() + calcStat( this.velocita.getBattleValue(), 110));
 		
-		this.learnMove();
+		//this.learnMove();
 	}
 	
 	private int calcStat(int stat, int percentuale) { return ((stat + this.lvl)/percentuale) + 1; }
@@ -267,7 +263,7 @@ public class Pokemon implements Crescita {
 	}
 	
 	@Override
-	public void learnMove() {
+	public void learnMove(int indexChangeMossa) {
 		Mossa m = null;
 		if(this.parcoMosse == null) {return;}
 
@@ -277,20 +273,20 @@ public class Pokemon implements Crescita {
 				if(Arrays.asList(this.getMoveSet()).contains(null) && !Arrays.asList(this.getMoveSet()).contains(m)) {
 					mosse[Arrays.asList(this.getMoveSet()).indexOf(null)] = new UsableMove(m);
 				} else {
-					System.out.println(this.nome + " vorrebbe imparare " + m.getNome() + ". Inserire il numero della mossa da sostituire...");
-					Scanner s = new Scanner(System.in);
-					String scelta = s.nextLine();
-					switch(scelta) {
-						case "1":
+					//System.out.println(this.nome + " vorrebbe imparare " + m.getNome() + ". Inserire il numero della mossa da sostituire...");
+					//Scanner s = new Scanner(System.in);
+					//String scelta = s.nextLine();
+					switch(indexChangeMossa) {
+						case 1:
 							this.mosse[0] = new UsableMove(m);
 							break;
-						case "2":
+						case 2:
 							this.mosse[1] = new UsableMove(m);
 							break;
-						case "3":
+						case 3:
 							this.mosse[2] = new UsableMove(m);
 							break;
-						case "4":
+						case 4:
 							this.mosse[3] = new UsableMove(m);
 							break;
 						default:
@@ -481,4 +477,6 @@ public class Pokemon implements Crescita {
 	public void setDifesaSPBattaglia(int difesaSP) { this.difesaSP.setBattleValue(difesaSP); }
 	public void setPrecisioneBattaglia(int precisione) { this.precisione.setBattleValue(precisione); }
 	public void setElusioneBattaglia(int elusione) { this.elusione.setBattleValue(elusione); }
+
+
 }

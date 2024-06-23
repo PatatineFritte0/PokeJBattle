@@ -27,12 +27,6 @@
 	-fx-alignment: center;
 }
 
-.active{
-	-fx-border-radius: 24px;
-	-fx-border-width: 5px;
-	-fx-border-color: green;
-}
-
 .imgPoke{
 	-fx-background-image: url("../img/charizardFront.png");
 	-fx-background-repeat: no-repeat;
@@ -80,12 +74,30 @@
 
 
 
-.statPartita{
+.statPartitaActive{
 	-fx-background-color: green;
+	-fx-background-radius: 20px 20px 0px 0px;
+}
+
+.statPartitaActive .label{
+	-fx-font-size: 15px;
+	-fx-alignment: center;
+}
+
+
+.statPartita{
+	-fx-background-color: gray;
 	-fx-background-radius: 20px 20px 0px 0px;
 }
 
 .statPartita .label{
 	-fx-font-size: 15px;
 	-fx-alignment: center;
+}
+
+
+.active{
+	-fx-border-radius: 24px;
+	-fx-border-width: 5px;
+	-fx-border-color: green;
 }

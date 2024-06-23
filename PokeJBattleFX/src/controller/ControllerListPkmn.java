@@ -32,6 +32,7 @@ public class ControllerListPkmn {
 	public void initialize() {
 		List<Pokemon> poke = new ArrayList<>();
 		poke.addAll(FactoryPkmn.allPokemon());
+		//for(Pokemon pokkkeee : poke) System.out.println(pokkkeee.getNome());
 		
 		int lenAnchor = poke.size() * 100;
 		pokeContainer.setPrefHeight(lenAnchor);
@@ -45,7 +46,6 @@ public class ControllerListPkmn {
 			pane.getStyleClass().add("pane");
 			pane.setOnMouseClicked(this::sceltaPokemon);
 			
-			System.out.println(pokemon.getNome());
 			ImageView imagePokemon = new ImageView("./view/img/"+pokemon.getNome().toLowerCase() + "Front.png");
 			imagePokemon.setFitHeight(90);
 			imagePokemon.setFitWidth(90);

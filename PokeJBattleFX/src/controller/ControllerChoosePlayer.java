@@ -116,7 +116,12 @@ public class ControllerChoosePlayer {
         	if(imp1.getOpacity() == 0.5) {
         		imp1.setOpacity(1);
             	imp1.setOnMouseClicked(arg0 -> {
-    				openReorganize(arg0);
+    				try {
+						openReorganize(arg0);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
     			});
         	}
         }
@@ -133,44 +138,45 @@ public class ControllerChoosePlayer {
         	if(imp2.getOpacity() == 0.5) {
         		imp2.setOpacity(1);
             	imp2.setOnMouseClicked(arg0 -> {
-    				openReorganize(arg0);
+    				try {
+						openReorganize(arg0);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
     			});
         	}
         }
     }
 	
-	public void openReorganize(MouseEvent event) {
+	public void openReorganize(MouseEvent event) throws IOException {
 		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/reorganizePkmn.fxml"));
 		
 		Stage owner = (Stage)((Node)event.getSource()).getScene().getWindow();
 		
 		Scene scene;
-		try {
-			scene = new Scene(root.load());
+		scene = new Scene(root.load());
+	
+		ControllerReorganizePkmn controller = root.getController();
 		
-			ControllerReorganizePkmn controller = root.getController();
-			
-			String idImg = ((ImageView) event.getTarget()).getId();
-			
-			controller.setIdChoose("chooseP"+ idImg.charAt(idImg.length()-1));
-			controller.setControllerOwner(this);
-			
-			Stage pkmn = new Stage();
-			pkmn.setScene(scene);
-			
-			Image icon = new Image("./view/img/pokeIcon2.PNG");
-			pkmn.getIcons().add(icon);
-			pkmn.setTitle("Riorganizza Pokemon");
-			
-			pkmn.setResizable(false);
-			pkmn.initModality(Modality.APPLICATION_MODAL);
-			
-			pkmn.initOwner(owner);
-			
-			pkmn.showAndWait();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-		}
+		String idImg = ((ImageView) event.getTarget()).getId();
+		
+		controller.setIdChoose("chooseP"+ idImg.charAt(idImg.length()-1));
+		controller.setControllerOwner(this);
+		
+		Stage pkmn = new Stage();
+		pkmn.setScene(scene);
+		
+		Image icon = new Image("./view/img/pokeIcon2.PNG");
+		pkmn.getIcons().add(icon);
+		pkmn.setTitle("Riorganizza Pokemon");
+		
+		pkmn.setResizable(false);
+		pkmn.initModality(Modality.APPLICATION_MODAL);
+		
+		pkmn.initOwner(owner);
+		
+		pkmn.showAndWait();
 	}
 	
 	public void back(MouseEvent event) throws IOException {

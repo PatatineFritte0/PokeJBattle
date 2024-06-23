@@ -115,10 +115,12 @@ public class Turno implements Runnable {
 	}
 	
 	private void scontro(Allenatore attaccante, Allenatore ricevente, Mossa attacco) {
+		/*
 		int danno = attaccante.getMainPokemon().attacca(ricevente.getMainPokemon(), attacco);
 		ricevente.getMainPokemon().incassa(danno);
 		System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + ricevente.getMainPokemon().getNome() + " subisce " + danno + " danni!\n");
 		this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + ricevente.getMainPokemon().getNome() + " subisce " + danno + " danni!";
+		*/
 	}
 	
 	private Mossa scelta(Allenatore trainer) {
