@@ -121,10 +121,10 @@ public class ControllerSquadra {
 			return;
 		}
 		
-		if(trainer == owner.allenatore) {
-			owner.indexCambioAllenatore = index;
-		}else if (trainer == owner.sfidante) {
-			owner.indexCambioSfidante = index;
+		if(trainer == owner.getAllenatore()) {
+			owner.setIndexCambioAllenatore(index);
+		}else if (trainer == owner.getSfidante()) {
+			owner.setIndexCambioSfidante(index);
 		}
 		((Stage)pane.getScene().getWindow()).close();
 	}
