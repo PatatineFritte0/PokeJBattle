@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -54,35 +55,37 @@ import model.costanti.Tipo;
 public class ControllerBattleInterface {
 	
 	@FXML
-	AnchorPane battleAnchor;
+	private AnchorPane battleAnchor;
 	
-	Allenatore allenatore;
-	Mossa m1;
-	int indexCambioAllenatore;
-	AtomicInteger countAllenatore;
+	private Allenatore allenatore;
+	private Mossa m1;
+	private int indexCambioAllenatore;
+	private AtomicInteger countAllenatore;
 	
 	
 	
-	Allenatore sfidante;
-	Mossa m2;
-	int indexCambioSfidante;
-	AtomicInteger countSfidante;
+	private Allenatore sfidante;
+	private Mossa m2;
+	private int indexCambioSfidante;
+	private AtomicInteger countSfidante;
 	
-	String log = "";
+	private String log = "";
 	
+
 	@FXML
 	public void initialize() {
-		this.allenatore = SaveManager.loadSave("Comi");
-		this.allenatore.setMainPokemon(0);
-		this.countAllenatore = new AtomicInteger(contaPkmn(allenatore));
-		this.sfidante = SaveManager.loadSave("Desk");
-		this.sfidante.setMainPokemon(0);
-		this.countSfidante = new AtomicInteger(contaPkmn(sfidante));
-		
-		caricaAllenatore(allenatore, "P1");
-		caricaAllenatore(sfidante, "P2");
-		
-		aggiornaTurno(allenatore.getMainPokemon(), "P1");
+		Platform.runLater(()->{
+			this.allenatore.setMainPokemon(0);
+			this.countAllenatore = new AtomicInteger(contaPkmn(allenatore));
+			
+			this.sfidante.setMainPokemon(0);
+			this.countSfidante = new AtomicInteger(contaPkmn(sfidante));
+			
+			caricaAllenatore(allenatore, "P1");
+			caricaAllenatore(sfidante, "P2");
+			
+			aggiornaTurno(allenatore.getMainPokemon(), "P1");
+		});
 	}
 	
 	private void caricaAllenatore(Allenatore allenatore, String player){
@@ -761,4 +764,13 @@ public class ControllerBattleInterface {
 		}
 		return null;
 	}
+
+	public Allenatore getAllenatore() {return allenatore;}
+	public void setAllenatore(Allenatore allenatore) {this.allenatore = allenatore;}
+	public int getIndexCambioAllenatore() {return indexCambioAllenatore;}
+	public void setIndexCambioAllenatore(int indexCambioAllenatore) {this.indexCambioAllenatore = indexCambioAllenatore;}
+	public Allenatore getSfidante() {return sfidante;}
+	public void setSfidante(Allenatore sfidante) {this.sfidante = sfidante;}
+	public int getIndexCambioSfidante() {return indexCambioSfidante;}
+	public void setIndexCambioSfidante(int indexCambioSfidante) {this.indexCambioSfidante = indexCambioSfidante;}
 }

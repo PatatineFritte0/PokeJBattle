@@ -9,10 +9,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -190,8 +192,25 @@ public class ControllerChoosePlayer {
 	}
 	
 	public void fight(ActionEvent event) throws IOException{
+		Allenatore allenatoreP1 = ((ComboBox<Allenatore>)this.getAnchor().getScene().lookup("#chooseP1")).getSelectionModel().getSelectedItem();
+		Allenatore sfidanteP2 = ((ComboBox<Allenatore>)this.getAnchor().getScene().lookup("#chooseP2")).getSelectionModel().getSelectedItem();
+		
+		if(allenatoreP1 == null || sfidanteP2 == null ) {
+			Alert alert = new Alert(AlertType.ERROR);
+			((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("./view/img/pokeIcon2.PNG"));
+			alert.setTitle("Errore");
+			alert.setContentText("Scegliere i combattenti prima di andare in battaglia");
+			alert.showAndWait();
+			return;
+		}
+		
 		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/battleInterface.fxml"));
 		Scene scene = new Scene(root.load());
+		
+		ControllerBattleInterface controller = root.getController();
+		
+		controller.setAllenatore(allenatoreP1);
+		controller.setSfidante(sfidanteP2);
 		
 		Stage owner = (Stage)((Node)event.getSource()).getScene().getWindow();
 		
