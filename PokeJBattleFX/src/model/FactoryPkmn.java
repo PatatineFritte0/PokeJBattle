@@ -48,6 +48,58 @@ public class FactoryPkmn {
 			case "8":
 				pkmn = new Charizard();
 				break;
+			case "caterpie":
+			case "9":
+				pkmn = new Caterpie();
+				break;
+			case "metapod":
+			case "10":
+				pkmn = new Metapod();
+				break;
+			case "butterfree":
+			case "11":
+				pkmn = new Butterfree();
+				break;
+			case "weedle":
+			case "12":
+				pkmn = new Weedle();
+				break;
+			case "kakuna":
+			case "13":
+				pkmn = new Kakuna();
+				break;
+			case "beedrill":
+			case "14":
+				pkmn = new Beedrill();
+				break;
+			case "pidgey":
+			case "15":
+				pkmn = new Pidgey();
+				break;
+			case "pidgeotto":
+			case "16":
+				pkmn = new Pidgeotto();
+				break;
+			case "pidgeot":
+			case "17":
+				pkmn = new Pidgeotto();
+				break;
+			case "rattata":
+			case "18":
+				pkmn = new Rattata();
+				break;
+			case "raticate":
+			case "19":
+				pkmn = new Raticate();
+				break;
+			case "fearow":
+			case "20":
+				pkmn = new Fearow();
+				break;
+			case "spearow":
+			case "21":
+				pkmn = new Spearow();
+				break;
 			case "missingNo":
 				pkmn = new MissingNo();
 				break;
@@ -66,13 +118,13 @@ public class FactoryPkmn {
 	
 	public static Pokemon random() {
 		Random r = new Random();
-		Integer n = r.nextInt(0, 9);
+		Integer n = r.nextInt(0, 22);
 		
 		return crea(n.toString());	
 	}
 	
 	public static List<Pokemon> allPokemon() {
-		int max = 8;
+		int max = 21;
 		
 		List<Pokemon> all = new ArrayList<>();
 		for(Integer i = 0; i <= max; i++) {
