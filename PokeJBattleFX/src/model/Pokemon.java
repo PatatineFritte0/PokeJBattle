@@ -68,6 +68,7 @@ public class Pokemon implements Crescita {
 	private int evoLvl;
 	private Pokemon evo;
 	private int evoStage;
+	private boolean tryToEvolv = false;
 	
 	private int battlePs;
 	private int maxPs;
@@ -251,7 +252,7 @@ public class Pokemon implements Crescita {
 		this.velocita.setMainValue(this.velocita.getMainValue() +calcStat( this.velocita.getMainValue(), 110));
 		this.velocita.setBattleValue(this.velocita.getBattleValue() + calcStat( this.velocita.getBattleValue(), 110));
 		
-		//this.learnMove();
+		if(this.getLvl() >= this.getEvoLvl() && this.evo != null) { tryToEvolv = true;};
 	}
 	
 	private int calcStat(int stat, int percentuale) { return ((stat + this.lvl)/percentuale) + 1; }
@@ -265,16 +266,6 @@ public class Pokemon implements Crescita {
 	
 	@Override
 	public void evolve() {
-		if(!(this.getLvl() >= this.getEvoLvl() && this.evo != null)) { return; }
-		
-		System.out.println(this.nome + " vorrebbe evolversi! Confermare l'evoluzione? s/n");
-		Scanner s = new Scanner(System.in);
-		String scelta = s.next();
-		if(!scelta.equals("s")) {
-			System.out.println("Evoluzione annullata");
-			return; 
-		}
-		
 		this.nome = evo.nome;
 		this.tipi = evo.tipi;
 		
@@ -294,6 +285,8 @@ public class Pokemon implements Crescita {
 		this.difesa.setMainValue(this.difesa.getMainValue() + calcStat( this.difesa.getMainValue(), 10));
 		this.difesaSP.setMainValue(this.difesaSP.getMainValue() +calcStat( this.difesaSP.getMainValue(), 10));
 		this.velocita.setMainValue(this.velocita.getMainValue() +calcStat( this.velocita.getMainValue(), 10));
+		
+		this.evoStage++;
 		
 		this.resetStats();
 	}
@@ -340,6 +333,7 @@ public class Pokemon implements Crescita {
 	public int getNextLvlExp() { return nextLvlExp; }
 	public int getEvoLvl() { return evoLvl; }
 	public Pokemon getEvo() { return evo; }
+	public boolean isTryToEvolv() {return tryToEvolv;}
 	public int getBattlePs() { return battlePs; }
 	public int getMaxPs() { return maxPs; }
 	public BaseStat getVelocita() { return velocita; }
@@ -380,6 +374,7 @@ public class Pokemon implements Crescita {
 	public void setNextLvlExp(int nextLvlExp) { this.nextLvlExp = nextLvlExp; }
 	public void setEvoLvl(int evoLvl) { this.evoLvl = evoLvl; }
 	public void setEvo(Pokemon evo) { this.evo = evo; }
+	public void setTryToEvolv(boolean tryToEvolv) {this.tryToEvolv = tryToEvolv;}
 	public void setBattlePs(int battlePs) { this.battlePs = battlePs; }
 	public void setMaxPs(int maxPs) { this.maxPs = maxPs; }
 	public void setVelocita(BaseStat velocita) { this.velocita = velocita; }
@@ -442,6 +437,7 @@ public class Pokemon implements Crescita {
 	public int getDifesaSPBattaglia() { return difesaSP.getBattleValue(); }
 	public int getPrecisioneBattaglia() { return precisione.getBattleValue(); }
 	public int getElusioneBattaglia() { return elusione.getBattleValue(); }
+	
 	public void setVelocitaBattaglia(int velocita) { this.velocita.setBattleValue(velocita); }
 	public void setAttaccoBattaglia(int attacco) { this.attacco.setBattleValue(attacco); }
 	public void setAttaccoSPBattaglia(int attaccoSP) { this.attaccoSP.setBattleValue(attaccoSP); }
@@ -449,6 +445,12 @@ public class Pokemon implements Crescita {
 	public void setDifesaSPBattaglia(int difesaSP) { this.difesaSP.setBattleValue(difesaSP); }
 	public void setPrecisioneBattaglia(int precisione) { this.precisione.setBattleValue(precisione); }
 	public void setElusioneBattaglia(int elusione) { this.elusione.setBattleValue(elusione); }
+
+
+	
+
+
+	
 
 
 }

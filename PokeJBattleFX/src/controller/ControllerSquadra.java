@@ -122,7 +122,6 @@ public class ControllerSquadra {
 		}
 		
 		if(trainer == owner.allenatore) {
-			System.out.println(index);
 			owner.indexCambioAllenatore = index;
 		}else if (trainer == owner.sfidante) {
 			owner.indexCambioSfidante = index;
