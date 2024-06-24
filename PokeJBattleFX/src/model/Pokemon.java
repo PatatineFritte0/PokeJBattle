@@ -277,7 +277,14 @@ public class Pokemon implements Crescita {
 		
 		this.nome = evo.nome;
 		this.tipi = evo.tipi;
-		this.parcoMosse = evo.parcoMosse;
+		
+		HashMap<Integer, Mossa> nuovoParcoMosse = new HashMap<Integer, Mossa>();
+		for(int key: evo.parcoMosse.keySet()) {
+			if(key>this.lvl) {
+				nuovoParcoMosse.put(key, evo.parcoMosse.get(key));
+			}
+		}
+		this.parcoMosse = nuovoParcoMosse;
 		this.evoLvl = evo.evoLvl;
 		this.evo = evo.evo;
 		
