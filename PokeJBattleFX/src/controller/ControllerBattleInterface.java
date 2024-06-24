@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -137,7 +138,7 @@ public class ControllerBattleInterface {
         timeline.play();
     }
 	
-	private void aggiornaTurno(Pokemon poke, String player){
+	void aggiornaTurno(Pokemon poke, String player){
 		
 		Pane activePlayerPane = (Pane)battleAnchor.lookup(".active");
 		if(activePlayerPane != null) {
@@ -234,31 +235,141 @@ public class ControllerBattleInterface {
 		if(player.equals("P1")) {
 			m1 = Mossa.CAMBIA;
 			sostituisciPkmn(allenatore, false);
-			aggiornaTurno(sfidante.getMainPokemon(), "P2");
+			if(indexCambioAllenatore != allenatore.getPokemonId(allenatore.getMainPokemon())) {
+				aggiornaTurno(sfidante.getMainPokemon(), "P2");
+			}
 		}else if(player.equals("P2")) {
 			m2 = Mossa.CAMBIA;
 			sostituisciPkmn(sfidante, false);
+			
+			if(indexCambioSfidante != sfidante.getPokemonId(sfidante.getMainPokemon())) {
+				aggiornaTurno(allenatore.getMainPokemon(), "P1");
+				try {
+					turno();
+				} catch (InterruptedException | IOException e) {e.printStackTrace();}
+			}
+		}
+		
+	}
+	
+	public void learnMove(Allenatore trainer) {
+		Pokemon poke = trainer.getMainPokemon();
+		Mossa m = null;
+		if(poke.getParcoMosse() == null) {return;}
+
+		for (int key : poke.getParcoMosse().keySet()) {
+			if(key <= poke.getLvl()) {
+				m = poke.getParcoMosse().get(key);
+				if(Arrays.asList(poke.getMoveSet()).contains(null) && !Arrays.asList(poke.getMoveSet()).contains(m)) {
+					poke.getMosse()[Arrays.asList(poke.getMoveSet()).indexOf(null)] = new UsableMove(m);
+					poke.getParcoMosse().remove(key);
+				} else {
+					
+					AtomicInteger index = new AtomicInteger();
+					try {
+						sceltaMosse(trainer, index, m);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					switch(index.get()) {
+						case 1:
+							poke.getMosse()[0] = new UsableMove(m);
+							break;
+						case 2:
+							poke.getMosse()[1] = new UsableMove(m);
+							break;
+						case 3:
+							poke.getMosse()[2] = new UsableMove(m);
+							break;
+						case 4:
+							poke.getMosse()[3] = new UsableMove(m);
+							break;
+						default:
+							//System.out.println("Mossa non imparata");
+							continue;
+					}
+				}
+			}
+		}
+	}
+	
+	public void sceltaMosse(Allenatore trainer, AtomicInteger index, Mossa m) throws IOException {
+		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/apprendimentoMosse.fxml"));
+		
+		Stage owner = (Stage)(battleAnchor.getScene().getWindow());
+		
+		Scene scene;
+		scene = new Scene(root.load());
+	
+		ControllerApprendimentoMosse controller = root.getController();
+		
+		controller.setControllerOwner(this);
+		controller.setPokemon(trainer.getMainPokemon());
+		controller.setIndex(index);
+		controller.setMossa(m);
+		
+		Stage pkmn = new Stage();
+		pkmn.setScene(scene);
+		
+		Image icon = new Image("./view/img/pokeIcon2.PNG");
+		pkmn.getIcons().add(icon);
+		pkmn.setTitle("il "+ trainer.getMainPokemon().getNome() +" di "+ trainer.getNickname() +" Vuole imparare una nuova mossa");
+		
+		pkmn.setResizable(false);
+		pkmn.initModality(Modality.APPLICATION_MODAL);
+		
+		pkmn.setOnCloseRequest(event ->{
+			 // Intercetta l'evento di chiusura
+            event.consume();
+
+            // Mostra un messaggio all'utente
+            Alert alert = new Alert(AlertType.INFORMATION);
+            ((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("./view/img/pokeIcon2.PNG"));
+            alert.setTitle("Attenzione");
+            alert.setHeaderText("Chiusura disabilitata");
+            alert.setContentText("La chiusura della finestra è disabilitata. Scegli prima un pokemon");
+            alert.showAndWait();
+		});
+		
+		pkmn.initOwner(owner);
+		
+		pkmn.showAndWait();
+	}
+	
+	public void resa() {
+		Pane activePlayerPane = (Pane)battleAnchor.lookup(".active");
+		
+		String player = activePlayerPane.getParent().getId();
+		
+		if(player.equals("P1")) {
+			m1 = Mossa.RESA;
+			aggiornaTurno(sfidante.getMainPokemon(), "P2");
+		}else if(player.equals("P2")) {
+			m2 = Mossa.RESA;
+			aggiornaTurno(allenatore.getMainPokemon(), "P1");
 			try {
 				turno();
 			} catch (InterruptedException | IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			aggiornaTurno(allenatore.getMainPokemon(), "P1");
 		}
-		
 	}
 	
 	public void turno() throws InterruptedException, IOException {
 		iniziaTurno();
 		
+		((TextArea)battleAnchor.lookup("#log")).setText(this.log);
+		this.log = "";
+		
 		aggiornaStatPokemon(allenatore.getMainPokemon(), "P1");
 		aggiornaStatPokemon(sfidante.getMainPokemon(), "P2");
 		
-		Thread.sleep(500);
-		
 		Allenatore vincitore = checkVincitore();
-		System.out.println(vincitore);
 		if(vincitore != null) {
+			Thread.sleep(1000);
 			Pane winnerPane;
 			Allenatore allePerdente;
 			if(vincitore == allenatore) {
@@ -314,8 +425,8 @@ public class ControllerBattleInterface {
 			}
 		}
 		
-		((TextArea)battleAnchor.lookup("#log")).setText(this.log);
-		this.log = "";
+		learnMove(allenatore);
+		learnMove(sfidante);
 		
 		aggiornaStatPokemon(allenatore.getMainPokemon(), "P1");
 		aggiornaStatPokemon(sfidante.getMainPokemon(), "P2");
@@ -523,24 +634,24 @@ public class ControllerBattleInterface {
 			
 			if(superefficacia == 0.0) {
 				//System.out.println("\n" + ricevente.getMainPokemon().getNome() + " e' immune! \n");
-				this.log += "\n" + ricevente.getMainPokemon().getNome() + " e' immune! \n";
+				this.log += "" + ricevente.getMainPokemon().getNome() + " e' immune! \n";
 			}
 			else if(superefficacia == 0.25) {
 				//System.out.println("\n Non e' per niente efficace! \n");
-				this.log += "\n Non e' per niente efficace! \n";
+				this.log += "Non e' per niente efficace! \n";
 			}
 			else if(superefficacia == 0.5) {
-				System.out.println("\n E' poco efficace! \n");
-				this.log += "\n E' poco efficace! \n";
+				//System.out.println("\n E' poco efficace! \n");
+				this.log += "E' poco efficace! \n";
 			}
 			else if(superefficacia == 2) {
 				//System.out.println("\n E' superefficace! \n");
-				this.log += "\n E' superefficace! \n";
+				this.log += "E' superefficace! \n";
 			}	
 			
 			if(isCrit.get()) {
 				//System.out.println("\n E' un colpo critico! ");
-				this.log += "\n E' un colpo critico! \n";
+				this.log += "E' un colpo critico! \n";
 			}
 		}
 	}
@@ -564,13 +675,11 @@ public class ControllerBattleInterface {
 		Pokemon p = trainer.getMainPokemon();
 		
 		int index = 6;
-		if(trainer == allenatore) { index = indexCambioSfidante; }
+		if(trainer == allenatore) { index = indexCambioAllenatore; }
 		else if(trainer == sfidante){ index = indexCambioSfidante; }
 		
 		trainer.setMainPokemon(index);
 		this.log += "\n"+ trainer.getNickname() + " sostituisce " + p.getNome() + " con " + trainer.getMainPokemon().getNome()+"\n";
-		
-		
 	}
 	// turno-------------------------------------------------------
 	

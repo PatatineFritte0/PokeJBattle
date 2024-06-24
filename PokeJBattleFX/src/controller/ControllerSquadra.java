@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.IOException;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -119,13 +121,8 @@ public class ControllerSquadra {
 			return;
 		}
 		
-		//Pokemon p = trainer.getMainPokemon();
-		//trainer.setMainPokemon(index);
-		
-		//System.out.println("\nRientra " + p.getNome() + ", vai " + trainer.getMainPokemon().getNome() +"!\n");
-		
-		//owner.log += "\n" + trainer.getNickname() + " sostituisce " + p.getNome() + " con " + trainer.getMainPokemon().getNome();
 		if(trainer == owner.allenatore) {
+			System.out.println(index);
 			owner.indexCambioAllenatore = index;
 		}else if (trainer == owner.sfidante) {
 			owner.indexCambioSfidante = index;

@@ -262,41 +262,6 @@ public class Pokemon implements Crescita {
 		}
 	}
 	
-	@Override
-	public void learnMove(int indexChangeMossa) {
-		Mossa m = null;
-		if(this.parcoMosse == null) {return;}
-
-		for (int key : this.parcoMosse.keySet()) {
-			if(key == this.lvl) {
-				m = this.parcoMosse.get(key);
-				if(Arrays.asList(this.getMoveSet()).contains(null) && !Arrays.asList(this.getMoveSet()).contains(m)) {
-					mosse[Arrays.asList(this.getMoveSet()).indexOf(null)] = new UsableMove(m);
-				} else {
-					//System.out.println(this.nome + " vorrebbe imparare " + m.getNome() + ". Inserire il numero della mossa da sostituire...");
-					//Scanner s = new Scanner(System.in);
-					//String scelta = s.nextLine();
-					switch(indexChangeMossa) {
-						case 1:
-							this.mosse[0] = new UsableMove(m);
-							break;
-						case 2:
-							this.mosse[1] = new UsableMove(m);
-							break;
-						case 3:
-							this.mosse[2] = new UsableMove(m);
-							break;
-						case 4:
-							this.mosse[3] = new UsableMove(m);
-							break;
-						default:
-							System.out.println("Mossa non imparata");
-							continue;
-					}
-				}
-			}
-		}
-	}
 	
 	@Override
 	public void evolve() {

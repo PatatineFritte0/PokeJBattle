@@ -85,7 +85,7 @@
                   </ImageView>
                   <Label layoutX="14.0" layoutY="151.0" prefHeight="55.0" prefWidth="134.0" text="Squadra" />
                </children></Pane>
-            <Pane layoutX="845.0" layoutY="232.0" prefHeight="55.0" prefWidth="60.0" style="-fx-background-color: white;" styleClass="resa">
+            <Pane layoutX="845.0" layoutY="232.0" onMouseClicked="#resa" prefHeight="55.0" prefWidth="60.0" style="-fx-background-color: white;" styleClass="resa">
                <children>
                   <ImageView fitHeight="43.0" fitWidth="47.0" layoutX="7.0" layoutY="6.0">
                      <image>

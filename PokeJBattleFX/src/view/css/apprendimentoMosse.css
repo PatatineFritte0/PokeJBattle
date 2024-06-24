@@ -1,0 +1,25 @@
+@font-face{
+	-fx-font-family: "Press Start 2P";
+	src: url("../fonts/PressStart2P.ttf");
+}
+
+.custom-anchor{
+	-fx-font-family: "Press Start 2P";
+	-fx-background-size: 100% 70%;
+	-fx-background-repeat: no-repeat;
+}
+
+.mossa{
+	-fx-background-image: url("../img/normale.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 100% 100%;
+	-fx-font-size: 15px;
+}
+
+.mossa .nameMossa{
+	-fx-font-size: 17px;
+}
+
+.mossa .label{
+	-fx-alignment: center;
+}
