@@ -100,6 +100,22 @@ public class FactoryPkmn {
 			case "21":
 				pkmn = new Spearow();
 				break;
+			case "ekans":
+			case "22":
+				pkmn = new Ekans();
+				break;
+			case "arbok":
+			case "23":
+				pkmn = new Arbok();
+				break;
+			case "pikachu":
+			case "24":
+				pkmn = new Pikachu();
+				break;
+			case "raichu":
+			case "25":
+				pkmn = new Raichu();
+				break;
 			case "missingNo":
 				pkmn = new MissingNo();
 				break;
@@ -118,13 +134,13 @@ public class FactoryPkmn {
 	
 	public static Pokemon random() {
 		Random r = new Random();
-		Integer n = r.nextInt(0, 22);
+		Integer n = r.nextInt(0, 26);
 		
 		return crea(n.toString());	
 	}
 	
 	public static List<Pokemon> allPokemon() {
-		int max = 21;
+		int max = 25;
 		
 		List<Pokemon> all = new ArrayList<>();
 		for(Integer i = 0; i <= max; i++) {
