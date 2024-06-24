@@ -9,8 +9,8 @@ import model.costanti.Tipo;
 public class Squirtle extends Pokemon {
 	
 	public Squirtle() {
-		super("Squirtle", Tipo.ACQUA, null, new Mossa []{null, null, null, null},
-				new HashMap<Integer, Mossa>() {{put(1, Mossa.AZIONE); put(2, Mossa.COLPOCODA); put(4, Mossa.PISTOLACQUA); put(8, Mossa.RITIRATA); put(12, Mossa.MORSO); put(17, Mossa.IDROPOMPA); put(20, Mossa.IDROPULSAR); put(24, Mossa.FERROSCUDO); put(28, Mossa.IDRONDATA); put(32, Mossa.IDROPOMPA); put(37, Mossa.ONDASCHIANTO); put(41, Mossa.SURF);}},
+		super("Squirtle", Tipo.ACQUA, null, new Mossa []{Mossa.AZIONE, Mossa.COLPOCODA, Mossa.PISTOLACQUA, null},
+				new HashMap<Integer, Mossa>() {{put(8, Mossa.RITIRATA); put(12, Mossa.MORSO); put(17, Mossa.IDROPOMPA); put(20, Mossa.IDROPULSAR); put(24, Mossa.FERROSCUDO); put(28, Mossa.IDRONDATA); put(32, Mossa.IDROPOMPA); put(37, Mossa.ONDASCHIANTO); put(41, Mossa.SURF);}},
 				1, 16, new Wortortle(), 44, 43, 48, 50, 65, 64);
 	}
 }

@@ -82,7 +82,7 @@ public class FactoryPkmn {
 				break;
 			case "pidgeot":
 			case "17":
-				pkmn = new Pidgeotto();
+				pkmn = new Pidgeot();
 				break;
 			case "rattata":
 			case "18":

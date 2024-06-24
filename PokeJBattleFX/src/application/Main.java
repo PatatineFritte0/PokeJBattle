@@ -20,7 +20,7 @@ public class Main extends Application {
 			
 			Parent root = FXMLLoader.load(getClass().getResource("../view/fxml/BattleJPoke.fxml"));
 			Scene scene = new Scene(root,1000,800);
-			scene.getStylesheets().add(getClass().getResource("../view/css/application.css").toExternalForm());
+			//scene.getStylesheets().add(getClass().getResource("../view/css/application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			
@@ -36,8 +36,8 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		//launch(args);
-		MainTest.test(args);
+		launch(args);
+		//MainTest.test(args);
 		System.exit(0);
 
 	}

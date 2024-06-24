@@ -9,8 +9,8 @@ import model.costanti.Tipo;
 public class Charmander extends Pokemon {
 	
 	public Charmander() {	
-		super("Charmander", Tipo.FUOCO, null, new Mossa []{null, null, null, null},
-				new HashMap<Integer, Mossa>() {{put(1, Mossa.GRAFFIO); put(2, Mossa.RUGGITO); put(4, Mossa.BRACIERE); put(8, Mossa.MURODIFUMO); put(12, Mossa.DRAGOSPIRO);}}, 
+		super("Charmander", Tipo.FUOCO, null, new Mossa []{Mossa.GRAFFIO, Mossa.RUGGITO, Mossa.BRACIERE, null},
+				new HashMap<Integer, Mossa>() {{put(8, Mossa.MURODIFUMO); put(12, Mossa.DRAGOSPIRO);}}, 
 				1, 16, new Charmeleon(), 39, 65, 52, 60, 43, 50);
 	}
 
