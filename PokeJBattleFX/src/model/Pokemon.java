@@ -226,7 +226,7 @@ public class Pokemon implements Crescita {
 		this.setNextLvlExp( (int) (4 * Math.pow(this.getLvl(), 3)/ 5));
 		
 		int oldMaxPs = this.getMaxPs();
-		this.setMaxPs(this.getMaxPs() + calcStat(this.getMaxPs(), 110));
+		this.setMaxPs(this.getMaxPs() + calcPs(this.getMaxPs(), 150));
 		
 		int possibleNewHp = this.getBattlePs() + (this.getMaxPs()*5)/100;
 		
@@ -256,6 +256,7 @@ public class Pokemon implements Crescita {
 	}
 	
 	private int calcStat(int stat, int percentuale) { return ((stat + this.lvl)/percentuale) + 1; }
+	private int calcPs(int stat, int percentuale) { return ((stat + this.lvl)/percentuale) + 4; }
 	
 	public void goToLvl(int lvl) {
 		for(int i = 0; i<lvl; i++) {
