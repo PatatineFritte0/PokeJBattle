@@ -4,7 +4,15 @@
 }
 
 .custom-anchor{
+	-fx-text-fill: white;
 	-fx-font-family: "Press Start 2P";
+	-fx-background-image: url("../img/switchSelectorBackground.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 100% 100%;
+}
+
+.custom-anchor .label{
+	-fx-text-fill: white;
 }
 
 .paneSquadra .label{
@@ -19,19 +27,31 @@
 
 .paneSquadra .pokeContainers .pane{
 	-fx-background-image: url("../img/partyMember.png");
-	-fx-background-size: contain;
+	-fx-background-size: 100% 100%;
 	-fx-background-repeat: no-repeat;
 }
 
 .paneNickname .label{
-	-fx-font-size: 9px;
+	-fx-font-size: 12px;
 }
 
 .paneNickname .text-label{
 	-fx-font-size: 9px;
 }
 
-.Err{
+.custom-anchor .Err{
+	-fx-text-fill: red;
 	-fx-alignment: center;
-	-fx-font-size: 9px;
+	-fx-font-size: 13px;
+}
+
+.button{
+	-fx-text-fill: white;
+	-fx-alignment: center;
+	-fx-font-size: 15px;
+	-fx-background-image: url("../img/greenButton.png");
+	-fx-background-size: 100% 100%;
+	-fx-background-repeat: no-repeat;
+	-fx-border-color: transparent;
+	-fx-background-color: transparent;
 }

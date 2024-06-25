@@ -5,8 +5,27 @@
 
 .custom-anchor{
 	-fx-font-family: "Press Start 2P";
+	-fx-background-image: url("../img/switchSelectorBackground.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 100% 100%;
 }
 
 .custom-anchor .label{
 	-fx-alignment: center;
+	-fx-text-fill: white;
+}
+
+.button{
+	-fx-background-size: 100% 100%;
+	-fx-background-repeat: no-repeat;
+	-fx-border-color: transparent;
+	-fx-background-color: transparent;
+}
+
+.buttonRed{
+	-fx-background-image: url("../img/redButton.png");
+}
+
+.buttonGreen{
+	-fx-background-image: url("../img/greenButton.png");	
 }

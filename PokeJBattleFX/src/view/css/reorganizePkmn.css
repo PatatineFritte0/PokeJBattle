@@ -5,6 +5,9 @@
 
 .root{
 	-fx-font-family: "Press Start 2P";
+	-fx-background-image: url("../img/newSaveBackgound.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 100% 100%;
 }
 
 .root .label{
@@ -17,8 +20,16 @@
 	-fx-alignment: center;
 }
 
-.button{
-	-fx-background-image: url("../img/button.png");
-	-fx-background-size: contain;
+.paneCell{
+	-fx-background-image: url("../img/partyMember.png");
+	-fx-background-size: 100% 100%;
 	-fx-background-repeat: no-repeat;
+}
+
+.button{
+	-fx-background-image: url("../img/greenButton.png");
+	-fx-background-size: 100% 100%;
+	-fx-background-repeat: no-repeat;
+	-fx-border-color: transparent;
+	-fx-background-color: transparent;
 }

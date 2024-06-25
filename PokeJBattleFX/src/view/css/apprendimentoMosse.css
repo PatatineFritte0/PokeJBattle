@@ -5,8 +5,9 @@
 
 .custom-anchor{
 	-fx-font-family: "Press Start 2P";
-	-fx-background-size: 100% 70%;
+	-fx-background-image: url("../img/switchSelectorBackground.png");
 	-fx-background-repeat: no-repeat;
+	-fx-background-size: 100% 100%;
 }
 
 .mossa{

@@ -77,10 +77,10 @@ public class ControllerBattleInterface {
 		Pane p = (Pane) battleAnchor.lookup("#"+player);
 		((Label)p.lookup("#nicknamePlayer")).setText(allenatore.getNickname());
 		
-		aggiornaStatPokemon(allenatore.getMainPokemon(), player);
+		aggiornaStatPokemon(allenatore, player);
 	}
 	
-	protected void aggiornaStatPokemon(Pokemon main, String player) {
+	protected void aggiornaStatPokemon(Allenatore allenatore, String player) {
 		String verso;
 		if(player.equals("P1")) {
 			verso = "Back";
@@ -91,7 +91,20 @@ public class ControllerBattleInterface {
 			return;
 		}
 		
+		Pokemon main = allenatore.getMainPokemon();
+		
 		Pane p = (Pane) battleAnchor.lookup("#"+player);
+		
+		for(int i = 0; i<6; i++) {
+			if(allenatore.getPokemonById(i) != null) {
+				if(allenatore.getPokemonById(i).getBattlePs() <= 0) {
+					p.lookup("#poke"+i).setStyle("-fx-background-image: url(./view/img/esausto.png);");
+				}else {
+					p.lookup("#poke"+i).setStyle("-fx-background-image: url(./view/img/pokeball.png);");
+				}
+			}
+		}
+		
 		
 		p.lookup("#imgPokemon").setStyle("-fx-background-image: url(./view/img/"+main.getNome().toLowerCase()+verso+".png);");
 		
@@ -206,7 +219,7 @@ public class ControllerBattleInterface {
         	pane = (Pane) ((Label) source).getParent();
         }
 		
-		UsableMove mossa = allenatore.getMainPokemon().getMosse()[Integer.valueOf(String.valueOf( pane.getId().charAt(pane.getId().length() - 1)))];
+		UsableMove mossa = sfidante.getMainPokemon().getMosse()[Integer.valueOf(String.valueOf( pane.getId().charAt(pane.getId().length() - 1)))];
 		if(mossa.getPp() == 0) return;
 		this.m2 = mossa.getMossa();
 		
@@ -413,8 +426,8 @@ public class ControllerBattleInterface {
 		((TextArea)battleAnchor.lookup("#log")).setText(this.log);
 		this.log = "";
 		
-		aggiornaStatPokemon(allenatore.getMainPokemon(), "P1");
-		aggiornaStatPokemon(sfidante.getMainPokemon(), "P2");
+		aggiornaStatPokemon(allenatore, "P1");
+		aggiornaStatPokemon(sfidante, "P2");
 		
 		Allenatore vincitore = checkVincitore();
 		if(vincitore != null) {
@@ -477,8 +490,8 @@ public class ControllerBattleInterface {
 			}
 		}
 		
-		aggiornaStatPokemon(allenatore.getMainPokemon(), "P1");
-		aggiornaStatPokemon(sfidante.getMainPokemon(), "P2");
+		aggiornaStatPokemon(allenatore, "P1");
+		aggiornaStatPokemon(sfidante, "P2");
 		
 		aggiornaTurno(allenatore.getMainPokemon(), "P1");
 	}
@@ -707,7 +720,7 @@ public class ControllerBattleInterface {
 	
 	
 	protected void esausto(Allenatore trainer, AtomicInteger count) {
-		System.out.println("\n" + trainer.getMainPokemon().getNome() + " e' esausto");
+		//System.out.println("\n" + trainer.getMainPokemon().getNome() + " e' esausto");
 		count.set(count.get()-1);
 		if(count.get() <= 0) {return;}
 		this.log += "\n" + trainer.getMainPokemon().getNome() + " di " + trainer.getNickname() + " e' esausto!\n";
@@ -715,7 +728,7 @@ public class ControllerBattleInterface {
 		if(trainer == allenatore) { player = "P1"; }
 		else if(trainer == sfidante){ player = "P2"; }
 		
-		aggiornaStatPokemon(trainer.getMainPokemon(), player);
+		aggiornaStatPokemon(trainer, player);
 		
 		try {
 			sostituisciPkmn(trainer, true);

@@ -9,11 +9,6 @@
 
 <AnchorPane fx:id="evoluzioneAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="custom-anchor" stylesheets="@../css/evoluzione.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerEvoluzione">
    <children>
-      <ImageView fitHeight="54.0" fitWidth="110.0" layoutX="245.0" layoutY="162.0">
-         <image>
-            <Image url="@../img/frecciaDestra.png" />
-         </image>
-      </ImageView>
       <Pane layoutX="30.0" layoutY="26.0" prefHeight="280.0" prefWidth="200.0">
          <children>
             <ImageView fx:id="imgPoke" fitHeight="150.0" fitWidth="200.0" layoutX="22.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
@@ -34,7 +29,12 @@
             <Label fx:id="labelPokeEvo" layoutX="22.0" layoutY="206.0" prefHeight="47.0" prefWidth="150.0" text="Nome Pokemon" />
          </children>
       </Pane>
-      <Button layoutX="30.0" layoutY="337.0" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="200.0" text="Non Evolvere" />
-      <Button layoutX="379.0" layoutY="337.0" mnemonicParsing="false" onAction="#evolvi" prefHeight="25.0" prefWidth="200.0" text="Evolvi" />
+      <Button layoutX="45.0" layoutY="327.0" mnemonicParsing="false" onAction="#close" prefHeight="47.0" prefWidth="171.0" styleClass="buttonRed" text="Non Evolvere" />
+      <Button layoutX="384.0" layoutY="327.0" mnemonicParsing="false" onAction="#evolvi" prefHeight="47.0" prefWidth="171.0" styleClass="buttonGreen" text="Evolvi" />
+      <ImageView fitHeight="57.0" fitWidth="111.0" layoutX="245.0" layoutY="166.0">
+         <image>
+            <Image url="@../img/frecciaDestra_white.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

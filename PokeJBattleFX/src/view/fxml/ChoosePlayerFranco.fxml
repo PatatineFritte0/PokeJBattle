@@ -6,29 +6,30 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
 <AnchorPane fx:id="chooseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" styleClass="custom-anchor" stylesheets="@../css/choosePlayers.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerChoosePlayerFranco">
    <children>
-      <ComboBox fx:id="chooseP1" layoutX="419.0" layoutY="178.0" prefHeight="70.0" prefWidth="150.0" promptText="Scegli P1" styleClass="custom-combobox" />
-      <ImageView fx:id="imp1" fitHeight="59.0" fitWidth="59.0" layoutX="344.0" layoutY="184.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+      <ComboBox fx:id="chooseP1" layoutX="174.0" layoutY="117.0" prefHeight="70.0" prefWidth="161.0" promptText="Scegli P1" styleClass="custom-combobox" />
+      <ImageView fx:id="imp1" fitHeight="59.0" fitWidth="59.0" layoutX="99.0" layoutY="123.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/setting.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="17.0" fitWidth="15.0" layoutX="790.0" layoutY="203.0">
-         <image>
-            <Image url="@../img/downArrow.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="403.0" layoutY="307.0" prefHeight="25.0" prefWidth="120.0" text="Vittorie:" />
-      <Label fx:id="VP1" layoutX="510.0" layoutY="311.0" prefHeight="17.0" prefWidth="59.0" text="None" />
-      <Label layoutX="397.0" layoutY="328.0" prefHeight="25.0" prefWidth="120.0" text="Sconfitte:" />
-      <Label fx:id="SP1" layoutX="519.0" layoutY="332.0" prefHeight="17.0" prefWidth="59.0" text="None" />
-      <Button layoutX="374.0" layoutY="624.0" mnemonicParsing="false" onAction="#fight" prefHeight="96.0" prefWidth="228.0" text="Fight" />
-      <ImageView fitHeight="70.0" fitWidth="100.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#back">
+      <Label layoutX="175.0" layoutY="193.0" prefHeight="25.0" prefWidth="120.0" text="Vittorie:" />
+      <Label fx:id="VP1" layoutX="282.0" layoutY="197.0" prefHeight="17.0" prefWidth="59.0" text="None" />
+      <Label layoutX="169.0" layoutY="214.0" prefHeight="25.0" prefWidth="120.0" text="Sconfitte:" />
+      <Label fx:id="SP1" layoutX="291.0" layoutY="218.0" prefHeight="17.0" prefWidth="59.0" text="None" />
+      <Button layoutX="385.0" layoutY="690.0" mnemonicParsing="false" onAction="#fight" prefHeight="96.0" prefWidth="228.0" text="Fight" />
+      <ImageView fitHeight="59.0" fitWidth="83.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#back">
          <image>
             <Image url="@../img/backarrow.png" />
          </image>
       </ImageView>
+      <Pane layoutX="644.0" layoutY="118.0" prefHeight="70.0" prefWidth="161.0" styleClass="custom-combobox">
+         <children>
+            <Label layoutX="51.0" layoutY="30.0" text="Franco" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

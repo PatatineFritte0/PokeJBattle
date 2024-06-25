@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -26,9 +27,10 @@ import model.costanti.Mossa;
 public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 	
 	@Override
-	protected void aggiornaStatPokemon(Pokemon main, String player) {
+	protected void aggiornaStatPokemon(Allenatore allenatore, String player) {
 		String verso;
 		Pane p;
+		Pokemon main = allenatore.getMainPokemon();
 		if(player.equals("P1")) {
 			verso = "Back";
 			
@@ -53,6 +55,16 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 		}else {
 			System.out.println("ERR");
 			return;
+		}
+		
+		for(int i = 0; i<6; i++) {
+			if(allenatore.getPokemonById(i) != null) {
+				if(allenatore.getPokemonById(i).getBattlePs() <= 0) {
+					p.lookup("#poke"+i).setStyle("-fx-background-image: url(./view/img/esausto.png);");
+				}else {
+					p.lookup("#poke"+i).setStyle("-fx-background-image: url(./view/img/pokeball.png);");
+				}
+			}
 		}
 		
 		p.lookup("#imgPokemon").setStyle("-fx-background-image: url(./view/img/"+main.getNome().toLowerCase()+verso+".png);");
@@ -129,7 +141,7 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 	
 	@Override
 	public void sostituisciPkmn(Allenatore trainer, boolean disableClose) throws IOException{
-		if(trainer.getNickname().equals("Franco")) {return;}
+		if(trainer instanceof Franco) {return;}
 		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/squadra.fxml"));
 		
 		Stage owner = (Stage)(battleAnchor.getScene().getWindow());
@@ -203,8 +215,8 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 		((TextArea)battleAnchor.lookup("#log")).setText(this.log);
 		this.log = "";
 		
-		aggiornaStatPokemon(allenatore.getMainPokemon(), "P1");
-		aggiornaStatPokemon(sfidante.getMainPokemon(), "P2");
+		aggiornaStatPokemon(allenatore, "P1");
+		aggiornaStatPokemon(sfidante, "P2");
 		
 		Allenatore vincitore = checkVincitore();
 		if(vincitore != null) {
@@ -267,8 +279,8 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 			}
 		}
 		
-		aggiornaStatPokemon(allenatore.getMainPokemon(), "P1");
-		aggiornaStatPokemon(sfidante.getMainPokemon(), "P2");
+		aggiornaStatPokemon(allenatore, "P1");
+		aggiornaStatPokemon(sfidante, "P2");
 		
 		aggiornaTurno(allenatore.getMainPokemon(), "P1");
 	}
@@ -379,26 +391,16 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 		count.set(count.get()-1);
 		if(count.get() <= 0) {return;}
 		this.log += "\n" + trainer.getMainPokemon().getNome() + " di " + trainer.getNickname() + " e' esausto!\n";
-		String player = null;
+		String player = (trainer == allenatore) ? "P1" : "P2";
 		
-		if(trainer == allenatore) { player = "P1"; }
-		else if(trainer == sfidante){
-			player = "P2"; 			
-			indexCambioSfidante = ((Franco)trainer).cambia();
-			//System.out.println(trainer.getNickname());
-		}
-		
-		aggiornaStatPokemon(trainer.getMainPokemon(), player);
-		
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {e.printStackTrace();}
+		aggiornaStatPokemon(trainer, player);
 		
 		if(player.equals("P1")){
 			try {
-				System.out.println(trainer.getNickname() + " interfaccia");
 				sostituisciPkmn(trainer, true);
 			} catch (IOException e) {e.printStackTrace();}
+		}else {
+			indexCambioSfidante = ((Franco)trainer).cambia();
 		}
 		
 		Pokemon p = trainer.getMainPokemon();
@@ -409,6 +411,7 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 		
 		trainer.setMainPokemon(index);
 		this.log += "\n"+ trainer.getNickname() + " sostituisce " + p.getNome() + " con " + trainer.getMainPokemon().getNome()+"\n";
+
 	}
 	
 }

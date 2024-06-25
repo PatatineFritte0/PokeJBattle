@@ -5,10 +5,18 @@
 
 .custom-anchor{
 	-fx-font-family: "Press Start 2P";
+	-fx-background-image: url("../img/switchSelectorBackground.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 100% 100%;
 }
 
 .pane{
 	-fx-background-image: url("../img/partyMember.png");
 	-fx-background-size: 100% 100%;
 	-fx-background-repeat: no-repeat;
+}
+
+.pane .label{
+	-fx-alignment: center;
+	-fx-text-fill: black;
 }

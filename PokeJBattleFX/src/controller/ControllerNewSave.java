@@ -65,9 +65,12 @@ public class ControllerNewSave {
 		
 		if(text.equals("")) {
 			errLabel.setText("Il nickname non puo'\nessere vuoto, avrai\npur un nome te no?");
+			this.nicknameRight = false;
 			return;
 		}else if(controlEqualNickname(text)){
 			errLabel.setText("Nickname gia esistente");
+			this.nicknameRight = false;
+			return;
 		}else {
 			errLabel.setText("");
 		}
@@ -91,14 +94,14 @@ public class ControllerNewSave {
 		String errText = "";
 		boolean error = false;
 		if(isArrayFullOfNulls(this.squadra)) {
-			errText += "Inserisci in squadra almeno un pokemon";
+			errText += "Inserisci in squadra\nalmeno un pokemon.";
 			error = true;
 		}
 		if(!this.nicknameRight) {
 			if(!errText.equals("")) {
 				errText+='\n';
 			}
-			errText += "Nickname non valido";
+			errText += "Nickname non valido.";
 			error = true;
 		}
 		
@@ -115,7 +118,7 @@ public class ControllerNewSave {
 
 		Stage stage = (Stage) myScene.getWindow();
 		
-		FXMLLoader choose = new FXMLLoader(getClass().getResource("../view/fxml/ChoosePlayers.fxml"));
+		FXMLLoader choose = new FXMLLoader(getClass().getResource("../view/fxml/BattleJPoke.fxml"));
 		stage.setScene(new Scene(choose.load()));
 
 		

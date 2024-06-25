@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
@@ -85,6 +86,16 @@ public class ControllerReorganizePkmn {
 				indexPoke.setLayoutY(8);
 				indexPoke.setId("index");
 				
+				pane.getStyleClass().add("paneCell");
+				
+				pane.setOnMouseEntered(event -> {
+		            pane.setCursor(Cursor.HAND);
+		        });
+				
+				pane.setOnMouseExited(event -> {
+		            pane.setCursor(Cursor.DEFAULT);
+		        });
+				
 				pane.getChildren().addAll(image, namePokemon, lvl, valueLvl, indexPoke);
 			}
 			
@@ -134,9 +145,23 @@ public class ControllerReorganizePkmn {
 			
 			free.getChildren().addAll(pane.getChildren());
 			free.setOnMouseClicked(this::toSquad);
+			free.getStyleClass().add("paneCell");
+			free.setOnMouseEntered(evento -> {
+	            free.setCursor(Cursor.HAND);
+	        });
+			
+			free.setOnMouseExited(evento -> {
+	            free.setCursor(Cursor.DEFAULT);
+	        });
+			
+			pane.setCursor(Cursor.DEFAULT);
+			pane.setOnMouseEntered(null);
+			pane.setOnMouseExited(null);
 			
 			pane.getChildren().clear();
+			
 			pane.setOnMouseClicked((useless)->{});
+			pane.getStyleClass().remove("paneCell");
 		}else {
 			Alert alert = new Alert(AlertType.ERROR);
 			((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("./view/img/pokeIcon2.PNG"));
@@ -163,9 +188,22 @@ public class ControllerReorganizePkmn {
 			
 			free.getChildren().addAll(pane.getChildren());
 			free.setOnMouseClicked(this::toRiorganize);
+			free.getStyleClass().add("paneCell");
+			free.setOnMouseEntered(evento -> {
+	            free.setCursor(Cursor.HAND);
+	        });
+			free.setOnMouseExited(evento -> {
+	            free.setCursor(Cursor.DEFAULT);
+	        });
+			
+			
+			pane.setCursor(Cursor.DEFAULT);
+			pane.setOnMouseEntered(null);
+			pane.setOnMouseExited(null);
 			
 			pane.getChildren().clear();
 			pane.setOnMouseClicked((useless)->{});
+			pane.getStyleClass().remove("paneCell");
 		}else {
 			Alert alert = new Alert(AlertType.ERROR);
 			((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("./view/img/pokeIcon2.PNG"));

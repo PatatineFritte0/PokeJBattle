@@ -37,7 +37,7 @@ public class ControllerSquadra {
 				Pane pane = (Pane) anchorSquadra.lookup("#pkmn"+ String.valueOf(counter));
 				if(pokemon != null) {
 					
-					Label index = new Label(String.valueOf(counter));
+					Label index = new Label(String.valueOf(counter + 1));
 					index.setLayoutX(14);
 					index.setLayoutY(14);
 					index.setId("index");
@@ -53,28 +53,28 @@ public class ControllerSquadra {
 					
 					Label lvl = new Label("LVL:");
 					lvl.setLayoutX(110);
-					lvl.setLayoutY(50);
+					lvl.setLayoutY(45);
 					
 					Label pokeLvl = new Label(String.valueOf(pokemon.getLvl()));
 					pokeLvl.setLayoutX(160);
-					pokeLvl.setLayoutY(50);
+					pokeLvl.setLayoutY(45);
 					pokeLvl.setId("lvl");
 					
-					Label ps = new Label("ps:");
+					Label ps = new Label("PS:");
 					ps.setLayoutX(110);
-					ps.setLayoutY(70);
+					ps.setLayoutY(65);
 					
 					Label psBattle = new Label(String.valueOf(pokemon.getBattlePs()));
-					psBattle.setLayoutX(160);
-					psBattle.setLayoutY(70);
+					psBattle.setLayoutX(145);
+					psBattle.setLayoutY(65);
 					
 					Label barra = new Label("/");
-					psBattle.setLayoutX(190);
-					psBattle.setLayoutY(70);
+					barra.setLayoutX(180);
+					barra.setLayoutY(65);
 					
 					Label psMax = new Label(String.valueOf(pokemon.getMaxPs()));
-					psMax.setLayoutX(220);
-					psMax.setLayoutY(70);
+					psMax.setLayoutX(195);
+					psMax.setLayoutY(65);
 					
 					pane.getChildren().addAll(imagePokemon,namePokemon, lvl, pokeLvl, ps, psMax, psBattle, barra, index);
 					pane.setOnMouseClicked(this::sceltaPokemon);
@@ -101,7 +101,7 @@ public class ControllerSquadra {
         	pane = (Pane) ((Label) source).getParent();
         }
 		
-		int index = Integer.valueOf(((Label) pane.lookup("#index")).getText());
+		int index = Integer.valueOf(((Label) pane.lookup("#index")).getText()) - 1;
 		
 		Pokemon scelta = trainer.getPokemonById(index);
 		

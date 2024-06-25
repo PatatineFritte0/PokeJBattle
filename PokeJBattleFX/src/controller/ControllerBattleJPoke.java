@@ -16,7 +16,7 @@ public class ControllerBattleJPoke {
 		
 		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		
-		Scene scene = new Scene(root,1000,800);
+		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -26,7 +26,7 @@ public class ControllerBattleJPoke {
 		
 		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		
-		Scene scene = new Scene(root,1000,800);
+		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -36,7 +36,7 @@ public class ControllerBattleJPoke {
 		
 		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		
-		Scene scene = new Scene(root,1000,800);
+		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
 	}

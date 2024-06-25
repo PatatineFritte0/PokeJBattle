@@ -58,6 +58,7 @@
 }
 
 .button{
+	-fx-font-size: 20px;
 	-fx-background-image: url('../img/greenButton.png');
 	-fx-background-size: 100% 100%;
 	-fx-background-repeat: no-repeat;

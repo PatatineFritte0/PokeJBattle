@@ -7,16 +7,18 @@
 	-fx-font-family: "Press Start 2P";
 }
 
-#pokeContainer{
-	-fx-background-image: url("../img/switchSelectorBackground.png");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: 100% 100%;
+.custom-anchor .label{
+	-fx-alignment: center;
 }
 
-.pane{
-	-fx-background-image: url("../img/partyMember.png");
+.button{
+	-fx-text-fill: black;
+	-fx-alignment: center;
+	-fx-font-size: 15px;
+	-fx-background-image: url("../img/redButton.png");
 	-fx-background-size: 100% 100%;
 	-fx-background-repeat: no-repeat;
 	-fx-border-color: transparent;
 	-fx-background-color: transparent;
+	
 }

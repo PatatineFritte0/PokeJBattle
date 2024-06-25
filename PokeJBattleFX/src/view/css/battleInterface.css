@@ -7,12 +7,9 @@
 	-fx-font-family: "Press Start 2P";
 	
 	-fx-background-image: url("../img/backgroundBattle.png");
-	-fx-background-size: 100% 70%;
+	-fx-background-size: 100% 80%;
 	-fx-background-repeat: no-repeat;
 }
-
-
-
 
 .data{
 	-fx-font-size: 20px;
@@ -33,7 +30,17 @@
 	-fx-background-size: 100% 100%;
 }
 
+.inf{
+	-fx-background-image: url("../img/chooseMoveBackground.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 100% 100%;
+}
 
+.cambia{
+	-fx-background-image: url("../img/greenButton.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 100% 100%;
+}
 
 
 .mossa{
@@ -114,4 +121,15 @@
 
 .text-flow {
     -fx-line-spacing: 100px;
+}
+
+.log{
+	-fx-background-image: url("../img/logBox.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 100% 100%;
+}
+
+.pokeBall{
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 100% 100%;
 }
