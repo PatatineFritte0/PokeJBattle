@@ -30,6 +30,7 @@ public class UsableMove {
 	}
 
 	public void useMove() {
+		if(pp==0) return;
 		this.pp -= 1;
 	}
 }

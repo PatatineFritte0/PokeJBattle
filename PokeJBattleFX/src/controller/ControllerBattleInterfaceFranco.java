@@ -20,6 +20,7 @@ import model.Allenatore;
 import model.Franco;
 import model.Pokemon;
 import model.SaveManager;
+import model.UsableMove;
 import model.costanti.Mossa;
 
 public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
@@ -86,7 +87,9 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
         	pane = (Pane) ((Label) source).getParent();
         }
 		
-		this.m1 = allenatore.getMainPokemon().getMosse()[Integer.valueOf(String.valueOf( pane.getId().charAt(pane.getId().length() - 1)))].getMossa();
+		UsableMove mossa = allenatore.getMainPokemon().getMosse()[Integer.valueOf(String.valueOf( pane.getId().charAt(pane.getId().length() - 1)))];
+		if(mossa.getPp() == 0) return;
+		this.m1 = mossa.getMossa();
 		
 		//aggiornaTurno(sfidante.getMainPokemon(), "P2");
 		

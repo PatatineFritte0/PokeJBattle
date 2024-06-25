@@ -187,7 +187,10 @@ public class ControllerBattleInterface {
         	pane = (Pane) ((Label) source).getParent();
         }
 		
-		this.m1 = allenatore.getMainPokemon().getMosse()[Integer.valueOf(String.valueOf( pane.getId().charAt(pane.getId().length() - 1)))].getMossa();
+		UsableMove mossa = allenatore.getMainPokemon().getMosse()[Integer.valueOf(String.valueOf( pane.getId().charAt(pane.getId().length() - 1)))];
+		if(mossa.getPp() == 0) return;
+		this.m1 = mossa.getMossa();
+		
 		
 		aggiornaTurno(sfidante.getMainPokemon(), "P2");
 	}
@@ -203,7 +206,9 @@ public class ControllerBattleInterface {
         	pane = (Pane) ((Label) source).getParent();
         }
 		
-		this.m2 = sfidante.getMainPokemon().getMosse()[Integer.valueOf(String.valueOf( pane.getId().charAt(pane.getId().length() - 1)))].getMossa();
+		UsableMove mossa = allenatore.getMainPokemon().getMosse()[Integer.valueOf(String.valueOf( pane.getId().charAt(pane.getId().length() - 1)))];
+		if(mossa.getPp() == 0) return;
+		this.m2 = mossa.getMossa();
 		
 		try {
 			turno();
