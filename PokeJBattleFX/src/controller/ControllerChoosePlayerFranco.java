@@ -24,16 +24,14 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.SaveManager;
 import model.Allenatore;
+import model.Franco;
 
-public class ControllerChoosePlayer {
+public class ControllerChoosePlayerFranco {
 	@FXML
 	private AnchorPane chooseAnchor;
 	
 	@FXML
     private ComboBox<Allenatore> chooseP1;
-
-    @FXML
-    private ComboBox<Allenatore> chooseP2;
 
     private ObservableList<Allenatore> allAllenatori;
 	
@@ -45,16 +43,10 @@ public class ControllerChoosePlayer {
                 allAllenatori = FXCollections.observableArrayList(SaveManager.getSaves());
 
                 chooseP1.setItems(FXCollections.observableArrayList(allAllenatori));
-                chooseP2.setItems(FXCollections.observableArrayList(allAllenatori));
 
                 setupComboBox(chooseP1);
-                setupComboBox(chooseP2);
 
                 chooseP1.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-                    updateComboBoxItems();
-                });
-
-                chooseP2.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                     updateComboBoxItems();
                 });
             }
@@ -96,12 +88,9 @@ public class ControllerChoosePlayer {
     }
     
     
-    private Allenatore oldCP1;
-    private Allenatore oldCP2;
     
     private void updateComboBoxItems(){
     	Allenatore selectedP1 = chooseP1.getSelectionModel().getSelectedItem();
-    	Allenatore selectedP2 = chooseP2.getSelectionModel().getSelectedItem();
     
         if (selectedP1 != null) {
         	((Label)chooseAnchor.getScene().lookup("#VP1")).setText(String.valueOf(selectedP1.getVittorie()));
@@ -109,37 +98,11 @@ public class ControllerChoosePlayer {
         	
         	
         	String.valueOf(selectedP1.getVittorie());
-        	if(oldCP1 != null) chooseP2.getItems().add(oldCP1);
-        	
-        	chooseP2.getItems().remove(selectedP1);
-        	oldCP1 = selectedP1;
         	
         	ImageView imp1 = (ImageView) chooseAnchor.getScene().lookup("#imp1");
         	if(imp1.getOpacity() == 0.5) {
         		imp1.setOpacity(1);
             	imp1.setOnMouseClicked(arg0 -> {
-    				try {
-						openReorganize(arg0);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-    			});
-        	}
-        }
-
-        if (selectedP2 != null) {
-        	((Label)chooseAnchor.getScene().lookup("#VP2")).setText(String.valueOf(selectedP2.getVittorie()));
-        	((Label)chooseAnchor.getScene().lookup("#SP2")).setText(String.valueOf(selectedP2.getSconfitte()));
-        	if(oldCP2 != null) chooseP1.getItems().add(oldCP2);
-        	
-        	chooseP1.getItems().remove(selectedP2);
-        	oldCP2 = selectedP2;
-        	
-        	ImageView imp2 = (ImageView) chooseAnchor.getScene().lookup("#imp2");
-        	if(imp2.getOpacity() == 0.5) {
-        		imp2.setOpacity(1);
-            	imp2.setOnMouseClicked(arg0 -> {
     				try {
 						openReorganize(arg0);
 					} catch (IOException e) {
@@ -163,7 +126,7 @@ public class ControllerChoosePlayer {
 		
 		String idImg = ((ImageView) event.getTarget()).getId();
 		
-		controller.setIdChoose("chooseP"+ idImg.charAt(idImg.length()-1));
+		controller.setIdChoose("chooseP1");
 		controller.setControllerOwner(this);
 		
 		Stage pkmn = new Stage();
@@ -193,9 +156,9 @@ public class ControllerChoosePlayer {
 	
 	public void fight(ActionEvent event) throws IOException{
 		Allenatore allenatoreP1 = ((ComboBox<Allenatore>)this.getAnchor().getScene().lookup("#chooseP1")).getSelectionModel().getSelectedItem();
-		Allenatore sfidanteP2 = ((ComboBox<Allenatore>)this.getAnchor().getScene().lookup("#chooseP2")).getSelectionModel().getSelectedItem();
+		//Allenatore sfidanteP2 = ((ComboBox<Allenatore>)this.getAnchor().getScene().lookup("#chooseP2")).getSelectionModel().getSelectedItem();
 		
-		if(allenatoreP1 == null || sfidanteP2 == null ) {
+		if(allenatoreP1 == null) {
 			Alert alert = new Alert(AlertType.ERROR);
 			((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("./view/img/pokeIcon2.PNG"));
 			alert.setTitle("Errore");
@@ -206,14 +169,14 @@ public class ControllerChoosePlayer {
 		
 		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/battleInterface.fxml"));
 		
-		root.setController(new ControllerBattleInterface());
+		root.setController(new ControllerBattleInterfaceFranco());
 		
 		Scene scene = new Scene(root.load());
 		
 		ControllerBattleInterface controller = root.getController();
 		
 		controller.setAllenatore(allenatoreP1);
-		controller.setSfidante(sfidanteP2);
+		controller.setSfidante(new Franco(allenatoreP1));
 		
 		Stage owner = (Stage)((Node)event.getSource()).getScene().getWindow();
 		

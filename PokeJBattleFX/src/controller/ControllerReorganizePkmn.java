@@ -35,13 +35,22 @@ public class ControllerReorganizePkmn {
 	private Pane squadPane;
 	
 	public Allenatore allenatore;
+
+	private ControllerChoosePlayerFranco controllerOwnerFranco;
 	
 	@FXML
 	public void initialize(){
 		//inserisci il nickname nel label nickname
 		Platform.runLater(()->{
 			Stage stage = (Stage)squadPane.getScene().getWindow();
-			ComboBox<Allenatore> comboBox = (ComboBox<Allenatore>)controllerOwner.getAnchor().getScene().lookup("#"+idChoose);
+			ComboBox<Allenatore> comboBox;
+			
+			if (controllerOwner == null){
+				comboBox = (ComboBox<Allenatore>)controllerOwnerFranco.getAnchor().getScene().lookup("#"+idChoose);
+			}else {
+				comboBox = (ComboBox<Allenatore>)controllerOwner.getAnchor().getScene().lookup("#"+idChoose);
+			}
+			
 			this.allenatore = comboBox.getSelectionModel().getSelectedItem();
 			
 			nicknameLabel.setText(allenatore.getNickname());
@@ -173,6 +182,10 @@ public class ControllerReorganizePkmn {
 	
 	public void setControllerOwner(ControllerChoosePlayer controller) {
 		this.controllerOwner = controller;
+	}
+	
+	public void setControllerOwner(ControllerChoosePlayerFranco controller) {
+		this.controllerOwnerFranco = controller;
 	}
 	
 	

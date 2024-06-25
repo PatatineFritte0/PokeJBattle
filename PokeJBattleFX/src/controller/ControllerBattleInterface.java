@@ -3,9 +3,6 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Optional;
-import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -13,38 +10,26 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Allenatore;
-import model.BestOfThree;
-import model.FactoryPkmn;
-import model.Franco;
 import model.Pokemon;
 import model.UsableMove;
 import model.SaveManager;
@@ -55,21 +40,21 @@ import model.costanti.Tipo;
 public class ControllerBattleInterface {
 	
 	@FXML
-	private AnchorPane battleAnchor;
+	protected AnchorPane battleAnchor;
 	
-	private Allenatore allenatore;
-	private Mossa m1;
-	private int indexCambioAllenatore;
-	private AtomicInteger countAllenatore;
+	protected Allenatore allenatore;
+	protected Mossa m1;
+	protected int indexCambioAllenatore;
+	protected AtomicInteger countAllenatore;
 	
 	
 	
-	private Allenatore sfidante;
-	private Mossa m2;
-	private int indexCambioSfidante;
-	private AtomicInteger countSfidante;
+	protected Allenatore sfidante;
+	protected Mossa m2;
+	protected int indexCambioSfidante;
+	protected AtomicInteger countSfidante;
 	
-	private String log = "";
+	protected String log = "";
 	
 
 	@FXML
@@ -88,14 +73,14 @@ public class ControllerBattleInterface {
 		});
 	}
 	
-	private void caricaAllenatore(Allenatore allenatore, String player){
+	protected void caricaAllenatore(Allenatore allenatore, String player){
 		Pane p = (Pane) battleAnchor.lookup("#"+player);
 		((Label)p.lookup("#nicknamePlayer")).setText(allenatore.getNickname());
 		
 		aggiornaStatPokemon(allenatore.getMainPokemon(), player);
 	}
 	
-	private void aggiornaStatPokemon(Pokemon main, String player) {
+	protected void aggiornaStatPokemon(Pokemon main, String player) {
 		String verso;
 		if(player.equals("P1")) {
 			verso = "Back";
@@ -134,7 +119,7 @@ public class ControllerBattleInterface {
 		animateProgressBar(barExp, currentExp, progressExp, 0.5);
 	}
 	
-	private void animateProgressBar(ProgressBar progressBar, double fromValue, double toValue, double durationInSeconds) {
+	protected void animateProgressBar(ProgressBar progressBar, double fromValue, double toValue, double durationInSeconds) {
         progressBar.setProgress(fromValue);
         KeyValue keyValue = new KeyValue(progressBar.progressProperty(), toValue);
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(durationInSeconds), keyValue);
@@ -142,7 +127,7 @@ public class ControllerBattleInterface {
         timeline.play();
     }
 	
-	void aggiornaTurno(Pokemon poke, String player){
+	protected void aggiornaTurno(Pokemon poke, String player){
 		
 		Pane activePlayerPane = (Pane)battleAnchor.lookup(".active");
 		if(activePlayerPane != null) {
@@ -191,7 +176,7 @@ public class ControllerBattleInterface {
 		}
 	}
 	
-	private void sceltaP1(MouseEvent event) {
+	protected void sceltaP1(MouseEvent event) {
 		Object source = event.getTarget();
 		Pane pane = null;
 		if (source instanceof Pane) {
@@ -207,7 +192,7 @@ public class ControllerBattleInterface {
 		aggiornaTurno(sfidante.getMainPokemon(), "P2");
 	}
 	
-	private void sceltaP2(MouseEvent event){
+	protected void sceltaP2(MouseEvent event){
 		Object source = event.getTarget();
 		Pane pane = null;
 		if (source instanceof Pane) {
@@ -646,7 +631,7 @@ public class ControllerBattleInterface {
 		return;
 	}
 	
-	private void scontro(Allenatore attaccante, Allenatore ricevente, Mossa attacco) {
+	protected void scontro(Allenatore attaccante, Allenatore ricevente, Mossa attacco) {
 		
 		AtomicBoolean isCrit = new AtomicBoolean();
 		isCrit.set(false);
@@ -716,7 +701,7 @@ public class ControllerBattleInterface {
 	}
 	
 	
-	private void esausto(Allenatore trainer, AtomicInteger count) {
+	protected void esausto(Allenatore trainer, AtomicInteger count) {
 		System.out.println("\n" + trainer.getMainPokemon().getNome() + " e' esausto");
 		count.set(count.get()-1);
 		if(count.get() <= 0) {return;}
@@ -743,7 +728,7 @@ public class ControllerBattleInterface {
 	// turno-------------------------------------------------------
 	
 	// partita-------------------------------------------------------
-	private int contaPkmn(Allenatore t) {
+	protected int contaPkmn(Allenatore t) {
 		int pkmn = 0;
 		
 		Pokemon[] squadraAll = t.getSquadra();

@@ -30,4 +30,14 @@ public class ControllerBattleJPoke {
 		stage.setScene(scene);
 		stage.show();
 	}
+	
+	public void sceneChooseFranco(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("../view/fxml/ChoosePlayerFranco.fxml"));
+		
+		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		
+		Scene scene = new Scene(root,1000,800);
+		stage.setScene(scene);
+		stage.show();
+	}
 }

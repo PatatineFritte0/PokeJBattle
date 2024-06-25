@@ -1,3 +1,8 @@
+@font-face{
+	-fx-font-family: "Press Start 2P";
+	src: url("../fonts/PressStart2P.ttf");
+}
+
 .custom-combobox .arrow-button {
     -fx-background-color: transparent;
     -fx-background-size: contain; /* Adatta l'immagine alle dimensioni del pulsante */
@@ -9,19 +14,25 @@
 
 .custom-combobox .list-cell {
     -fx-pref-height: 70px;
-    -fx-background-image: url('../img/selezione.jpeg');
-    -fx-background-size: 100% 100%; /* Adatta l'immagine di sfondo alle dimensioni della cella */
+    -fx-background-image: url('../img/grayButton.png');
+    -fx-background-size: 100% 100%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-alignment: center;
+    -fx-text-fill: black;
+    -fx-border-color: transparent;
+	-fx-background-color: transparent;
 }
 
 .custom-combobox{
+	-fx-text-fill: black;
 	-fx-font-size: 10px;
-	-fx-background-image: url('../img/selezione.jpeg');
+	-fx-background-image: url('../img/grayButton.png');
     -fx-background-size: 100% 100%; /* Adatta l'immagine di sfondo alle dimensioni del ComboBox */
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;  
+    -fx-border-color: transparent;
+	-fx-background-color: transparent;
 }
 
 .custom-combobox .arrow {
@@ -32,12 +43,24 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-shape: null; /* Rimuovi la forma della freccia originale */
+    
 }
 
 .custom-anchor{
 	-fx-font-family: "Press Start 2P";
-	-fx-background-image: url('../img/sfondoChoose.jpg');
-	-fx-background-size: contain;
-	-fx-background-repeat: no-repeat;
+	-fx-background-image: url('../img/chooseSaveBackground.jpeg');
 	-fx-background-size: 100% 100%;
+	-fx-background-repeat: no-repeat;
+}
+
+.custom-anchor .label{
+	-fx-text-fill: black;
+}
+
+.button{
+	-fx-background-image: url('../img/greenButton.png');
+	-fx-background-size: 100% 100%;
+	-fx-background-repeat: no-repeat;
+	-fx-border-color: transparent;
+	-fx-background-color: transparent;
 }

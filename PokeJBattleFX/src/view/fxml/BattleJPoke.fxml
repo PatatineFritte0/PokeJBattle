@@ -31,6 +31,7 @@
             <Image url="@../img/pokemonLogo.png" />
          </image>
       </ImageView>
-      <Button fx:id="startButton" layoutX="90.0" layoutY="461.0" mnemonicParsing="false" onAction="#sceneChoose" prefHeight="100.0" prefWidth="300.0" text="Start" />
+      <Button fx:id="startButton" layoutX="90.0" layoutY="461.0" mnemonicParsing="false" onAction="#sceneChoose" prefHeight="100.0" prefWidth="300.0" text="PvP" />
+      <Button layoutX="342.0" layoutY="604.0" mnemonicParsing="false" onAction="#sceneChooseFranco" prefHeight="100.0" prefWidth="300.0" text="PvE" />
    </children>
 </AnchorPane>

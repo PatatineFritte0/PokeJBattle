@@ -31,10 +31,12 @@ public class Franco extends Allenatore {
 			}
 		}
 		
+		lvlMedio = Integer.valueOf(lvlMedio/nPkmnEnemy);
+		
 		
 		for(Pokemon pkmn:this.getSquadra()) {
 			if(pkmn != null) {
-				pkmn.setLvl(lvlMedio-3);
+				pkmn.setLvl(lvlMedio);
 				pkmn.setCurrentExp(-100000);
 				for(Mossa m:pkmn.getMoveSet()) {
 					Set<Integer> setChiavi = pkmn.getParcoMosse().keySet();
@@ -103,15 +105,15 @@ public class Franco extends Allenatore {
 		return sceltaFinale;
 	}
 	
-	public String cambia() {
+	public int cambia() {
 		
 		Integer scelta = controllaSquadra();
-		if(scelta != -1) return scelta.toString();
+		if(scelta != -1) return scelta;
 		
 		int nPkmn = this.getSquadra().length;	
 		scelta = strategia.nextInt(0, nPkmn);
 		
-		return scelta.toString();
+		return scelta;
 	}
 	
 	private int controllaSquadra() {

@@ -28,9 +28,9 @@ public class MainTest {
 		
 		SaveManager.save(a2);
 		
-		BestOfThree game = new BestOfThree(a1,a2);
+		//BestOfThree game = new BestOfThree(a1,a2);
 			
-		game.run();
+		//game.run();
 			
 		System.out.println("\nVITTORIE-SCONFITTE -> " + a1.getNickname() + ":" + a1.getVittorie() + " - " + a1.getSconfitte() + "; " + a2.getNickname() + ":" + a2.getVittorie() + " - " + a2.getSconfitte() + "\n");
 
