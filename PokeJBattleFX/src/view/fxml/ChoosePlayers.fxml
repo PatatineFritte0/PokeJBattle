@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="chooseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" styleClass="custom-anchor" stylesheets="@../css/choosePlayers.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerChoosePlayer">
+<AnchorPane fx:id="chooseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" styleClass="custom-anchor" stylesheets="@../css/choosePlayers.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerChoosePlayer">
    <children>
       <ComboBox fx:id="chooseP1" layoutX="171.0" layoutY="110.0" prefHeight="70.0" prefWidth="150.0" promptText="Scegli P1" styleClass="custom-combobox" />
       <ComboBox fx:id="chooseP2" layoutX="669.0" layoutY="102.0" prefHeight="70.0" prefWidth="150.0" promptText="Scegli P2" styleClass="custom-combobox" />
@@ -22,13 +22,13 @@
          </image>
       </ImageView>
       <Label layoutX="162.0" layoutY="194.0" prefHeight="25.0" prefWidth="120.0" text="Vittorie:" />
-      <Label fx:id="VP1" layoutX="269.0" layoutY="198.0" prefHeight="17.0" prefWidth="59.0" text="None" />
+      <Label fx:id="VP1" layoutX="269.0" layoutY="198.0" prefHeight="17.0" prefWidth="59.0" text="-" />
       <Label layoutX="669.0" layoutY="186.0" prefHeight="25.0" prefWidth="120.0" text="Vittorie:" />
-      <Label fx:id="VP2" layoutX="779.0" layoutY="190.0" prefHeight="17.0" prefWidth="59.0" text="None" />
+      <Label fx:id="VP2" layoutX="779.0" layoutY="190.0" prefHeight="17.0" prefWidth="59.0" text="-" />
       <Label layoutX="156.0" layoutY="215.0" prefHeight="25.0" prefWidth="120.0" text="Sconfitte:" />
-      <Label fx:id="SP1" layoutX="278.0" layoutY="219.0" prefHeight="17.0" prefWidth="59.0" text="None" />
+      <Label fx:id="SP1" layoutX="278.0" layoutY="219.0" prefHeight="17.0" prefWidth="59.0" text="-" />
       <Label layoutX="669.0" layoutY="207.0" prefHeight="25.0" prefWidth="120.0" text="Sconfitte:" />
-      <Label fx:id="SP2" layoutX="791.0" layoutY="211.0" prefHeight="17.0" prefWidth="59.0" text="None" />
+      <Label fx:id="SP2" layoutX="791.0" layoutY="211.0" prefHeight="17.0" prefWidth="59.0" text="-" />
       <Button layoutX="386.0" layoutY="691.0" mnemonicParsing="false" onAction="#fight" prefHeight="96.0" prefWidth="228.0" text="Fight" />
       <ImageView fitHeight="43.0" fitWidth="74.0" layoutX="21.0" layoutY="13.0" onMouseClicked="#back">
          <image>

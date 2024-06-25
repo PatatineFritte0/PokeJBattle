@@ -54,7 +54,7 @@ public enum Mossa {
 	FORZA("Forza", 80, Tipo.NORMALE, Categoria.FISICO, 100, 15, /*Dati per mosse di stato ->*/null, 0, false),
 	IRADIDRAGO("Ira di Drago", 50, Tipo.DRAGO, Categoria.SPECIALE, 100, 10, /*Dati per mosse di stato ->*/null, 0, false),
 	TURBOFUOCO("Turbofuoco", 35, Tipo.FUOCO, Categoria.SPECIALE, 85, 15, /*Dati per mosse di stato ->*/null, 0, false),
-	TUONOSHOCK("Tuonoshock", 40, Tipo.ELETTRO, Categoria.SPECIALE, 40, 30, /*Dati per mosse di stato ->*/null, 0, false),
+	TUONOSHOCK("Tuonoshock", 40, Tipo.ELETTRO, Categoria.SPECIALE, 100, 30, /*Dati per mosse di stato ->*/null, 0, false),
 	FULMINE("Fulmine", 90, Tipo.ELETTRO, Categoria.SPECIALE, 100, 15, /*Dati per mosse di stato ->*/null, 0, false),
 	TUONO("Tuono", 110, Tipo.ELETTRO, Categoria.SPECIALE, 70, 15, /*Dati per mosse di stato ->*/null, 0, false),
 	SASSATA("Sassata", 50, Tipo.ROCCIA, Categoria.FISICO, 90, 15, /*Dati per mosse di stato ->*/null, 0, false),

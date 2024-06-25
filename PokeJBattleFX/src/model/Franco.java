@@ -12,6 +12,7 @@ public class Franco extends Allenatore {
 	Allenatore enemy;
 	Pokemon enemyMain;
 	boolean scambioConsentito;
+	int statusCounter;
 	
 	public Franco(Allenatore enemy) {
 		super("Franco", new Pokemon[] {FactoryPkmn.random(), FactoryPkmn.random(), FactoryPkmn.random(), FactoryPkmn.random(), FactoryPkmn.random(), FactoryPkmn.random()});
@@ -21,6 +22,7 @@ public class Franco extends Allenatore {
 		this.enemy = enemy;
 		this.enemyMain = enemy.getSquadra()[0];
 		this.scambioConsentito = true;
+		this.statusCounter = 0;
 		
 		int lvlMedio = 1;
 		int nPkmnEnemy = 0;
@@ -76,8 +78,9 @@ public class Franco extends Allenatore {
 		
 		ArrayList<Mossa> mosseCorrette = new ArrayList<>();
 		for(Mossa m:this.getMainPokemon().getMoveSet()) {
-			if(m != null && (m.getCategoria() == Categoria.STATO || m.getTipo().checkSuperefficacia(this.enemy.getMainPokemon().getTipi()[0]) || m.getTipo().checkSuperefficacia(this.enemy.getMainPokemon().getTipi()[1]))) {
+			if(m != null && ((m.getCategoria() == Categoria.STATO && this.statusCounter < 6) || m.getTipo().checkSuperefficacia(this.enemy.getMainPokemon().getTipi()[0]) || m.getTipo().checkSuperefficacia(this.enemy.getMainPokemon().getTipi()[1]))) {
 				mosseCorrette.add(m);
+				if(m.getCategoria() == Categoria.STATO) this.statusCounter++;
 			}
 		}
 		
@@ -109,11 +112,17 @@ public class Franco extends Allenatore {
 		
 		Integer scelta = controllaSquadra();
 		if(scelta != -1) return scelta;
+			
+		ArrayList<Integer> disponibili = new ArrayList<Integer>();
+		for(Pokemon p : this.getSquadra()) {
+			if(p.getBattlePs() > 0 && p != this.getMainPokemon()) {
+				disponibili.add(this.getPokemonId(p));
+			}
+		}
+
+		scelta = disponibili.get(strategia.nextInt(0, disponibili.size()));
 		
-		int nPkmn = this.getSquadra().length;	
-		do {
-			scelta = strategia.nextInt(0, nPkmn);
-		} while(this.getPokemonById(scelta).getBattlePs() <= 0 || this.getPokemonById(scelta) == this.getMainPokemon());
+		this.statusCounter = 0;
 		
 		return scelta;
 	}
@@ -134,4 +143,6 @@ public class Franco extends Allenatore {
 		
 		return id;
 	}
+	public void setScambioConsentito(boolean scambioConsentito) { this.scambioConsentito = scambioConsentito; }
+	
 }

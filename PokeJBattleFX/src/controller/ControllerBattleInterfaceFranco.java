@@ -107,7 +107,12 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 		
 		this.m2 = ((Franco)sfidante).agisci();
 		if(this.m2 == Mossa.CAMBIA) {
-			indexCambioSfidante = ((Franco)sfidante).cambia();
+			if(countSfidante.get() > 1) {
+				indexCambioSfidante = ((Franco)sfidante).cambia();
+			} else {
+				((Franco)sfidante).setScambioConsentito(false);
+				this.m2 = ((Franco)sfidante).agisci();
+			}
 		}
 		
 		try {
@@ -259,7 +264,11 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 				Alert alert = new Alert(AlertType.INFORMATION);
 				((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("./view/img/pokeIcon2.PNG"));
 	            alert.setTitle("Vittoria");
-	            alert.setHeaderText("Vittoria per "+ vincitore.getNickname());
+	            if(vincitore instanceof Franco) {
+	            	alert.setHeaderText("Hai perso!");
+	            } else {
+	            	alert.setHeaderText("Hai vinto!");
+	            }
 	            alert.setContentText("Procedo a caricare la schermata di titolo");
 	            
 	            alert.setOnCloseRequest(menuPrincipale());
