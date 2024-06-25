@@ -258,8 +258,6 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 			sfidante.setMainPokemon(0);
 			
 			if(Integer.valueOf(nVittorie.getText()) == 1) {
-				vincitore.setVittorie(vincitore.getVittorie() + 1);
-				allePerdente.setSconfitte(allePerdente.getSconfitte() + 1);
 				
 				Alert alert = new Alert(AlertType.INFORMATION);
 				((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("./view/img/pokeIcon2.PNG"));
