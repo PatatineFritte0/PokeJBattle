@@ -8,8 +8,19 @@ import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.fxml.FXMLLoader;
 
-
+/**
+ * Classe main dove viene fatta partire la prima interfaccia.
+ * 
+ * @author Simone Comignani, Simone Descontus
+ * @version 1.0
+ */
 public class JPokeBattle extends Application {
+	/**
+	 * Fa partire la l'interfaccia grafica di javaFX.
+	 *
+	 * @param primaryStage Stage da dover far vedere.
+	 * @return void.
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		try {

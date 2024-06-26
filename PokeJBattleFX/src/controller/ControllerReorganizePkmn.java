@@ -17,28 +17,63 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Allenatore;
-import model.FactoryPkmn;
 import model.Pokemon;
 import model.SaveManager;
 
+/**
+ * Classe controller della riorganizzazione pokemon che ha il compito di gestire
+ * tutta l'interfaccia della riorganizzazione pokemon.
+ * 
+ * @author Simone Comignani, Simone Descontus
+ * @version 1.0
+ */
 public class ControllerReorganizePkmn {
+	/**
+	 * id di che squadra allenatore deve riorganizzare
+	 */
 	private String idChoose;
 	
+	/**
+	 * controller schermata padre
+	 */
 	public ControllerChoosePlayer controllerOwner;
 	
+	/**
+	 * Label del nickname
+	 */
 	@FXML
 	private Label nicknameLabel;
 	
+	/**
+	 * pane contenenti tutti i pokemon riorganizzati
+	 */
 	@FXML
 	private Pane riorganizedPane;
 	
+	/**
+	 * pane contenenti tutti i pokemon non riorganizzati
+	 */
 	@FXML
 	private Pane squadPane;
 	
+	/**
+	 * allenatore che deve riorganizzare la squadra
+	 */
 	public Allenatore allenatore;
-
+	
+	/**
+	 * controller schermata padre (franco)
+	 */
 	private ControllerChoosePlayerFranco controllerOwnerFranco;
 	
+	
+	/**
+     * questo metodo viene lanciato una volta fatta la load della schermata,
+     * e inizializza i campi utili alla visualizzazione di tutti i pokemon
+     * in squadra dell allenatore dando ad ogniuno di loro un metodo di spostamento.
+     *
+     * @return void.
+     */
 	@FXML
 	public void initialize(){
 		//inserisci il nickname nel label nickname
@@ -102,6 +137,14 @@ public class ControllerReorganizePkmn {
 		});
 	}
 	
+	/**
+	 * Questo metodo serve a controllare se tutti i pokemon sono
+	 * stati riorganizzati, nel caso sia cosi, salva la squadra dell allenatore
+	 * e chiude l'interfaccia
+	 * 
+	 * @param event ActionEvent ci sono informazioni utili correlate all evento
+	 * @return void.
+	 */
 	public void reorganizeSquad(ActionEvent event) {
 		if(isEmptyPane(squadPane)){
 			Pokemon[] nuovaSquadra = new Pokemon[6];
@@ -128,6 +171,13 @@ public class ControllerReorganizePkmn {
 		}
 	}
 	
+	/**
+	 * Questo metodo serve a spostare un pane dalla parte della squadra non riorganizzata
+	 * alla squadra riorganizzata
+	 * 
+	 * @param event MouseEvent ci sono informazioni utili correlate all evento
+	 * @return void.
+	 */
 	public void toRiorganize(MouseEvent event) {
 		Pane free = getFreePane(riorganizedPane);
 		if(free != null) {
@@ -170,7 +220,14 @@ public class ControllerReorganizePkmn {
 			alert.showAndWait();
 		}
 	}
-
+	
+	/**
+	 * Questo metodo serve a spostare un pane dalla parte della squadra riorganizzata
+	 * alla squadra non riorganizzata
+	 * 
+	 * @param event MouseEvent ci sono informazioni utili correlate all evento
+	 * @return void.
+	 */
 	public void toSquad(MouseEvent event) {
 		Pane free = getFreePane(squadPane);
 		if(free != null) {
@@ -214,19 +271,43 @@ public class ControllerReorganizePkmn {
 	}
 	
 	
+	/**
+	 * setta l'idChoose
+	 * 
+	 * @param id String
+	 * @return void.
+	 */
 	public void setIdChoose(String id) {
 		this.idChoose = id;
 	}
 	
+	/**
+	 * setta il controller padre
+	 * 
+	 * @param controller ControllerChoosePlayer
+	 * @return void.
+	 */
 	public void setControllerOwner(ControllerChoosePlayer controller) {
 		this.controllerOwner = controller;
 	}
 	
+	/**
+	 * setta il controller padre
+	 * 
+	 * @param controller ControllerChoosePlayerFranco
+	 * @return void.
+	 */
 	public void setControllerOwner(ControllerChoosePlayerFranco controller) {
 		this.controllerOwnerFranco = controller;
 	}
 	
 	
+	/**
+	 * restituisce un pane libero nei figli pane del mainPane
+	 * 
+	 * @param mainPane Pane
+	 * @return Pane.
+	 */
 	private Pane getFreePane(Pane mainPane){
 		ObservableList<Node> childrens =  mainPane.getChildren();
 		
@@ -238,6 +319,12 @@ public class ControllerReorganizePkmn {
 		return null;
 	}
 	
+	/**
+	 * restituisce un pane pieno nei figli pane del mainPane
+	 * 
+	 * @param mainPane Pane
+	 * @return Pane.
+	 */
 	private Pane getFullPane(Pane mainPane) {
 		ObservableList<Node> childrens =  mainPane.getChildren();
 		
@@ -249,7 +336,12 @@ public class ControllerReorganizePkmn {
 		return null;
 	}
 	
-	
+	/**
+	 * restituisce se un pane figlio mainPane e' vuoto o no
+	 * 
+	 * @param mainPane Pane
+	 * @return boolean.
+	 */
 	private boolean isEmptyPane(Pane mainPane){
 		ObservableList<Node> childrens =  mainPane.getChildren();
 		

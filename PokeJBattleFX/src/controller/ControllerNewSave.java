@@ -22,14 +22,41 @@ import model.Allenatore;
 import model.Pokemon;
 import model.SaveManager;
 
+
+/**
+ * Classe controller del nuovo salvataggio che ha il compito di gestire
+ * tutta l'interfaccia del nuovo salvataggio.
+ * 
+ * @author Simone Comignani, Simone Descontus
+ * @version 1.0
+ */
 public class ControllerNewSave {
+	/**
+	 * Anchor pane principale dell interfaccia
+	 */
 	@FXML
 	AnchorPane newSaveAnchor;
 	
+	/**
+	 * Possibile squadra per un nuovo allenatore
+	 */
 	public Pokemon[] squadra = new Pokemon[6];
 	
+	/**
+	 * booleana per il controllo del nickname
+	 */
 	private boolean nicknameRight = false;
 	
+	
+	/**
+	 * Questo metodo apre l'interfaccia della lista pokemon disponibili
+	 * inizializzando il suo controller con dei dati utili.
+	 * 
+	 * 
+	 * @param event MouseEvent ci sono informazioni utili correlate all evento
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	public void openListPkmn(MouseEvent event) throws IOException {
 		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/listPkmn.fxml"));
 		
@@ -56,6 +83,16 @@ public class ControllerNewSave {
 		pkmn.showAndWait();
 	}
 	
+	
+	/**
+	 * Questo metodo serve a controllare se il nickname dell utente abbia senso
+	 * o sia disponibile, questo viene rifatto ogni volta che digita un carattere
+	 * nella text field
+	 * 
+	 * 
+	 * @param event KeyEvent ci sono informazioni utili correlate all evento
+	 * @return void.
+	 */
 	public void controlNickname(KeyEvent event){
 		TextField textField = (TextField) event.getTarget();
 		String text = textField.getText();
@@ -78,6 +115,14 @@ public class ControllerNewSave {
 		this.nicknameRight = true;
 	}
 	
+	/**
+	 * Questo metodo serve a controllare se nella lista di salvataggi c'e' un nome
+	 * simile a quello nel parametro.
+	 * 
+	 * 
+	 * @param nickname String contiene il nickname che si vuole provare a creare
+	 * @return void.
+	 */
 	public boolean controlEqualNickname(String nickname){
 		List<Allenatore> allenatori = SaveManager.getSaves();
 		for(Allenatore al: allenatori) {
@@ -87,6 +132,17 @@ public class ControllerNewSave {
 		return false;
 	}
 	
+	
+	/**
+	 * Questo metodo serve a controllare se tutti i campi sono stati compilati
+	 * correttamente, nel caso sia cosi, crea un nuovo salvataggio riportando alla
+	 * schermata principale.
+	 * 
+	 * 
+	 * @param event ActionEvent ci sono informazioni utili correlate all evento
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	public void controlDone(ActionEvent event) throws IOException{
 		Scene myScene = ((Node)event.getSource()).getScene();
 		
@@ -124,6 +180,14 @@ public class ControllerNewSave {
 		
 	}
 	
+	
+	/**
+	 * Questo metodo serve a controllare se l'array e' pieno di null o meno
+	 * 
+	 * 
+	 * @param array Object[]
+	 * @return boolean.
+	 */
 	private boolean isArrayFullOfNulls(Object[] array) {
         for (Object element : array) {
             if (element != null) {
@@ -133,6 +197,13 @@ public class ControllerNewSave {
         return true;
 	}
 	
+	/**
+	 * un metodo che fa ritornare al menu principale
+	 * 
+	 * @param event MouseEvent ci sono informazioni utili correlate all evento
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	public void back(MouseEvent event) throws IOException {
 		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/BattleJPoke.fxml"));
 		Scene scene = new Scene(root.load());

@@ -5,11 +5,6 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class Allenatore {
-	@Override
-	public String toString() {
-		return "Allenatore [nickname=" + nickname + ", nPokemon=" + nPokemon + ", vittorie=" + vittorie + ", sconfitte="
-				+ sconfitte + ", winRadio=" + winRadio + ", ultimoAccesso=" + ultimoAccesso + "]";
-	}
 	private String nickname;
 	private Pokemon[] squadra = new Pokemon[6];
 	private Pokemon mainPokemon;
@@ -123,4 +118,10 @@ public class Allenatore {
 
 	public int getSconfitte() { return sconfitte; }
 	public void setSconfitte(int sconfitte) { this.sconfitte = sconfitte; }
+	
+	@Override
+	public String toString() {
+		return "Allenatore [nickname=" + nickname + ", nPokemon=" + nPokemon + ", vittorie=" + vittorie + ", sconfitte="
+				+ sconfitte + ", winRadio=" + winRadio + ", ultimoAccesso=" + ultimoAccesso + "]";
+	}
 }

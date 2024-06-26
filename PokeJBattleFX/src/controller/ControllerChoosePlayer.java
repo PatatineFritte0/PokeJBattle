@@ -25,18 +25,44 @@ import javafx.util.Callback;
 import model.SaveManager;
 import model.Allenatore;
 
+
+/**
+ * Classe controller della scelta dei player che ha il compito di gestire
+ * tutta l'interfaccia della scelta dei player.
+ * 
+ * @author Simone Comignani, Simone Descontus
+ * @version 1.0
+ */
 public class ControllerChoosePlayer {
+	/**
+	 * Anchor pane principale dell interfaccia
+	 */
 	@FXML
 	private AnchorPane chooseAnchor;
 	
+	/**
+	 * Combo box della scelta di P1
+	 */
 	@FXML
     private ComboBox<Allenatore> chooseP1;
-
+	
+	/**
+	 * Combo box della scelta di P2
+	 */
     @FXML
     private ComboBox<Allenatore> chooseP2;
-
+    
+    /**
+	 * Lista di tutti gli allenatori esistenti nei salvataggi
+	 */
     private ObservableList<Allenatore> allAllenatori;
 	
+    /**
+     * questo metodo viene lanciato una volta fatta la load della schermata,
+     * e inizializza le chooseBox dei player.
+     *
+     * @return void.
+     */
     @FXML
     public void initialize() {
         chooseAnchor.sceneProperty().addListener((observable, oldScene, newScene) -> {
@@ -60,7 +86,13 @@ public class ControllerChoosePlayer {
             }
         });
     }
-
+    
+	/**
+	 * setta i vari valori e funzioni che la combobox deve avere.
+	 *
+	 * @param chooseP12 ComboBox<Allenatore> contiene la comboBox da fare il setup.
+	 * @return void.
+	 */
     private void setupComboBox(ComboBox<Allenatore> chooseP12) {
         chooseP12.setCellFactory(new Callback<ListView<Allenatore>, ListCell<Allenatore>>() {
             @Override
@@ -95,10 +127,21 @@ public class ControllerChoosePlayer {
         });
     }
     
-    
+    /**
+	 * tiene conto della vecchi ascelta di P1
+	 */
     private Allenatore oldCP1;
+    /**
+	 * tiene conto della vecchia scelta di P2
+	 */
     private Allenatore oldCP2;
     
+    
+    /**
+	 * questo metodo serve a gestire ogni volta che un player sceglie un valore nella combobox.
+	 *
+	 * @return void.
+	 */
     private void updateComboBoxItems(){
     	Allenatore selectedP1 = chooseP1.getSelectionModel().getSelectedItem();
     	Allenatore selectedP2 = chooseP2.getSelectionModel().getSelectedItem();
@@ -151,6 +194,14 @@ public class ControllerChoosePlayer {
         }
     }
 	
+    
+    /**
+	 * apre la schermata di riorganizzazione pokemon e inizializza i valori utili nel suo controller
+	 * 
+	 * @param event MouseEvent ci sono informazioni utili correlate all evento
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	public void openReorganize(MouseEvent event) throws IOException {
 		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/reorganizePkmn.fxml"));
 		
@@ -181,6 +232,14 @@ public class ControllerChoosePlayer {
 		pkmn.showAndWait();
 	}
 	
+	
+	/**
+	 * un metodo che fa ritornare al menu principale
+	 * 
+	 * @param event MouseEvent ci sono informazioni utili correlate all evento
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	public void back(MouseEvent event) throws IOException {
 		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/BattleJPoke.fxml"));
 		Scene scene = new Scene(root.load());
@@ -191,6 +250,14 @@ public class ControllerChoosePlayer {
 		owner.show();
 	}
 	
+	/**
+	 * un metodo che fa iniziare la battaglia cambiando schermata, questo solo se i campi dei
+	 * combobox sono tutti e due settati ad un valore.
+	 * 
+	 * @param event MouseEvent ci sono informazioni utili correlate all evento
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	public void fight(ActionEvent event) throws IOException{
 		Allenatore allenatoreP1 = ((ComboBox<Allenatore>)this.getAnchor().getScene().lookup("#chooseP1")).getSelectionModel().getSelectedItem();
 		Allenatore sfidanteP2 = ((ComboBox<Allenatore>)this.getAnchor().getScene().lookup("#chooseP2")).getSelectionModel().getSelectedItem();
@@ -221,6 +288,12 @@ public class ControllerChoosePlayer {
 		owner.show();
 	}
 	
+	
+	/**
+	 * ottieni l'anchorPane della schermata
+	 * 
+	 * @return AnchorPane.
+	 */
 	public AnchorPane getAnchor(){ return this.chooseAnchor;}
 }
 		

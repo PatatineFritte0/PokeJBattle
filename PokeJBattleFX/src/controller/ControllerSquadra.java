@@ -1,7 +1,5 @@
 package controller;
 
-import java.io.IOException;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -17,15 +15,38 @@ import javafx.stage.Stage;
 import model.Allenatore;
 import model.Pokemon;
 
+/**
+ * Classe controller della scelta pokemon in squadra che ha il compito di gestire
+ * tutta l'interfaccia della scelta pokemon in squadra.
+ * 
+ * @author Simone Comignani, Simone Descontus
+ * @version 1.0
+ */
 public class ControllerSquadra {
-	
+	/**
+	 * Anchor pane principale dell interfaccia.
+	 */
 	@FXML
 	AnchorPane anchorSquadra;
 	
+	/**
+	 * controller del interfaccia padre.
+	 */
 	ControllerBattleInterface owner;
 	
+	/**
+	 * allenatore che deve scegliere il pokemon.
+	 */
 	Allenatore trainer;
 
+
+	/**
+     * questo metodo viene lanciato una volta fatta la load della schermata,
+     * e inizializza i campi utili alla visualizzazione di tutti i pokemon
+     * in squadra dell'allenatore
+     *
+     * @return void.
+     */
 	@FXML
 	public void initialize() {
 		
@@ -86,8 +107,14 @@ public class ControllerSquadra {
 		
 	}
 		
-	
-		
+	/**
+	 * Questo metodo serve a capire che pokemon il player ha selezionato
+	 * e va i dovuti controlli per capire se quel pokemon puo essere scelto
+	 * o no.
+	 * 
+	 * @param event ActionEvent ci sono informazioni utili correlate all evento
+	 * @return void.
+	 */
 	public void sceltaPokemon(MouseEvent event) {
 		Object source = event.getTarget();
 		Pane pane = null;
@@ -129,11 +156,22 @@ public class ControllerSquadra {
 		((Stage)pane.getScene().getWindow()).close();
 	}
 	
-	
+	/**
+	 * setta l'allenatore
+	 * 
+	 * @param all Allenatore
+	 * @return void.
+	 */
 	public void setAllenatore(Allenatore all) {
 		this.trainer = all;
 	}
 	
+	/**
+	 * setta il controller padre
+	 * 
+	 * @param controllerBattleInterface ControllerBattleInterface
+	 * @return void.
+	 */
 	public void setControllerOwner(ControllerBattleInterface controllerBattleInterface) {
 		this.owner = controllerBattleInterface;
 	}

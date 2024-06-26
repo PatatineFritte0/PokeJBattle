@@ -18,16 +18,38 @@ import javafx.stage.Stage;
 import model.FactoryPkmn;
 import model.Pokemon;
 
+/**
+ * Classe controller della lista dei pokemon che ha il compito di gestire
+ * tutta l'interfaccia della lista dei pokemon.
+ * 
+ * @author Simone Comignani, Simone Descontus
+ * @version 1.0
+ */
 public class ControllerListPkmn {
 	
+	/**
+	 * Tiene conto di quale evento ha fatto aprire questa interfaccia
+	 */
 	private MouseEvent priviusEvent;
 	
+	/**
+	 * Controller del padre
+	 */
 	private ControllerNewSave controllerOwner;
 	
+	/**
+	 * Anchor pane principale dell interfaccia
+	 */
 	@FXML
 	private AnchorPane pokeContainer;
 	
-	
+	/**
+     * questo metodo viene lanciato una volta fatta la load della schermata,
+     * e inizializza i campi utili alla visualizzazione di tutti i pokemon
+     * presenti nel gioco.
+     *
+     * @return void.
+     */
 	@FXML
 	public void initialize() {
 		List<Pokemon> poke = new ArrayList<>();
@@ -73,7 +95,14 @@ public class ControllerListPkmn {
 		}
 	}
 	
-	
+	/**
+	 * Questo metodo serve a settare il pokemon scelto in questa interfaccia in quella padre
+	 * attraverso il suo controller per poi chiudere l'interfaccia.
+	 * 
+	 * 
+	 * @param event MouseEvent ci sono informazioni utili correlate all evento
+	 * @return void.
+	 */
 	public void sceltaPokemon(MouseEvent event) {
 		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		Object source = event.getTarget();
@@ -123,14 +152,35 @@ public class ControllerListPkmn {
 		stage.close();
 	}
 	
+	/**
+	 * Questo metodo serve a settare il pokemon scelto in questa interfaccia in quella padre
+	 * attraverso il suo controller per poi chiudere l'interfaccia.
+	 * 
+	 * 
+	 * @param pane Pane contiene il pane nel quale vuoi cercare il label
+	 * @param id String contiene l'id del label dentro il pane
+	 * @return Label.
+	 */
 	private Label findLabelInPaneWithId(Pane pane, String id) {
         return (Label)pane.lookup("#"+id);
     }
 	
+	/**
+	 * Questo metodo setta il priviusEvent.
+	 * 
+	 * @param event MouseEvent.
+	 * @return void.
+	 */
 	public void setPriviusEvent(MouseEvent event) {
 		this.priviusEvent = event;
 	}
 	
+	/**
+	 * Questo metodo setta il controller padre.
+	 * 
+	 * @param controller ControllerNewSave.
+	 * @return void.
+	 */
 	public void setControllerOwner(ControllerNewSave controller) {
 		this.controllerOwner = controller;
 	}

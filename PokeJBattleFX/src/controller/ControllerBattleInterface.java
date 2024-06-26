@@ -37,26 +37,67 @@ import model.costanti.Categoria;
 import model.costanti.Mossa;
 import model.costanti.Tipo;
 
+/**
+ * Classe controller della battaglia che ha il compito di gestire
+ * tutta l'interfaccia della battaglia.
+ * 
+ * @author Simone Comignani, Simone Descontus
+ * @version 1.0
+ */
 public class ControllerBattleInterface {
 	
+	/**
+	 * Anchor pane principale dell interfaccia
+	 */
 	@FXML
 	protected AnchorPane battleAnchor;
 	
+	/**
+	 * Allenatore P1
+	 */
 	protected Allenatore allenatore;
+	/**
+	 * scelta della mossa P1
+	 */
 	protected Mossa m1;
+	/**
+	 * index di cambio pokemon di P1
+	 */
 	protected int indexCambioAllenatore;
+	/**
+	 * counter dei pokemon ancora in vita
+	 */
 	protected AtomicInteger countAllenatore;
 	
 	
-	
+	/**
+	 * Allenatore P2
+	 */
 	protected Allenatore sfidante;
+	/**
+	 * scelta della mossa P2
+	 */
 	protected Mossa m2;
+	/**
+	 * index di cambio pokemon di P2
+	 */
 	protected int indexCambioSfidante;
+	/**
+	 * counter dei pokemon ancora in vita di P2
+	 */
 	protected AtomicInteger countSfidante;
 	
+	/**
+	 * log del turno
+	 */
 	protected String log = "";
 	
 
+	/**
+	 * Inizializzo il campo di battaglia con gli sfidanti
+	 * 
+	 * @return void.
+	 */
 	@FXML
 	public void initialize() {
 		Platform.runLater(()->{
@@ -73,6 +114,14 @@ public class ControllerBattleInterface {
 		});
 	}
 	
+	
+	/**
+	 * Inizializzo la barra del nickname del giocatore
+	 *
+	 * @param allenatore Allenatore contiene le informazioni da inserire nei campi.
+	 * @param player String contiene l'id del giocatore selezionato.
+	 * @return void.
+	 */
 	protected void caricaAllenatore(Allenatore allenatore, String player){
 		Pane p = (Pane) battleAnchor.lookup("#"+player);
 		((Label)p.lookup("#nicknamePlayer")).setText(allenatore.getNickname());
@@ -80,6 +129,13 @@ public class ControllerBattleInterface {
 		aggiornaStatPokemon(allenatore, player);
 	}
 	
+	/**
+	 * Aggiorna le statistiche del pokemon selezionato
+	 *
+	 * @param allenatore Allenatore contiene il pokemon da aggiornare.
+	 * @param player String contiene l'id del giocatore selezionato.
+	 * @return void.
+	 */
 	protected void aggiornaStatPokemon(Allenatore allenatore, String player) {
 		String verso;
 		if(player.equals("P1")) {
@@ -132,6 +188,16 @@ public class ControllerBattleInterface {
 		animateProgressBar(barExp, currentExp, progressExp, 0.5);
 	}
 	
+	
+	/**
+	 * Un metodo utile per l'animazione della progressbar per evitare l'effetto istantaneo
+	 *
+	 * @param progressBar ProgressBar contiene l'oggetto ProgressBar da aggiornare.
+	 * @param fromValue double contiene il valore iniziale della PB.
+	 * @param toValue double contiene il valore finale della PB.
+	 * @param durationInSeconds double sarebbe in quanto tempo l'animazione va al suo termine.
+	 * @return void.
+	 */
 	protected void animateProgressBar(ProgressBar progressBar, double fromValue, double toValue, double durationInSeconds) {
         progressBar.setProgress(fromValue);
         KeyValue keyValue = new KeyValue(progressBar.progressProperty(), toValue);
@@ -189,6 +255,13 @@ public class ControllerBattleInterface {
 		}
 	}
 	
+	/**
+	 * Quando fa la scelta il P1, viene chiamato questo metodo
+	 * passa le informazioni utili alla classe e cede il turno al prossimo player
+	 *
+	 * @param event MouseEvent ci sono informazioni utili correlate all evento
+	 * @return void
+	 */
 	protected void sceltaP1(MouseEvent event) {
 		Object source = event.getTarget();
 		Pane pane = null;
@@ -208,6 +281,13 @@ public class ControllerBattleInterface {
 		aggiornaTurno(sfidante.getMainPokemon(), "P2");
 	}
 	
+	/**
+	 * Quando fa la scelta il P2, viene chiamato questo metodo
+	 * passa le informazioni utili alla classe e viene fatto il calcolo del turno
+	 *
+	 * @param event MouseEvent ci sono informazioni utili correlate all evento
+	 * @return void
+	 */
 	protected void sceltaP2(MouseEvent event){
 		Object source = event.getTarget();
 		Pane pane = null;
@@ -232,6 +312,14 @@ public class ControllerBattleInterface {
 		aggiornaTurno(allenatore.getMainPokemon(), "P1");
 	}
 	
+	/**
+	 * Quando il player vuole cambiare pokemon in campo viene chiamato questo metodo
+	 * che una volta scelto il pokemon da cambiare fa finire il turno.
+	 *
+	 * @param event MouseEvent ci sono informazioni utili correlate all evento.
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	public void mossaCambia(MouseEvent event) throws IOException {
 		Pane activePlayerPane = (Pane)battleAnchor.lookup(".active");
 		
@@ -257,6 +345,14 @@ public class ControllerBattleInterface {
 		
 	}
 	
+	/**
+	 * questo metodo controlla se il main pokemon dell allenatore deve imparare qualche mossa o no,
+	 * quando deve imparare qualcosa appare una schermata di scelta delle mosse
+	 *
+	 * @param trainer Allenatore contiene il pokemon in campo.
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	public void learnMove(Allenatore trainer) {
 		Pokemon poke = trainer.getMainPokemon();
 		Mossa m = null;
@@ -305,6 +401,15 @@ public class ControllerBattleInterface {
 		}
 	}
 	
+	/**
+	 * questo metodo apre la schermata della scelta delle mosse
+	 *
+	 * @param trainer Allenatore contiene il pokemon in campo.
+	 * @param index AtomicInteger e' l'indice della mossa da dimenticare.
+	 * @param mossa Mossa contine la mossa che deve imparare.
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	public void sceltaMosse(Allenatore trainer, AtomicInteger index, Mossa m) throws IOException {
 		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/apprendimentoMosse.fxml"));
 		
@@ -347,6 +452,13 @@ public class ControllerBattleInterface {
 		pkmn.showAndWait();
 	}
 	
+	/**
+	 * questo metodo controlla se i pokemon della squadra dell allenatore si devono evolvere o meno
+	 *
+	 * @param trainer Allenatore contiene il pokemon in campo.
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	public void controlloEvoluzioni(Allenatore trainer) throws IOException {
 		for(Pokemon poke: trainer.getSquadra()) {
 			if(poke != null) {
@@ -358,6 +470,14 @@ public class ControllerBattleInterface {
 		}
 	}
 	
+	/**
+	 * questo metodo apre la schermata della richiesta delle evoluzioni
+	 *
+	 * @param trainer Allenatore contiene delle informazioni utili.
+	 * @param poke Pokemon contiene il pokemon da evolvere
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	public void richiestaEvo(Allenatore trainer, Pokemon poke) throws IOException {
 		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/evoluzione.fxml"));
 		
@@ -396,7 +516,14 @@ public class ControllerBattleInterface {
 		
 		pkmn.showAndWait();
 	}
-
+	
+	
+	/**
+	 * Questo metodo viene chiamato da interfaccia e capisce chi si arrende e 
+	 * aggiorna i campi utili a capire chi ha fatto la resa nel calcolo del turno.
+	 *
+	 * @return void.
+	 */
 	public void resa() {
 		Pane activePlayerPane = (Pane)battleAnchor.lookup(".active");
 		
@@ -417,6 +544,19 @@ public class ControllerBattleInterface {
 		}
 	}
 	
+	
+	/**
+	 * questo metodo esegue il turno
+	 * 
+	 * Fa scontrare i pokemon, controlla se hanno imparato nuove mosse per possibili
+	 * lvlup, aggiorna le stats dei pokemon, controlla se qualcuno e' il vincitore della partita,
+	 * salva i progressi ogni fine partita, resetta lo stato delle squadre ogni fine partita,
+	 * controlla le evoluzioni e fa tornare alla schermata principale se la best of three e' finita.
+	 * 
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 * @throws InterruptedException da errore nel caso in cui lo sleep non funzioni correttamente.
+	 */
 	public void turno() throws InterruptedException, IOException {
 		iniziaTurno();
 		
@@ -496,6 +636,13 @@ public class ControllerBattleInterface {
 		aggiornaTurno(allenatore.getMainPokemon(), "P1");
 	}
 	
+	
+	/**
+	 * fa tornare al menu principale
+	 * 
+	 * @return EventHandler<DialogEvent>
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	public EventHandler<DialogEvent> menuPrincipale() throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("../view/fxml/BattleJPoke.fxml"));
 		
@@ -507,6 +654,15 @@ public class ControllerBattleInterface {
 		return null;
 	}
 	
+	
+	/**
+	 * Questo metodo apre la schermata di sostituzione dei pokemon
+	 *
+	 * @param trainer Allenatore contiene delle informazioni utili per l'interfaccia.
+	 * @param disableClose boolean contiene una booleana che indica se bisogna disabilitare la chiusura della finestra o meno
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	public void sostituisciPkmn(Allenatore trainer, boolean disableClose) throws IOException{
 		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/squadra.fxml"));
 		
@@ -550,7 +706,15 @@ public class ControllerBattleInterface {
 		pkmn.showAndWait();
 	}
 	
-	// turno -----------------------------------------------------------------------------	
+	// turno -----------------------------------------------------------------------------
+	
+	
+	/**
+	 * In questo metodo considera tutte le possibili scelte che hanno fatto i giocatori
+	 * a seconda di queste agira di conseguenza, qui vengono anche scritti i log.
+	 *
+	 * @return void.
+	 */
 	public void iniziaTurno() {
 		this.log += "\n-----\nInizio turno: [" + this.allenatore.getNickname() + ":" + this.countAllenatore + ", " + this.sfidante.getNickname() + ":" + this.countSfidante + "]\n";
 
@@ -649,6 +813,15 @@ public class ControllerBattleInterface {
 		return;
 	}
 	
+	
+	/**
+	 * questo metodo c'e' la logica di scontro tra due pokemon
+	 *
+	 * @param attaccante Allenatore allenatore che attacca.
+	 * @param ricevente Allenatore allenatore che riceve il colpo.
+	 * @param attacco Mossa e' la mossa con cui l'attaccante attacca il ricevente.
+	 * @return void.
+	 */
 	protected void scontro(Allenatore attaccante, Allenatore ricevente, Mossa attacco) {
 		
 		AtomicBoolean isCrit = new AtomicBoolean();
@@ -718,7 +891,14 @@ public class ControllerBattleInterface {
 		}
 	}
 	
-	
+	/**
+	 * Questo metodo ha il compito di gestire un pokemon esausto facendolo cambiare poi
+	 * all'allenatore
+	 *
+	 * @param trainer Allenatore contiene l'allenatore a cui il pokemon e' esausto
+	 * @param count AtomicInteger indica il counter dei pokemon rimanenti all'allenatore.
+	 * @return void.
+	 */
 	protected void esausto(Allenatore trainer, AtomicInteger count) {
 		//System.out.println("\n" + trainer.getMainPokemon().getNome() + " e' esausto");
 		count.set(count.get()-1);
@@ -746,6 +926,13 @@ public class ControllerBattleInterface {
 	// turno-------------------------------------------------------
 	
 	// partita-------------------------------------------------------
+	
+	/**
+	 * Questo metodo ha il compito di contare i pokemon dell'allenatore
+	 *
+	 * @param trainer Allenatore contiene la squadra
+	 * @return void.
+	 */
 	protected int contaPkmn(Allenatore t) {
 		int pkmn = 0;
 		
@@ -756,6 +943,12 @@ public class ControllerBattleInterface {
 		return pkmn;
 	}
 	
+	
+	/**
+	 * Questo metodo ha il compito di capire se c'e' un vincitore
+	 *
+	 * @return Allenatore chi ha vinto.
+	 */
 	public Allenatore checkVincitore() {
 		if(this.countAllenatore.get() <= 0) {
 			this.countAllenatore.set(contaPkmn(allenatore));
@@ -767,13 +960,64 @@ public class ControllerBattleInterface {
 		}
 		return null;
 	}
-
+	
+	/**
+	 * Questo metodo ritorna l'allenatore
+	 *
+	 * @return Allenatore.
+	 */
 	public Allenatore getAllenatore() {return allenatore;}
+	
+	/**
+	 * Questo metodo setta il valore di allenatore
+	 *
+	 * @param allenatore Allenatore contiene il nuovo valore di allenatore
+	 * @return void.
+	 */
 	public void setAllenatore(Allenatore allenatore) {this.allenatore = allenatore;}
+	
+	/**
+	 * Questo metodo ritorna l'index di cambio dell'allenatore
+	 *
+	 * @return int.
+	 */
 	public int getIndexCambioAllenatore() {return indexCambioAllenatore;}
+	
+	/**
+	 * Questo metodo setta il valore di indexCambioAllenatore
+	 *
+	 * @param indexCambioAllenatore int contiene il nuovo valore dell indexCambioAllenatore
+	 * @return void.
+	 */
 	public void setIndexCambioAllenatore(int indexCambioAllenatore) {this.indexCambioAllenatore = indexCambioAllenatore;}
+	
+	/**
+	 * Questo metodo ritorna lo sfidante
+	 * 
+	 * @return Allenatore.
+	 */
 	public Allenatore getSfidante() {return sfidante;}
+	
+	/**
+	 * Questo metodo setta il valore di sfidante
+	 *
+	 * @param sfidante Allenatore contiene il nuovo valore dello sfidante.
+	 * @return void.
+	 */
 	public void setSfidante(Allenatore sfidante) {this.sfidante = sfidante;}
+	
+	/**
+	 * Questo metodo ritorna l'index di cambio dell'sfidante.
+	 *
+	 * @return int.
+	 */
 	public int getIndexCambioSfidante() {return indexCambioSfidante;}
+	
+	/**
+	 * Questo metodo setta il valore di indexCambioSfidante
+	 *
+	 * @param indexCambioAllenatore int contiene il nuovo valore dell indexCambioSfidante
+	 * @return void.
+	 */
 	public void setIndexCambioSfidante(int indexCambioSfidante) {this.indexCambioSfidante = indexCambioSfidante;}
 }

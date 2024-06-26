@@ -26,15 +26,37 @@ import model.SaveManager;
 import model.Allenatore;
 import model.Franco;
 
+/**
+ * Classe controller della scelta del player contro franco che ha il compito di gestire
+ * tutta l'interfaccia della scelta del player contro franco.
+ * 
+ * @author Simone Comignani, Simone Descontus
+ * @version 1.0
+ */
 public class ControllerChoosePlayerFranco {
+	/**
+	 * Anchor pane principale dell interfaccia
+	 */
 	@FXML
 	private AnchorPane chooseAnchor;
 	
+	/**
+	 * Combo box della scelta di P1
+	 */
 	@FXML
     private ComboBox<Allenatore> chooseP1;
-
+	
+	/**
+	 * Lista di tutti gli allenatori esistenti nei salvataggi
+	 */
     private ObservableList<Allenatore> allAllenatori;
 	
+    /**
+     * questo metodo viene lanciato una volta fatta la load della schermata,
+     * e inizializza il chooseBox del player.
+     *
+     * @return void.
+     */
     @FXML
     public void initialize() {
         chooseAnchor.sceneProperty().addListener((observable, oldScene, newScene) -> {
@@ -52,7 +74,13 @@ public class ControllerChoosePlayerFranco {
             }
         });
     }
-
+    
+    /**
+	 * setta i vari valori e funzioni che la combobox deve avere.
+	 *
+	 * @param chooseP12 ComboBox<Allenatore> contiene la comboBox da fare il setup.
+	 * @return void.
+	 */
     private void setupComboBox(ComboBox<Allenatore> chooseP12) {
         chooseP12.setCellFactory(new Callback<ListView<Allenatore>, ListCell<Allenatore>>() {
             @Override
@@ -88,7 +116,11 @@ public class ControllerChoosePlayerFranco {
     }
     
     
-    
+    /**
+	 * questo metodo serve a gestire ogni volta che un player sceglie un valore nella combobox.
+	 *
+	 * @return void.
+	 */
     private void updateComboBoxItems(){
     	Allenatore selectedP1 = chooseP1.getSelectionModel().getSelectedItem();
     
@@ -114,6 +146,13 @@ public class ControllerChoosePlayerFranco {
         }
     }
 	
+    /**
+	 * apre la schermata di riorganizzazione pokemon e inizializza i valori utili nel suo controller
+	 * 
+	 * @param event MouseEvent ci sono informazioni utili correlate all evento
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	public void openReorganize(MouseEvent event) throws IOException {
 		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/reorganizePkmn.fxml"));
 		
@@ -144,6 +183,13 @@ public class ControllerChoosePlayerFranco {
 		pkmn.showAndWait();
 	}
 	
+	/**
+	 * un metodo che fa ritornare al menu principale
+	 * 
+	 * @param event MouseEvent ci sono informazioni utili correlate all evento
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	public void back(MouseEvent event) throws IOException {
 		FXMLLoader root = new FXMLLoader(getClass().getResource("../view/fxml/BattleJPoke.fxml"));
 		Scene scene = new Scene(root.load());
@@ -154,6 +200,15 @@ public class ControllerChoosePlayerFranco {
 		owner.show();
 	}
 	
+	
+	/**
+	 * un metodo che fa iniziare la battaglia cambiando schermata, questo solo se i campi della
+	 * combobox e' settato ad un valore.
+	 * 
+	 * @param event MouseEvent ci sono informazioni utili correlate all evento
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	public void fight(ActionEvent event) throws IOException{
 		Allenatore allenatoreP1 = ((ComboBox<Allenatore>)this.getAnchor().getScene().lookup("#chooseP1")).getSelectionModel().getSelectedItem();
 		//Allenatore sfidanteP2 = ((ComboBox<Allenatore>)this.getAnchor().getScene().lookup("#chooseP2")).getSelectionModel().getSelectedItem();
@@ -184,6 +239,11 @@ public class ControllerChoosePlayerFranco {
 		owner.show();
 	}
 	
+	/**
+	 * ottieni l'anchorPane della schermata
+	 * 
+	 * @return AnchorPane.
+	 */
 	public AnchorPane getAnchor(){ return this.chooseAnchor;}
 }
 		

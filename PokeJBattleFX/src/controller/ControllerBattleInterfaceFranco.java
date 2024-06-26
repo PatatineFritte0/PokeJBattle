@@ -24,8 +24,22 @@ import model.SaveManager;
 import model.UsableMove;
 import model.costanti.Mossa;
 
+/**
+ * Classe controller della battaglia con franco che ha il compito di gestire
+ * tutta l'interfaccia della battaglie con franco.
+ * 
+ * @author Simone Comignani, Simone Descontus
+ * @version 1.0
+ */
 public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 	
+	/**
+	 * Aggiorna le statistiche del pokemon selezionato
+	 *
+	 * @param allenatore Allenatore contiene il pokemon da aggiornare.
+	 * @param player String contiene l'id del giocatore selezionato.
+	 * @return void.
+	 */
 	@Override
 	protected void aggiornaStatPokemon(Allenatore allenatore, String player) {
 		String verso;
@@ -87,6 +101,15 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 		barHp.setStyle("-fx-accent: "+color);
 	}
 	
+	
+	/**
+	 * Quando fa la scelta il P1, viene chiamato questo metodo
+	 * passa le informazioni utili alla classe e Franco fara le sue mosse.
+	 * andando direttamente al calcolo del turno.
+	 *
+	 * @param event MouseEvent ci sono informazioni utili correlate all evento
+	 * @return void
+	 */
 	@Override
 	protected void sceltaP1(MouseEvent event) {
 		Object source = event.getTarget();
@@ -120,6 +143,14 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 		} catch (InterruptedException | IOException e) {e.printStackTrace();}	
 	}
 	
+	/**
+	 * Quando il player vuole cambiare pokemon in campo viene chiamato questo metodo
+	 * che una volta scelto il pokemon da cambiare fa finire il turno.
+	 *
+	 * @param event MouseEvent ci sono informazioni utili correlate all evento.
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	@Override
 	public void mossaCambia(MouseEvent event) throws IOException {
 		Pane activePlayerPane = (Pane)battleAnchor.lookup(".active");
@@ -144,6 +175,14 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 		
 	}
 	
+	/**
+	 * Questo metodo apre la schermata di sostituzione dei pokemon tranne se sei franco
+	 *
+	 * @param trainer Allenatore contiene delle informazioni utili per l'interfaccia.
+	 * @param disableClose boolean contiene una booleana che indica se bisogna disabilitare la chiusura della finestra o meno
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 */
 	@Override
 	public void sostituisciPkmn(Allenatore trainer, boolean disableClose) throws IOException{
 		if(trainer instanceof Franco) {return;}
@@ -189,7 +228,12 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 		pkmn.showAndWait();
 	}
 	
-	
+	/**
+	 * Questo metodo viene chiamato da interfaccia e capisce chi si arrende e 
+	 * aggiorna i campi utili a capire chi ha fatto la resa nel calcolo del turno.
+	 *
+	 * @return void.
+	 */
 	@Override
 	public void resa() {
 		Pane activePlayerPane = (Pane)battleAnchor.lookup(".active");
@@ -209,7 +253,18 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 		}
 	}
 	
-	
+	/**
+	 * questo metodo esegue il turno
+	 * 
+	 * Fa scontrare i pokemon, controlla se hanno imparato nuove mosse per possibili
+	 * lvlup, aggiorna le stats dei pokemon, controlla se qualcuno e' il vincitore della partita,
+	 * salva i progressi ogni fine partita, resetta lo stato delle squadre ogni fine partita,
+	 * controlla le evoluzioni e fa tornare alla schermata principale se la best of three e' finita.
+	 * 
+	 * @return void.
+	 * @throws IOException puo essere lanciata se il file fxml e' errato o inesistente.
+	 * @throws InterruptedException da errore nel caso in cui lo sleep non funzioni correttamente.
+	 */
 	@Override
 	public void turno() throws InterruptedException, IOException {
 		iniziaTurno();
@@ -275,7 +330,7 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 			}
 			
 			SaveManager.save(allenatore);
-			SaveManager.save(sfidante);
+			//SaveManager.save(sfidante);
 			
 		}else {
 			if(allenatore.getMainPokemon().getBattlePs() == 0) {
@@ -292,6 +347,12 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 		aggiornaTurno(allenatore.getMainPokemon(), "P1");
 	}
 	
+	/**
+	 * In questo metodo considera tutte le possibili scelte che hanno fatto i giocatori
+	 * a seconda di queste agira di conseguenza, qui vengono anche scritti i log.
+	 *
+	 * @return void.
+	 */
 	@Override
 	public void iniziaTurno() {
 		this.log += "\n-----\nInizio turno: [" + this.allenatore.getNickname() + ":" + this.countAllenatore + ", " + this.sfidante.getNickname() + ":" + this.countSfidante + "]\n";
@@ -392,6 +453,14 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 	}
 	
 	
+	/**
+	 * Questo metodo ha il compito di gestire un pokemon esausto facendolo cambiare poi
+	 * all'allenatore
+	 *
+	 * @param trainer Allenatore contiene l'allenatore a cui il pokemon e' esausto
+	 * @param count AtomicInteger indica il counter dei pokemon rimanenti all'allenatore.
+	 * @return void.
+	 */
 	@Override
 	protected void esausto(Allenatore trainer, AtomicInteger count) {
 		System.out.println("\n" + trainer.getMainPokemon().getNome() + " e' esausto");
