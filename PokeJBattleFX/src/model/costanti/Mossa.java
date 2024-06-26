@@ -487,19 +487,56 @@ public enum Mossa {
 	RUOTAFUOCO("Ruotafuoco", 35, Tipo.FUOCO, Categoria.SPECIALE, 85, 15, /*Dati per mosse di stato ->*/null, 0, false);
 	
 	/**
-     * 
+     * nome della mossa
      */
 	private String nome;
+	/**
+     * basePower mossa
+     */
 	private int basePower;
+	/**
+     * Tipo della mossa
+     */
 	private Tipo tipo;
+	/**
+     * Categoria della mossa
+     */
 	private Categoria categoria;
+	/**
+     * Precisione della mossa
+     */
 	private int precisione;
+	/**
+     * PP della mossa
+     */
 	private int PP;
 	
+	/**
+     * di quanto va abbassata la statistica se e' una mossa di stato
+     */
 	private int lvlBoostNerf;
+	/**
+     * quale statistica va abbassata se e' una mossa di stato
+     */
 	private Statistica statBoostNerf;
+	/**
+     * booleana che indica se la mossa e' diretta a chi la lancia o no
+     */
 	private boolean onSelf;
 	
+	 /**
+     * Costruttore dell'enum Mossa.
+     * 
+     * @param nome String.
+     * @param basePower int
+     * @param tipo Tipo.
+     * @param categoria Categoria.
+     * @param precisione int.
+     * @param pP int.
+     * @param statBoostNerf Statistica.
+     * @param lvlBoostNerf int.
+     * @param onSelf boolean.
+     */
 	private Mossa(String nome, int basePower, Tipo tipo, Categoria categoria, int precisione, int pP, Statistica statBoostNerf, int lvlBoostNerf, boolean onSelf) {
 		this.nome = nome;
 		this.basePower = basePower;
@@ -513,32 +550,139 @@ public enum Mossa {
 		this.onSelf = onSelf;
 	}
 	
+	/**
+     * Metodo che restituisce il valore del campo nome.
+     * 
+     * @return String.
+     */
 	public String getNome() { return nome; }
+	
+	/**
+     * Metodo che setta il valore del campo nome.
+     * 
+     * @param nome String
+     * @return void.
+     */
 	public void setNome(String nome) { this.nome = nome; }
 	
+	/**
+     * Metodo che restituisce il valore del campo basePower.
+     * 
+     * @return int.
+     */
 	public int getBasePower() { return basePower; }
+	
+	/**
+     * Metodo che setta il valore del campo basePower.
+     * 
+     * @param basePower int
+     * @return void.
+     */
 	public void setBasePower(int basePower) { this.basePower = basePower; }
 	
+	/**
+     * Metodo che restituisce il valore del campo tipo.
+     * 
+     * @return Tipo.
+     */
 	public Tipo getTipo() { return tipo; }
+	
+	/**
+     * Metodo che setta il valore del campo tipo.
+     * 
+     * @param tipo Tipo
+     * @return void.
+     */
 	public void setTipo(Tipo tipo) { this.tipo = tipo; }
 	
+	/**
+     * Metodo che restituisce il valore del campo categoria.
+     * 
+     * @return Categoria.
+     */
 	public Categoria getCategoria() { return categoria; }
+	
+	/**
+     * Metodo che setta il valore del campo categoria.
+     * 
+     * @param categoria Categoria
+     * @return void.
+     */
 	public void setCategoria(Categoria categoria) { this.categoria = categoria; }
 	
+	/**
+     * Metodo che restituisce il valore del campo precisione.
+     * 
+     * @return int.
+     */
 	public int getPrecisione() { return precisione; }
+	
+	/**
+     * Metodo che setta il valore del campo precisione.
+     * 
+     * @param precisione int
+     * @return void.
+     */
 	public void setPrecisione(int precisione) { this.precisione = precisione; }
 	
+	/**
+     * Metodo che restituisce il valore del campo PP.
+     * 
+     * @return int.
+     */
 	public int getPP() { return PP; }
+	
+	/**
+     * Metodo che setta il valore del campo pP.
+     * 
+     * @param pP int
+     * @return void.
+     */
 	public void setPP(int pP) { PP = pP; }
 	
-	
+	/**
+     * Metodo che restituisce il valore del campo lvlBoostNerf.
+     * 
+     * @return int.
+     */
 	public int getLvlBoostNerf() { return lvlBoostNerf; }
+	
+	/**
+     * Metodo che setta il valore del campo lvlBoostNerf.
+     * 
+     * @param lvlBoostNerf int
+     * @return void.
+     */
 	public void setLvlBoostNerf(int lvlBoostNerf) { this.lvlBoostNerf = lvlBoostNerf; }
 	
+	/**
+     * Metodo che restituisce il valore del campo statBoostNerf.
+     * 
+     * @return Statistica.
+     */
 	public Statistica getStatBoostNerf() { return this.statBoostNerf; }
+	
+	/**
+     * Metodo che setta il valore del campo statBoostNerf.
+     * 
+     * @param statBoostNerf Statistica
+     * @return void.
+     */
 	public void setStatBoostNerf(Statistica statBoostNerf) { this.statBoostNerf = statBoostNerf; }
 	
+	/**
+     * Metodo che restituisce il valore del campo onSelf.
+     * 
+     * @return boolean.
+     */
 	public boolean getOnSelf() { return this.onSelf; }
+	
+	/**
+     * Metodo che setta il valore del campo onSelf.
+     * 
+     * @param onSelf boolean
+     * @return void.
+     */
 	public void setOnSelf(boolean onSelf) { this.onSelf = onSelf; }
 	
 	}

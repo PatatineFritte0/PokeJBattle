@@ -3,34 +3,106 @@ package model.costanti;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Enum degli elementi che mosse e pokemon possono possedere.
+ * 
+ * @author Simone Comignani, Simone Descontus
+ * @version 1.0
+ */
 public enum Tipo {
-	NORMALE,	
-    LOTTA,   
+	/**
+     * L'oggetto e' di tipo normale
+     */
+	NORMALE,
+	/**
+     * L'oggetto e' di tipo lotta
+     */
+    LOTTA,
+    /**
+     * L'oggetto e' di tipo volante
+     */
     VOLANTE,
+    /**
+     * L'oggetto e' di tipo veleno
+     */
     VELENO,
+    /**
+     * L'oggetto e' di tipo terra
+     */
     TERRA,
+    /**
+     * L'oggetto e' di tipo coleottero
+     */
     COLEOTTERO,
+    /**
+     * L'oggetto e' di tipo spettro
+     */
     SPETTRO,
+    /**
+     * L'oggetto e' di tipo acciaio
+     */
     ACCIAIO, 
+    /**
+     * L'oggetto e' di tipo fuoco
+     */
     FUOCO,
+    /**
+     * L'oggetto e' di tipo acqua
+     */
     ACQUA,
+    /**
+     * L'oggetto e' di tipo roccia
+     */
     ROCCIA,
+    /**
+     * L'oggetto e' di tipo erba
+     */
     ERBA,
+    /**
+     * L'oggetto e' di tipo elettro
+     */
     ELETTRO,
+    /**
+     * L'oggetto e' di tipo psico
+     */
     PSICO,
+    /**
+     * L'oggetto e' di tipo ghiaccio
+     */
     GHIACCIO,
-    DRAGO,    
+    /**
+     * L'oggetto e' di tipo drago
+     */
+    DRAGO,
+    /**
+     * L'oggetto e' di tipo buio
+     */
     BUIO,    
+    /**
+     * L'oggetto e' di tipo folletto
+     */
     FOLLETTO;
-
+	
+	/**
+     * Costruttore dell'Enum Tipo.
+     */
 	Tipo() {
 		this.forteContro = new ArrayList<>();
 		this.resistitoDa = new ArrayList<>();
 		this.immuneDa = new ArrayList<>();
 	}
 	
+	/**
+     * Indica su quali tipi e' forte il tipo
+     */
     private List<Tipo> forteContro;
+    /**
+     * Indica su quali tipi e' resistente il tipo.
+     */
     private List<Tipo> resistitoDa;
+    /**
+     * Indica su quali tipi e' immune il tipo.
+     */
     private List<Tipo> immuneDa;
 
     static {
@@ -107,22 +179,68 @@ public enum Tipo {
     	FOLLETTO.immuneDa.addAll(new ArrayList<Tipo>() {{ }});  	
     }
     
+    /**
+     * Metodo che restituisce il valore del campo forteContro.
+     * 
+     * @return List<Tipo>.
+     */
     public List<Tipo> getForze(){return this.forteContro;}
+    
+    /**
+     * Metodo che restituisce il valore del campo resistitoDa.
+     * 
+     * @return List<Tipo>.
+     */
     public List<Tipo> getResistenti(){return this.resistitoDa;}
+    
+    /**
+     * Metodo che restituisce il valore del campo immuneDa.
+     * 
+     * @return List<Tipo>.
+     */
     public List<Tipo> getImmuni() { return this.immuneDa; }
 	
+    
+    /**
+     * Metodo che controlla se il tipo e' superefficace
+     * contro un altro tipo.
+     * 
+     * @param tipo Tipo
+     * @return boolean.
+     */
     public boolean checkSuperefficacia(Tipo tipo) {
 		return getForze().contains(tipo);
 	}
 	
+    /**
+     * Metodo che controlla se il tipo e' resistente
+     * contro un altro tipo.
+     * 
+     * @param tipo Tipo
+     * @return boolean.
+     */
     public boolean checkResistenza(Tipo tipo) {
 		return getResistenti().contains(tipo);
 	}
 	
+    /**
+     * Metodo che controlla se il tipo e' immune
+     * contro un altro tipo.
+     * 
+     * @param tipo Tipo
+     * @return boolean.
+     */
     public boolean checkImmunita(Tipo tipo) {
 		return getImmuni().contains(tipo);
 	}
-	
+    
+    /**
+     * Metodo che relazione ha un tipo rispetto ad un altro
+     * ritornando dei valori 0, 0.5, 2
+     * 
+     * @param tipo Tipo
+     * @return double.
+     */
 	public double calcolaRelazioneTipi(Tipo tipo)
 	{
 		if (checkSuperefficacia(tipo)) return 2;
