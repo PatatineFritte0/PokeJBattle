@@ -116,6 +116,38 @@ public class FactoryPkmn {
 			case "25":
 				pkmn = new Raichu();
 				break;
+			case "sandshrew":
+			case "26":
+				pkmn = new Sandshrew();
+				break;
+			case "sandslash":
+			case "27":
+				pkmn = new Sandslash();
+				break;
+			case "nidoran_f":
+			case "28":
+				pkmn = new Nidoran_F();
+				break;
+			case "nidorina":
+			case "29":
+				pkmn = new Nidorina();
+				break;
+			case "nidoqueen":
+			case "30":
+				pkmn = new Nidoqueen();
+				break;
+			case "nidoran_M":
+			case "31":
+				pkmn = new Nidoran_M();
+				break;
+			case "nidorino":
+			case "32":
+				pkmn = new Nidorino();
+				break;
+			case "nidoking":
+			case "33":
+				pkmn = new Nidoking();
+				break;
 			case "missingNo":
 				pkmn = new MissingNo();
 				break;
@@ -134,16 +166,16 @@ public class FactoryPkmn {
 	
 	public static Pokemon random() {
 		Random r = new Random();
-		Integer n = r.nextInt(0, 26);
+		Integer n = r.nextInt(0, 34);
 		
 		return crea(n.toString());	
 	}
 	
 	public static List<Pokemon> allPokemon() {
-		int max = 25;
+		int max = 34;
 		
 		List<Pokemon> all = new ArrayList<>();
-		for(Integer i = 0; i <= max; i++) {
+		for(Integer i = 0; i < max; i++) {
 			all.add(crea(i.toString(), 5));
 		}
 		
