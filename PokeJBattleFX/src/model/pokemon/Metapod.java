@@ -4,7 +4,12 @@ import java.util.HashMap;
 import model.Pokemon;
 import model.costanti.*;
 
-
+/**
+ * Classe che crea un determinato pokemon
+ * 
+ * @author Simone Comignani, Simone Descontus
+ * @version 1.0
+ */
 public class Metapod extends Pokemon {
 	
 	public Metapod() {

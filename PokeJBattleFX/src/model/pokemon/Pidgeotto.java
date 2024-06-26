@@ -6,8 +6,15 @@ import model.Pokemon;
 import model.costanti.Mossa;
 import model.costanti.Tipo;
 
+/**
+ * Classe che crea un determinato pokemon
+ * 
+ * @author Simone Comignani, Simone Descontus
+ * @version 1.0
+ */
 public class Pidgeotto extends Pokemon{
 
+	
 	public Pidgeotto() {
 		super("Pidgeotto", Tipo.NORMALE, Tipo.VOLANTE, new Mossa []{Mossa.GRAFFIO, Mossa.BECCATA, null, null},
 				new HashMap<Integer, Mossa>() {{put(8, Mossa.TURBOSABBIA); put(12, Mossa.ATTACCORAPIDO); put(17, Mossa.RIDUTTORE); put(24, Mossa.VOLO); put(28, Mossa.AEREOATTACCO); put(32, Mossa.ATTACCODALA);}}, 

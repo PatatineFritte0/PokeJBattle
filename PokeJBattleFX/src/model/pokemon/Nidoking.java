@@ -6,6 +6,12 @@ import model.Pokemon;
 import model.costanti.Mossa;
 import model.costanti.Tipo;
 
+/**
+ * Classe che crea un determinato pokemon
+ * 
+ * @author Simone Comignani, Simone Descontus
+ * @version 1.0
+ */
 public class Nidoking extends Pokemon{
 
 	public Nidoking() {
