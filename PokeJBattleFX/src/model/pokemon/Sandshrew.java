@@ -13,7 +13,10 @@ import model.costanti.Tipo;
  * @version 1.0
  */
 public class Sandshrew extends Pokemon{
-
+	
+	/**
+	 * Costruttore classe
+	 */
 	public Sandshrew() {
 		super("Sandshrew", Tipo.TERRA, null, new Mossa []{Mossa.GRAFFIO, Mossa.TURBOSABBIA, Mossa.LACERAZIONE, null},
 				new HashMap<Integer, Mossa>() {{put(8, Mossa.DOPPIOTEAM); put(12, Mossa.COMETE); put(18, Mossa.FOSSA);}}, 

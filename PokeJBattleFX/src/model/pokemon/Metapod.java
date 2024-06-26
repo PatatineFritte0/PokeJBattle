@@ -12,6 +12,9 @@ import model.costanti.*;
  */
 public class Metapod extends Pokemon {
 	
+	/**
+	 * Costruttore classe
+	 */
 	public Metapod() {
 		super("Metapod", Tipo.COLEOTTERO, null, new Mossa []{Mossa.AZIONE, Mossa.COLEOMORSO, null, null},
 				new HashMap<Integer, Mossa>() {{put(7, Mossa.MILLEBAVE); put(9, Mossa.RAFFORZATORE);}},

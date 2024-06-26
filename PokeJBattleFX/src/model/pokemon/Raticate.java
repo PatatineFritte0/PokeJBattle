@@ -13,7 +13,10 @@ import model.costanti.Tipo;
  * @version 1.0
  */
 public class Raticate extends Pokemon{
-
+	
+	/**
+	 * Costruttore classe
+	 */
 	public Raticate() {
 		super("Raticate", Tipo.NORMALE, null, new Mossa []{Mossa.GRAFFIO, Mossa.COLPOCODA, null, null},
 				new HashMap<Integer, Mossa>() {{put(8, Mossa.ATTACCORAPIDO); put(17, Mossa.IPERZANNA); put(24, Mossa.FORZA); put(32, Mossa.GIGAIMPATTO);}}, 

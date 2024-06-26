@@ -13,7 +13,10 @@ import model.costanti.Tipo;
  * @version 1.0
  */
 public class Ekans extends Pokemon{
-
+	
+	/**
+	 * Costruttore classe
+	 */
 	public Ekans() {
 		super("Ekans", Tipo.VELENO, null, new Mossa []{Mossa.VELENOSPINA, Mossa.FULMISGUARDO, null, null},
 				new HashMap<Integer, Mossa>() {{put(8, Mossa.MORSO); put(12, Mossa.STRIDIO); put(18, Mossa.FANGO);}}, 

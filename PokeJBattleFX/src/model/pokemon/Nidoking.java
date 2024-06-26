@@ -13,7 +13,10 @@ import model.costanti.Tipo;
  * @version 1.0
  */
 public class Nidoking extends Pokemon{
-
+	
+	/**
+	 * Costruttore classe
+	 */
 	public Nidoking() {
 		super("Nidoking", Tipo.TERRA, Tipo.VELENO, new Mossa []{Mossa.VELENOSPINA, Mossa.AZIONE, Mossa.INCORNATA, Mossa.DOPPIOCALCIO},
 				new HashMap<Integer, Mossa>() {{put(8, Mossa.RIDUTTORE); put(12, Mossa.FOSSA); put(18, Mossa.PERFORCORNO); put(23, Mossa.TERREMOTO); put(25, Mossa.ABISSO);}}, 

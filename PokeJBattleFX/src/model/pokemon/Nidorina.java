@@ -13,7 +13,10 @@ import model.costanti.Tipo;
  * @version 1.0
  */
 public class Nidorina extends Pokemon{
-
+	
+	/**
+	 * Costruttore classe
+	 */
 	public Nidorina() {
 		super("Nidorina", Tipo.TERRA, null, new Mossa []{Mossa.AZIONE, Mossa.GRAFFIO, Mossa.COLPOCODA, Mossa.DOPPIOCALCIO},
 				new HashMap<Integer, Mossa>() {{put(8, Mossa.RIDUTTORE); put(12, Mossa.MEGAPUGNO); put(18, Mossa.VELENOSPINA);}}, 

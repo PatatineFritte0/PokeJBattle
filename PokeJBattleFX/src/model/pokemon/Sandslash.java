@@ -13,7 +13,10 @@ import model.costanti.Tipo;
  * @version 1.0
  */
 public class Sandslash extends Pokemon{
-
+	
+	/**
+	 * Costruttore classe
+	 */
 	public Sandslash() {
 		super("Sandslash", Tipo.TERRA, null, new Mossa []{Mossa.GRAFFIO, Mossa.TURBOSABBIA, Mossa.LACERAZIONE, null},
 				new HashMap<Integer, Mossa>() {{put(8, Mossa.DOPPIOTEAM); put(12, Mossa.COMETE); put(18, Mossa.FOSSA); put(23, Mossa.TERREMOTO); put(25, Mossa.FRANA);}}, 

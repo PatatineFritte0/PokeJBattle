@@ -13,7 +13,10 @@ import model.costanti.Tipo;
  * @version 1.0
  */
 public class Pikachu extends Pokemon{
-
+	
+	/**
+	 * Costruttore classe
+	 */
 	public Pikachu() {
 		super("Pikachu", Tipo.ELETTRO, null, new Mossa []{Mossa.TUONOSHOCK, Mossa.RUGGITO, null, null},
 				new HashMap<Integer, Mossa>() {{put(8, Mossa.COLPOCODA); put(12, Mossa.ATTACCORAPIDO); put(14, Mossa.DOPPIOTEAM); put(16, Mossa.COMETE); put(19, Mossa.FULMINE);}}, 

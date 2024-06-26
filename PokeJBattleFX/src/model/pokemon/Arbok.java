@@ -14,6 +14,9 @@ import model.costanti.Tipo;
  */
 public class Arbok extends Pokemon{
 
+	/**
+	 * Costruttore classe
+	 */
 	public Arbok() {
 		super("Arbok", Tipo.VELENO, null, new Mossa []{Mossa.VELENOSPINA, Mossa.FULMISGUARDO, null, null},
 				new HashMap<Integer, Mossa>() {{put(8, Mossa.MORSO); put(12, Mossa.STRIDIO); put(18, Mossa.FANGO); put(22, Mossa.ACIDO); put(25, Mossa.SMOG);}}, 

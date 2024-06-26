@@ -13,7 +13,10 @@ import model.costanti.Tipo;
  * @version 1.0
  */
 public class Nidoran_F extends Pokemon{
-
+	
+	/**
+	 * Costruttore classe
+	 */
 	public Nidoran_F() {
 		super("Nidoran_F", Tipo.TERRA, null, new Mossa []{Mossa.RUGGITO, Mossa.GRAFFIO, null, null},
 				new HashMap<Integer, Mossa>() {{put(8, Mossa.RIDUTTORE); put(12, Mossa.MEGAPUGNO);}}, 

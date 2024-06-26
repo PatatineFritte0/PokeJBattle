@@ -14,6 +14,9 @@ import model.costanti.Tipo;
  */
 public class Pidgeot extends Pokemon{
 	
+	/**
+	 * Costruttore classe
+	 */
 	public Pidgeot() {
 		super("Pidgeot", Tipo.NORMALE, Tipo.VOLANTE, new Mossa []{Mossa.GRAFFIO, Mossa.BECCATA, null, null},
 				new HashMap<Integer, Mossa>() {{put(8, Mossa.TURBOSABBIA); put(12, Mossa.ATTACCORAPIDO); put(17, Mossa.RIDUTTORE); put(24, Mossa.VOLO); put(28, Mossa.AEREOATTACCO); put(32, Mossa.ATTACCODALA); put(37, Mossa.AGILITA);}}, 

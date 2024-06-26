@@ -12,6 +12,9 @@ import model.costanti.*;
  */
 public class Caterpie extends Pokemon {
 	
+	/**
+	 * Costruttore classe
+	 */
 	public Caterpie() {
 		super("Caterpie", Tipo.COLEOTTERO, null, new Mossa []{Mossa.AZIONE, Mossa.COLEOMORSO, null, null},
 				new HashMap<Integer, Mossa>() {{put(7, Mossa.MILLEBAVE);}},

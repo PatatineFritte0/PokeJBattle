@@ -13,7 +13,10 @@ import model.costanti.Tipo;
  * @version 1.0
  */
 public class Nidoqueen extends Pokemon{
-
+	
+	/**
+	 * Costruttore classe
+	 */
 	public Nidoqueen() {
 		super("Nidoqueen", Tipo.TERRA, Tipo.VELENO, new Mossa []{Mossa.AZIONE, Mossa.GRAFFIO, Mossa.COLPOCODA, Mossa.DOPPIOCALCIO},
 				new HashMap<Integer, Mossa>() {{put(8, Mossa.RIDUTTORE); put(12, Mossa.MEGAPUGNO); put(18, Mossa.VELENOSPINA); put(23, Mossa.TERREMOTO); put(25, Mossa.ABISSO);}}, 

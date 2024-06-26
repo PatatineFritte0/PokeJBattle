@@ -13,7 +13,10 @@ import model.costanti.Tipo;
  * @version 1.0
  */
 public class Rattata extends Pokemon{
-
+	
+	/**
+	 * Costruttore classe
+	 */
 	public Rattata() {
 		super("Rattata", Tipo.NORMALE, null, new Mossa []{Mossa.GRAFFIO, Mossa.COLPOCODA, null, null},
 				new HashMap<Integer, Mossa>() {{put(8, Mossa.ATTACCORAPIDO); put(17, Mossa.IPERZANNA);}}, 

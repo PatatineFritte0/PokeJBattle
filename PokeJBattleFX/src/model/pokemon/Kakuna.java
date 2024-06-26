@@ -12,6 +12,9 @@ import model.costanti.*;
  */
 public class Kakuna extends Pokemon {
 	
+	/**
+	 * Costruttore classe
+	 */
 	public Kakuna() {
 		super("Kakuna", Tipo.COLEOTTERO, Tipo.VELENO, new Mossa []{Mossa.AZIONE, null, null, null},
 				new HashMap<Integer, Mossa>() {{put(7 , Mossa.MILLEBAVE); put(9 , Mossa.VELENOSPINA); put(7 , Mossa.RAFFORZATORE);}},

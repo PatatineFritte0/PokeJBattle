@@ -1018,12 +1018,4 @@ public class Pokemon implements Crescita {
 	 * @return void
 	 */
 	public void setElusioneBattaglia(int elusione) { this.elusione.setBattleValue(elusione); }
-
-
-	
-
-
-	
-
-
 }

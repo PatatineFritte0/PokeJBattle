@@ -12,6 +12,9 @@ import model.costanti.*;
  */
 public class Weedle extends Pokemon {
 	
+	/**
+	 * Costruttore classe
+	 */
 	public Weedle() {
 		super("Weedle", Tipo.COLEOTTERO, Tipo.VELENO, new Mossa []{Mossa.AZIONE, null, null, null},
 				new HashMap<Integer, Mossa>() {{put(7 , Mossa.MILLEBAVE); put(9 , Mossa.VELENOSPINA);}},

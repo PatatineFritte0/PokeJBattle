@@ -13,7 +13,10 @@ import model.costanti.Tipo;
  * @version 1.0
  */
 public class Spearow extends Pokemon{
-
+	
+	/**
+	 * Costruttore classe
+	 */
 	public Spearow() {
 		super("Spearow", Tipo.NORMALE, Tipo.VOLANTE, new Mossa []{Mossa.GRAFFIO, Mossa.BECCATA, null, null},
 				new HashMap<Integer, Mossa>() {{put(8, Mossa.TURBOSABBIA); put(12, Mossa.ATTACCODALA); put(19, Mossa.VOLO);}}, 

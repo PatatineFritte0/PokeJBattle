@@ -12,6 +12,9 @@ import model.costanti.*;
  */
 public class MissingNo extends Pokemon {
 	
+	/**
+	 * Costruttore classe
+	 */
 	public MissingNo() {
 		super("MissingNo", null, null, new Mossa []{null, null, null, null},
 				null, 0, 0, null , 0, 0, 0, 0, 0, 0);	

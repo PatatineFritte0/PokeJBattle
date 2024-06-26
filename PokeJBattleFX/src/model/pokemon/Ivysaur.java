@@ -12,6 +12,9 @@ import model.costanti.*;
  */
 public class Ivysaur extends Pokemon {
 	
+	/**
+	 * Costruttore classe
+	 */
 	public Ivysaur() {
 		super("Ivysaur", Tipo.ERBA, Tipo.VELENO, new Mossa []{Mossa.AZIONE, Mossa.RUGGITO, Mossa.FRUSTATA, null},
 				new HashMap<Integer, Mossa>() {{put(6, Mossa.CRESCITA); put(9, Mossa.FOGLIELAMA); put(16, Mossa.SEMEBOMBA); put(20, Mossa.FOGLIAMAGICA); put(25, Mossa.LACCIOERBOSO);}},
