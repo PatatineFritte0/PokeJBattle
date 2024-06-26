@@ -5,10 +5,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class FactoryPkmn {
 
+/**
+ * Classe Factory che serve a generare in modo veloce
+ * dei pokemon attraverso una stringa
+ * 
+ * @author Simone Comignani, Simone Descontus
+ * @version 1.0
+ */
+public class FactoryPkmn {
+	
+	/**
+	 * In questo metodo statico permette la generazione di
+	 * pokemon attraverso il parametro scelta, in piu se
+	 * il campo lvl e' diverso da null si puo decidere
+	 * con che livello istanziare il pokemon
+	 * 
+	 * @param scelta String
+	 * @param lvl int
+	 * @return Pokemon
+	 */
 	public static Pokemon crea(String scelta, int... lvl) {
-		
 		Pokemon pkmn; 
 		
 		switch(scelta) {
@@ -164,6 +181,12 @@ public class FactoryPkmn {
 		return pkmn;
 	}
 	
+	/**
+	 * Questo metodo statico crea un pokemon in
+	 * modo randomico
+	 * 
+	 * @return Pokemon
+	 */
 	public static Pokemon random() {
 		Random r = new Random();
 		Integer n = r.nextInt(0, 34);
@@ -171,6 +194,12 @@ public class FactoryPkmn {
 		return crea(n.toString());	
 	}
 	
+	/**
+	 * Questo metodo statico crea tutti i
+	 * pokemon disponibili
+	 * 
+	 * @return List<Pokemon>
+	 */
 	public static List<Pokemon> allPokemon() {
 		int max = 34;
 		

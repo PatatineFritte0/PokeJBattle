@@ -6,9 +6,22 @@ import java.lang.reflect.Type;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
-
+/**
+ * Questa classe e' utilizzata per i salvataggi
+ * su file, sia lettura che scrittura
+ * 
+ * @author Simone Comignani, Simone Descontus
+ * @version 1.0
+ */
 public class SaveManager {
 	
+	
+	/**
+	 * Questo metodo serve a creare un nuovo salvataggio
+	 * 
+	 * @param trainer Allenatore
+	 * @return (boolean) se e' andato a buon fine il salvataggio
+	 */
 	public static boolean newSave(Allenatore trainer) {
 		
 		String savePath = "src/saves.json";
@@ -45,6 +58,12 @@ public class SaveManager {
 		return result;
 	}
 	
+	/**
+	 * Questo metodo serve per caricare un salvataggio
+	 * 
+	 * @param nickname String
+	 * @return (Allenatore) Allenatore trovato nei salvataggi
+	 */
 	public static Allenatore loadSave(String nickname) {
 		
 		String savePath = "src/saves.json";
@@ -73,6 +92,12 @@ public class SaveManager {
 		return save;
 	}
 	
+	/**
+	 *  Questo metodo serve a sovrascrivere un salvataggio gia presente.
+	 *  
+	 * @param trainer Allenatore
+	 * @return void
+	 */
 	public static void save(Allenatore trainer) {
 		
 		String savePath = "src/saves.json";
@@ -104,6 +129,11 @@ public class SaveManager {
 		}	
 	}
 	
+	/**
+	 * Questo metodo restituisce ogni salvataggio presente.
+	 * 
+	 * @return List
+	 */
 	public static List getSaves() {
 		
 		String savePath = "src/saves.json";

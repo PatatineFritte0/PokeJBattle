@@ -6,14 +6,43 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
 
+/**
+ * Questa classe e' l'inteligenza dell'NPC che serve
+ * all allenatore per allenare il pokemon
+ * 
+ * @author Simone Comignani, Simone Descontus
+ * @version 1.0
+ */
 public class Franco extends Allenatore {
-	
+	/**
+	 * questo campo server per generare i numeri in modo casuale
+	 */
 	Random strategia;
+	/**
+	 * questo campo serve a Franco per gestire le sue mosse
+	 * sapendo chi ha contro potrebbe fare qualche mossa non randomica
+	 */
 	Allenatore enemy;
+	/**
+	 * questo campo serve per tener conto a Franco di chi ha di fronte
+	 */
 	Pokemon enemyMain;
+	/**
+	 * questo campo serve per evitare che Franco cambi pokemon inutilmente
+	 */
 	boolean scambioConsentito;
+	/**
+	 * questo campo serve per evitare che Franco utilizzi troppe mosse di stato
+	 */
 	int statusCounter;
 	
+	/**
+	 * 
+	 * Costruttore di Franco, una volta passato il nemico, lui si adattera facendo
+	 * qualche volta una mossa randomica e qualche volta una mossa sensata
+	 * 
+	 * @param enemy Allenatore
+	 */
 	public Franco(Allenatore enemy) {
 		super("Franco", new Pokemon[] {FactoryPkmn.random(), FactoryPkmn.random(), FactoryPkmn.random(), FactoryPkmn.random(), FactoryPkmn.random(), FactoryPkmn.random()});
 		
@@ -54,6 +83,11 @@ public class Franco extends Allenatore {
 		}
 	}
 	
+	/**
+	 * Questo metodo serve a Franco per capire come agire e quindi che mossa fare
+	 * 
+	 * @return Mossa
+	 */
 	public Mossa agisci() {
 		
 		Mossa sceltaFinale = null;
@@ -108,6 +142,11 @@ public class Franco extends Allenatore {
 		return sceltaFinale;
 	}
 	
+	/**
+	 * Questo metodo serve a Franco di capire con chi deve scambiare il pokemon
+	 * 
+	 * @return (int) l'index della posizione del pokemon della sua squadra che ha scelto
+	 */
 	public int cambia() {
 		
 		Integer scelta = controllaSquadra();
@@ -127,6 +166,12 @@ public class Franco extends Allenatore {
 		return scelta;
 	}
 	
+	/**
+	 * Questo metodo serve a Franco per ragionare e capire quale pokemon
+	 * scagliare contro al nemico.
+	 * 
+	 * @return int
+	 */
 	private int controllaSquadra() {
 		int id = -1;
 		
@@ -143,6 +188,13 @@ public class Franco extends Allenatore {
 		
 		return id;
 	}
+	
+	/**
+	 * Questo metodo serve per settare il campo scambioConsentito 
+	 * 
+	 * @param scambioConsentito boolean
+	 * @return void
+	 */
 	public void setScambioConsentito(boolean scambioConsentito) { this.scambioConsentito = scambioConsentito; }
 	
 }
