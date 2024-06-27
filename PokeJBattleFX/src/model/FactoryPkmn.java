@@ -153,7 +153,7 @@ public class FactoryPkmn {
 			case "30":
 				pkmn = new Nidoqueen();
 				break;
-			case "nidoran_M":
+			case "nidoran_m":
 			case "31":
 				pkmn = new Nidoran_M();
 				break;
