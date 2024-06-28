@@ -837,23 +837,44 @@ public class ControllerBattleInterface {
 		}
 		
 		
-		ricevente.getMainPokemon().incassa(danno);
+		ricevente.getMainPokemon().incassa(danno, isMiss);
+		if(isMiss.get()) {
+			//System.out.println("/n L'attacco non e' andato a segno!");
+			this.log += "\n"+ ricevente.getMainPokemon().getNome() +" evita l'attacco di " + attaccante.getMainPokemon().getNome() + "!\n";
+			return;
+		}
 		if(attacco.getCategoria() == Categoria.STATO) {
 			if(attacco.getOnSelf()) {
 				if(attacco.getLvlBoostNerf() > 0) {
-					//System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " aumenta!\n");
-					this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " aumenta!\n";
+					if(attaccante.getMainPokemon().getModifyLvlFromStat(attacco.getStatBoostNerf()) == 6) {
+						this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " Non può aumentare ulteriormente!\n";
+					} else {
+						//System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " aumenta!\n");
+						this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " aumenta!\n";
+					}
 				} else {
-					//System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " diminuisce!\n");
-					this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " diminuisce!\n";
+					if(attaccante.getMainPokemon().getModifyLvlFromStat(attacco.getStatBoostNerf()) == -6) {
+						this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " Non può diminuire ulteriormente!\n";
+					} else {
+						//System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " diminuisce!\n");
+						this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + attaccante.getMainPokemon().getNome() + " diminuisce!\n";
+					}
 				}
 			} else {
 				if(attacco.getLvlBoostNerf() > 0) {
-					//System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " aumenta!\n");
-					this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " aumenta!\n";
+					if(ricevente.getMainPokemon().getModifyLvlFromStat(attacco.getStatBoostNerf()) == 6) {
+						this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " Non può aumentare ulteriormente!\n";
+					} else {
+						//System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " aumenta!\n");
+						this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " aumenta!\n";
+					}
 				} else {
-					//System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " diminuisce!\n");
-					this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " diminuisce!\n";
+					if(ricevente.getMainPokemon().getModifyLvlFromStat(attacco.getStatBoostNerf()) == -6) {
+						this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " Non può diminuire ulteriormente!\n";
+					} else {
+						//System.out.println("\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " diminuisce!\n");
+						this.log += "\n" + attaccante.getMainPokemon().getNome() + " usa " + attacco + "! " + attacco.getStatBoostNerf().name() + " di " + ricevente.getMainPokemon().getNome() + " diminuisce!\n";
+					}
 				}
 			}
 		} else {			

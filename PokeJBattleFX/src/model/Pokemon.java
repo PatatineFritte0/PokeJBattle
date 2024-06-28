@@ -95,7 +95,7 @@ public class Pokemon implements Crescita {
 		 * 
 		 * @return int
 		 */
-		public int modifyLvl() { return modifyLvl; }
+		public int getModifyLvl() { return modifyLvl; }
 
 		/**
 		 * Questo metodo serve a settare il parametro stat
@@ -314,9 +314,10 @@ public class Pokemon implements Crescita {
 	 * @param danno int
 	 * @return void
 	 */
-	public void incassa(int danno) {
+	public void incassa(int danno, AtomicBoolean isMiss) {
 		Random r = new Random();
 		if (this.elusione.getBattleValue() > r.nextInt(100, 180)) {
+			isMiss.set(true);
 			System.out.println("MISS");
 			return; 
 		}
@@ -923,6 +924,43 @@ public class Pokemon implements Crescita {
 			System.out.println("ERR");
 		}
 		
+	}
+	
+	/**
+	 * Questo metodo restituisce il valore della statistica
+	 * specificata in battaglia
+	 * 
+	 * @param s Statistica
+	 * @return int
+	 */
+	public int getModifyLvlFromStat(Statistica s) {
+		int out = -1;
+		switch(s) {
+		case Statistica.ATTACCO:
+			out = this.getAttacco().getModifyLvl();
+			break;
+		case Statistica.ATTACCO_SPECIALE:
+			out = this.getAttaccoSP().getModifyLvl();
+			break;
+		case Statistica.DIFESA:
+			out = this.getDifesa().getModifyLvl();
+			break;
+		case Statistica.DIFESA_SPECIALE:
+			out = this.getDifesaSP().getModifyLvl();
+			break;
+		case Statistica.VELOCITA:
+			out = this.getVelocita().getModifyLvl();
+			break;
+		case Statistica.PRECISIONE:
+			out = this.getPrecisione().getModifyLvl();
+			break;
+		case Statistica.ELUSIONE:
+			out = this.getElusione().getModifyLvl();
+			break;
+		default:
+			System.out.println("ERR");
+		}
+		return out;
 	}
 	
 	/**
