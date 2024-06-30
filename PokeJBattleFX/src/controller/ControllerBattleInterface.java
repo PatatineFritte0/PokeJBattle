@@ -274,8 +274,11 @@ public class ControllerBattleInterface {
         }
 		
 		UsableMove mossa = allenatore.getMainPokemon().getMosse()[Integer.valueOf(String.valueOf( pane.getId().charAt(pane.getId().length() - 1)))];
-		if(mossa.getPp() == 0) return;
-		this.m1 = mossa.getMossa();
+		if(mossa.getPp() == 0) {
+			if(this.allenatore.getMainPokemon().getAllPp() != 0) return;
+			else this.m1 = Mossa.SCONTRO;
+		}
+		else this.m1 = mossa.getMossa();
 		
 		
 		aggiornaTurno(sfidante.getMainPokemon(), "P2");
@@ -300,8 +303,11 @@ public class ControllerBattleInterface {
         }
 		
 		UsableMove mossa = sfidante.getMainPokemon().getMosse()[Integer.valueOf(String.valueOf( pane.getId().charAt(pane.getId().length() - 1)))];
-		if(mossa.getPp() == 0) return;
-		this.m2 = mossa.getMossa();
+		if(mossa.getPp() == 0) {
+			if(this.sfidante.getMainPokemon().getAllPp() != 0) return;
+			else this.m2 = Mossa.SCONTRO;
+		}
+		else this.m2 = mossa.getMossa();
 		
 		try {
 			turno();
@@ -733,6 +739,7 @@ public class ControllerBattleInterface {
 		
 		if(this.m1 == Mossa.CAMBIA && this.m2 != Mossa.CAMBIA) {
 			Pokemon p = this.allenatore.getMainPokemon();
+			this.allenatore.getMainPokemon().resetSwitch();
 			this.allenatore.setMainPokemon(indexCambioAllenatore);
 			this.log += "\n"+ allenatore.getNickname() + " sostituisce " + p.getNome() + " con " + allenatore.getMainPokemon().getNome()+"\n";
 			
@@ -747,6 +754,7 @@ public class ControllerBattleInterface {
 			
 		} else if(this.m1 != Mossa.CAMBIA && this.m2 == Mossa.CAMBIA) {
 			Pokemon p = this.sfidante.getMainPokemon();
+			this.sfidante.getMainPokemon().resetSwitch();
 			this.sfidante.setMainPokemon(indexCambioSfidante);
 			this.log += "\n"+ sfidante.getNickname() + " sostituisce " + p.getNome() + " con " + sfidante.getMainPokemon().getNome()+"\n";
 			
@@ -760,10 +768,12 @@ public class ControllerBattleInterface {
 			}
 		}else if(this.m1 == Mossa.CAMBIA && this.m2 == Mossa.CAMBIA) {
 			Pokemon p = this.allenatore.getMainPokemon();
+			this.allenatore.getMainPokemon().resetSwitch();
 			this.allenatore.setMainPokemon(indexCambioAllenatore);
 			this.log += "\n"+ allenatore.getNickname() + " sostituisce " + p.getNome() + " con " + allenatore.getMainPokemon().getNome()+"\n";
 			
 			p = this.sfidante.getMainPokemon();
+			this.sfidante.getMainPokemon().resetSwitch();
 			this.sfidante.setMainPokemon(indexCambioSfidante);
 			this.log += "\n"+ sfidante.getNickname() + " sostituisce " + p.getNome() + " con " + sfidante.getMainPokemon().getNome()+"\n";
 			

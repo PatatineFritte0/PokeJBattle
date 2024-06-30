@@ -18,6 +18,10 @@ public enum Mossa {
 	CAMBIA("CAMBIA", 0, Tipo.NORMALE, Categoria.FISICO, 0, 0, /*Dati per mosse di stato ->*/null, 0, false),
 	
 	/**
+     * E' una mossa che viene utilizzata da un pokemon che non ha più mosse disponibili
+     */
+	SCONTRO("Scontro", 50, Tipo.NORMALE, Categoria.FISICO, 100, 0, /*Dati per mosse di stato ->*/null, 0, false),
+	/**
      * Il pokemon puo usare coleomorso
      */
 	COLEOMORSO("Coleomorso", 60, Tipo.COLEOTTERO, Categoria.FISICO, 100, 20, /*Dati per mosse di stato ->*/null, 0, false),

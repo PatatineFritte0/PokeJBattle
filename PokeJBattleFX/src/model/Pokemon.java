@@ -343,8 +343,8 @@ public class Pokemon implements Crescita {
 				mosse[i].useMove();
 				break ricerca;
 			}
-			if(i == 3) {
-				System.out.println("ERR");
+			if(i == 3 && mossa != Mossa.SCONTRO) {
+				System.out.println(this.getNome() + " - ERR - mossa non nel moveSet");
 				return 0;
 			}
 		}
@@ -869,6 +869,19 @@ public class Pokemon implements Crescita {
 	 */
 	public void setElusione(BaseStat elusione) { this.elusione = elusione; }
 	
+	/**
+	 * 
+	 * Questo metodo restituisce la somma del numero di utilizzi di tutte le mosse
+	 * 
+	 * @return int
+	 */
+	public int getAllPp() {
+		int out = 0;
+		for(UsableMove m:this.getMosse()) {
+			if(m != null) out += m.getPp();
+		}
+		return out;
+	}
 	
 	/**
 	 * Questo metodo resetta tutte le statistiche a quelle base
@@ -888,6 +901,22 @@ public class Pokemon implements Crescita {
 		for(UsableMove m:this.getMosse()) {
 			if(m != null) m.setPp(m.getPpMax());
 		}
+	}
+	
+	/**
+	 * Questo metodo resetta tutte le statistiche dopo uno cambio, non resettando i PP delle mosse
+	 * 
+	 * @return void
+	 */
+	public void resetSwitch() {
+		this.battlePs = this.maxPs;
+		this.attacco.resetStat();
+		this.attaccoSP.resetStat();
+		this.difesa.resetStat();
+		this.difesaSP.resetStat();
+		this.velocita.resetStat();
+		this.precisione.resetStat();
+		this.elusione.resetStat();
 	}
 	
 	// Setter e Getter utili per debug
@@ -924,7 +953,7 @@ public class Pokemon implements Crescita {
 			this.elusione.setModifyLvl(modifyLvl);
 			break;
 		default:
-			System.out.println("ERR");
+			System.out.println("ERR - tentativo di reset statistica, statistica non trovata");
 		}
 		
 	}
@@ -961,7 +990,7 @@ public class Pokemon implements Crescita {
 			out = this.getElusione().getModifyLvl();
 			break;
 		default:
-			System.out.println("ERR");
+			System.out.println("ERR - tentativo di reperimento livello di alterazione statistica, ma non trovata");
 		}
 		return out;
 	}
