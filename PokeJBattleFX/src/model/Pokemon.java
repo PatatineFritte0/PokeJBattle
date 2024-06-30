@@ -148,7 +148,10 @@ public class Pokemon implements Crescita {
 		 * 
 		 * @return void
 		 */
-		public void resetStat() { setBattleValue(this.mainVal); }
+		public void resetStat() { 
+			setBattleValue(this.mainVal); 
+			setModifyLvl(0);
+		}
 	}
 	// ↑ Statistiche di base ↑ --------------------------------------------------------------------------------------	
 	
@@ -542,7 +545,7 @@ public class Pokemon implements Crescita {
 	 */
 	@Override
 	public void gainExp(Pokemon enemy) {
-		this.currentExp += (this.evoStage*64)*enemy.getLvl()/7;
+		this.currentExp += (this.evoStage*64)*enemy.getLvl()/*/7*/;
 		
 		if(this.currentExp >= this.nextLvlExp) {
 			this.currentExp -= this.nextLvlExp;

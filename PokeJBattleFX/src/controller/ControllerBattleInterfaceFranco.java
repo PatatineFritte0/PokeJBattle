@@ -159,7 +159,6 @@ public class ControllerBattleInterfaceFranco extends ControllerBattleInterface{
 		
 		if(player.equals("P1")) {
 			m1 = Mossa.CAMBIA;
-			System.out.println("Ciao");
 			sostituisciPkmn(allenatore, false);
 			if(indexCambioAllenatore != allenatore.getPokemonId(allenatore.getMainPokemon())) {
 				//aggiornaTurno(sfidante.getMainPokemon(), "P2");

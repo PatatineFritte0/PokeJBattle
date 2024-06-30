@@ -67,7 +67,7 @@ public class Franco extends Allenatore {
 		
 		for(Pokemon pkmn:this.getSquadra()) {
 			if(pkmn != null) {
-				pkmn.setLvl(lvlMedio + strategia.nextInt(-3, +3));
+				pkmn.goToLvl(lvlMedio + strategia.nextInt(-3, +3));
 				pkmn.setCurrentExp(-100000);
 				for(Mossa m:pkmn.getMoveSet()) {
 					Set<Integer> setChiavi = pkmn.getParcoMosse().keySet();
@@ -108,13 +108,11 @@ public class Franco extends Allenatore {
 			this.scambioConsentito = false;
 			return Mossa.CAMBIA;
 		}
-		
-		
+
 		ArrayList<Mossa> mosseCorrette = new ArrayList<>();
 		for(Mossa m:this.getMainPokemon().getMoveSet()) {
 			if(m != null && ((m.getCategoria() == Categoria.STATO && this.statusCounter < 6) || m.getTipo().checkSuperefficacia(this.enemy.getMainPokemon().getTipi()[0]) || m.getTipo().checkSuperefficacia(this.enemy.getMainPokemon().getTipi()[1]))) {
 				mosseCorrette.add(m);
-				if(m.getCategoria() == Categoria.STATO) this.statusCounter++;
 			}
 		}
 		
@@ -137,6 +135,10 @@ public class Franco extends Allenatore {
 			case 3:
 				sceltaFinale = this.getMainPokemon().getMoveSet()[3];
 				break;
+		}
+		
+		if(sceltaFinale.getCategoria() == Categoria.STATO) {
+			this.statusCounter += 1;
 		}
 		
 		return sceltaFinale;
