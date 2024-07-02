@@ -1,3 +1,6 @@
+Requisiti minimi: avere almeno un display 1920x1080 :(
+
+
 istruzioni per avviare il programma
 
 1) importare il progetto su eclipse
