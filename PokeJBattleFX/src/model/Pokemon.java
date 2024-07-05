@@ -876,11 +876,14 @@ public class Pokemon implements Crescita {
 	 * @return int
 	 */
 	public int getAllPp() {
+		return Arrays.asList(this.getMosse()).stream().filter(m -> m!=null).map(m -> m.getPp()).reduce(0, (a,b)->a+b);
+		/*
 		int out = 0;
 		for(UsableMove m:this.getMosse()) {
 			if(m != null) out += m.getPp();
 		}
 		return out;
+		*/
 	}
 	
 	/**
@@ -909,7 +912,6 @@ public class Pokemon implements Crescita {
 	 * @return void
 	 */
 	public void resetSwitch() {
-		this.battlePs = this.maxPs;
 		this.attacco.resetStat();
 		this.attaccoSP.resetStat();
 		this.difesa.resetStat();
